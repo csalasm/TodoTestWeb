@@ -52,24 +52,27 @@ public class LoginServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Usuario u;
+        HttpSession session = request.getSession(true);
+        u = (Usuario)session.getAttribute("user");
+        if (u != null) { // Si esta autenticado, redirigimos a la pantalla principal
+            processErrorLogin(request, response);
+            return;
+        }
+        
         // Recuperamos parámetros del servlet
         LoginParameters lp = new LoginParameters(request);
         // Recuperamos la sessión por si el usuario está autenticado
-        HttpSession session = request.getSession(true);
-        u = (Usuario)session.getAttribute("user");
-        if (u != null) // Si esta autenticado, redirigimos a la pantalla principal
+
+        // Recuperamos el usuario
+        u = userActions.login(lp.getUser(), lp.getPassword());
+        
+        if (u == null) { // Error en los datos
             processErrorLogin(request, response);
-        else {
-            // Recuperamos el usuario
-            u = userActions.login(lp.getUser(), lp.getPassword());
-            if (u == null) // Error en los datos
-                processErrorLogin(request, response);
-            else // Redirigimos a la pantalla principal 
-                {
-                session.setAttribute("user", u);
-                processLogin(request, response);
-            }
+            return;
         }
+        
+        session.setAttribute("user", u);
+        processLogin(request, response);
             
     }
     
