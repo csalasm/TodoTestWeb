@@ -1,16 +1,10 @@
-<!-- views/login.ejs -->
-<!doctype html>
-<html>
-    <head>
-        <title>TodoTestWeb</title>
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
-        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
-        <link href="css/personalizado.css" rel="stylesheet" type="text/css"/>
-        <style>
-            body 		{ padding-top:80px; }
-        </style>
-    </head>
-    <body>
+<%-- 
+    Document   : AddTest
+    Created on : 16-dic-2015, 16:23:32
+    Author     : andresbailen93
+--%>
+
+<%@include file="TeacherHeader.html"%>
         <div class="container">
             <div class="jumbotron">
                 <h1>TODOTEST WEB</h1>
@@ -23,11 +17,11 @@
 
                 <!-- AddTest FORM -->
                 <form action="/login" method="post">
-                    <div class="form-group">
+                    <div class="form-group ">
                         <label>Nombre Test</label>
                         <input type="text" class="form-control" name="testname">
                     </div>
-                    <div class="col-sm-6 col-sm-offset-0">
+                    <div class="col-sm-6">
                         <div class="form-group">
                             <label>Duracion</label>
                             <select id="duration" name="duration" class="form-control">
@@ -75,6 +69,5 @@
             </div>
 
         </div>
-    </body>
-</html>
+<%@include file="Footer.html"%>
 

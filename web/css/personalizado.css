@@ -10,5 +10,8 @@ and open the template in the editor.
 
 .jumbotron{ text-align: center}
 
+.footer{position:fixed;
+        bottom : 0px}
+
 
              
