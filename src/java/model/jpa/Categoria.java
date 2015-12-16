@@ -11,10 +11,12 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -34,7 +36,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Categoria.findByNombre", query = "SELECT c FROM Categoria c WHERE c.nombre = :nombre")})
 public class Categoria implements Serializable {
     private static final long serialVersionUID = 1L;
-    @Id
+    @Id  
+    @GeneratedValue(generator="CATEGORY_SEQUENCE") 
+    @SequenceGenerator(name="CATEGORY_SEQUENCE",sequenceName="categoria_seq", allocationSize=1) 
     @Basic(optional = false)
     @NotNull
     @Column(name = "ID_CATEGORIA")
