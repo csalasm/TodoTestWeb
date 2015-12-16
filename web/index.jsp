@@ -1,4 +1,3 @@
-<!-- views/login.ejs -->
 <!doctype html>
 <html>
 <head>
@@ -22,7 +21,7 @@
 
 	<!-- show any messages that come back with authentication -->
 	
-		<div class="alert alert-danger"><%= message %></div>
+		<div class="alert alert-danger"></div>
 	
 
 	<!-- LOGIN FORM -->
@@ -46,4 +45,3 @@
 </div>
 </body>
 </html>
-
