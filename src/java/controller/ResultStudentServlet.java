@@ -5,21 +5,32 @@
  */
 package controller;
 
+import controller.facades.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.jpa.Examen;
+import model.jpa.Usuario;
 
 /**
  *
- * @author csalas
+ * @author alejandroruiz
  */
-public class SessionDestroyServlet extends HttpServlet {
+@WebServlet(name = "ResultStudentServlet", urlPatterns = {"/ResultStudentServlet"})
+public class ResultStudentServlet extends HttpServlet {
 
+    @EJB
+    UsuarioFacade usuarioFacade;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,14 +42,32 @@ public class SessionDestroyServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.invalidate();
-        redirectToLogin(request, response);
-    }
-    
-        private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-        rd.forward(request, response);
+         //Recuperamos la sesión
+        Usuario u;
+        /*HttpSession session = request.getSession(true);
+        u = (Usuario)session.getAttribute("user");
+        
+        if (u != null) { // Si esta autenticado, redirigimos a la pantalla principal
+            processErrorLogin(request, response);
+            return;
+        }*/
+        u = usuarioFacade.find("77774444A");
+        int success = usuarioFacade.totalSuccess(u);
+        int fails = usuarioFacade.totalFail(u);
+        double average = usuarioFacade.average(u);
+        int totalTest = usuarioFacade.totalTest(u);
+        
+        request.setAttribute("usuario", u);
+        request.setAttribute("success",success);
+        request.setAttribute("fails", fails);
+        request.setAttribute("average", average);
+        request.setAttribute("total",totalTest);
+        
+        
+        
+        processResultStudent(request,response);
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,5 +108,17 @@ public class SessionDestroyServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("ERROR_LOGIN", "true");
+        RequestDispatcher rd = getServletContext().getNamedDispatcher("/login.jsp");
+        rd.forward(request, response);
+        
+    }
+
+    private void processResultStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("ResultsStudent.jsp");
+        rd.forward(request, response);
+    }
 
 }

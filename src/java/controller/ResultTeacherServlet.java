@@ -5,21 +5,28 @@
  */
 package controller;
 
+import controller.facades.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import model.jpa.Usuario;
 
 /**
  *
- * @author csalas
+ * @author alejandroruiz
  */
-public class SessionDestroyServlet extends HttpServlet {
+@WebServlet(name = "ResultTeacherServlet", urlPatterns = {"/ResultTeacherServlet"})
+public class ResultTeacherServlet extends HttpServlet {
 
+    @EJB
+    UsuarioFacade usuarioFacade;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -31,14 +38,24 @@ public class SessionDestroyServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        HttpSession session = request.getSession();
-        session.invalidate();
-        redirectToLogin(request, response);
-    }
-    
-        private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
-        rd.forward(request, response);
+       
+         //Recuperamos la sesión
+        Usuario u;
+        /*HttpSession session = request.getSession(true);
+        u = (Usuario)session.getAttribute("user");
+        
+        if (u != null) { // Si esta autenticado, redirigimos a la pantalla principal
+            processErrorLogin(request, response);
+            return;
+        }*/
+        
+        u = usuarioFacade.find("77774444P");
+        
+        request.setAttribute("usuario", u);
+        
+        processResultTeacher(request,response);
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -79,5 +96,17 @@ public class SessionDestroyServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("ERROR_LOGIN", "true");
+        RequestDispatcher rd = getServletContext().getNamedDispatcher("/login.jsp");
+        rd.forward(request, response);
+        
+    }
+    
+    private void processResultTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("ResultsTeacher.jsp");
+        rd.forward(request, response);
+    }
 
 }
