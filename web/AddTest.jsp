@@ -16,7 +16,7 @@
 
 
                 <!-- AddTest FORM -->
-                <form action="/login" method="post">
+                <form action="AddTestServlet" method="post">
                     <div class="form-group ">
                         <label>Nombre Test</label>
                         <input type="text" class="form-control" name="testname">
