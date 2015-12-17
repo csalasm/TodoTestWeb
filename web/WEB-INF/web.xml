@@ -12,6 +12,10 @@
         <servlet-name>AddUserServlet</servlet-name>
         <servlet-class>controller.AddUserServlet</servlet-class>
     </servlet>
+        <servlet>
+        <servlet-name>SessionDestroyServlet</servlet-name>
+        <servlet-class>controller.SessionDestroyServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>QuestionServlet</servlet-name>
         <url-pattern>/QuestionServlet</url-pattern>
@@ -19,6 +23,10 @@
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SessionDestroyServlet</servlet-name>
+        <url-pattern>/SessionDestroyServlet</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddUserServlet</servlet-name>
