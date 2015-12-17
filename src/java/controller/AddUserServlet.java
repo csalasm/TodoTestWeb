@@ -6,10 +6,9 @@
 package controller;
 
 import controller.facades.UsuarioFacade;
-import controller.parameters.LoginParameters;
+import controller.parameters.AddUserParameters;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -21,20 +20,11 @@ import model.jpa.Usuario;
 
 /**
  *
- * @author csalas
+ * @author andresbailen93
  */
-public class LoginServlet extends HttpServlet {
+public class AddUserServlet extends HttpServlet {
     @EJB
     private UsuarioFacade usuarioFacade;
-   
-
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        usuarioFacade = new UsuarioFacade();
-    }
-    
-    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -46,40 +36,38 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         Usuario u;
         HttpSession session = request.getSession(true);
-        u = (Usuario)session.getAttribute("user");
-        if (u != null) { // Si esta autenticado, redirigimos a la pantalla principal
-            redirectToLogin(request, response);
-            return;
-        }
-        
-        // Recuperamos parámetros del servlet
-        LoginParameters lp = new LoginParameters(request);
-        // Recuperamos la sessión por si el usuario está autenticado
+        u = (Usuario) session.getAttribute("user");
 
-        // Recuperamos el usuario
-        u = usuarioFacade.login(lp.getUser(), lp.getPassword());
-        
-        if (u == null) { // Error en los datos
-            redirectToLogin(request, response);
+        if (u != null) { // Si no esta autenticado, redirigimos a la pantalla principal
+            processErrorLogin(request, response);
             return;
         }
-        
-        session.setAttribute("user", u);
-        redirectToMain(request, response);
-            
+        //Recuperamos los parametros de AddUserParameters
+        AddUserParameters adduserparam = new AddUserParameters(request);
+        //Instanciamos User added
+        Usuario userAdded = new Usuario(adduserparam.getDni(),adduserparam.getName(),adduserparam.getSurname(),adduserparam.getPassword(),(short)((adduserparam.isPermits())?1:0));
+        //Llamamos al JPA facade usuario
+        usuarioFacade.create(userAdded);
+        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
+        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
+        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
+        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
+        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
+        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
+        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
+        processMainPageTeacher(request, response);
     }
-    
-    private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("ERROR_LOGIN", "true");
         RequestDispatcher rd = getServletContext().getNamedDispatcher("/login.jsp");
-        rd.forward(request, response);       
+        rd.forward(request, response);
     }
-    
-    private void redirectToMain(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = getServletContext().getNamedDispatcher("/index.jsp");
+    private void processMainPageTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+        //request.setAttribute(name, this);
+        RequestDispatcher rd = getServletContext().getNamedDispatcher("/MainPageTeacher.jsp");
         rd.forward(request, response);
     }
 

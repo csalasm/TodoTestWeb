@@ -8,6 +8,7 @@ package controller.facades;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import model.actions.UserActions;
 import model.jpa.Usuario;
 
 /**
@@ -18,6 +19,7 @@ import model.jpa.Usuario;
 public class UsuarioFacade extends AbstractFacade<Usuario> {
     @PersistenceContext(unitName = "TodoTestWebPU")
     private EntityManager em;
+    UserActions ua;
 
     @Override
     protected EntityManager getEntityManager() {
@@ -26,6 +28,11 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
 
     public UsuarioFacade() {
         super(Usuario.class);
+        ua = new UserActions(em);
+    }
+    
+    public Usuario login(String user, String password) {
+        return ua.login(user, password);
     }
     
 }

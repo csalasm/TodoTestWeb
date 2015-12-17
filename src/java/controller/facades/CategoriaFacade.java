@@ -28,4 +28,8 @@ public class CategoriaFacade extends AbstractFacade<Categoria> {
         super(Categoria.class);
     }
     
+    public Categoria findByName(String topicName) { //Devuelve una categoria apartir de su nombre.
+        return find(topicName);
+    }
+    
 }
