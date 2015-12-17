@@ -11,7 +11,7 @@
         <div class="panel-heading"><span class="glyphicon glyphicon-home"></span> Bienvenido ${name}</div>
         <div class="panel-body">
             
-      <a href="#" class="btn btn-info btn-lg">
+      <a href="AvailableTestListServlet" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-list-alt"></span> Realizar Test
       </a><br>
       <br>

@@ -5,6 +5,7 @@
  */
 package controller.facades;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,6 +27,10 @@ public class TestFacade extends AbstractFacade<Test> {
 
     public TestFacade() {
         super(Test.class);
+    }
+    
+    public List<Test> getActiveTest() {
+        return (List<Test>) em.createNamedQuery("Test.findByActivo").setParameter("activo", 1).getResultList();
     }
     
 }
