@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.jpa.Usuario;
 
 /**
@@ -41,15 +42,14 @@ public class ResultTeacherServlet extends HttpServlet {
        
          //Recuperamos la sesión
         Usuario u;
-        /*HttpSession session = request.getSession(true);
+       HttpSession session = request.getSession();
         u = (Usuario)session.getAttribute("user");
-        
-        if (u != null) { // Si esta autenticado, redirigimos a la pantalla principal
-            processErrorLogin(request, response);
+        if (u == null) { // Si esta autenticado, redirigimos a la pantalla principal
+            redirectToLogin(request, response);
             return;
-        }*/
+        }
         
-        u = usuarioFacade.find("77774444P");
+       //Usuario user = usuarioFacade.find("77774444P");
         
         request.setAttribute("usuario", u);
         
@@ -97,11 +97,9 @@ public class ResultTeacherServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ERROR_LOGIN", "true");
-        RequestDispatcher rd = getServletContext().getNamedDispatcher("/login.jsp");
+    private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
-        
     }
     
     private void processResultTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
