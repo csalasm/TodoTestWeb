@@ -43,6 +43,7 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         Usuario u;
         HttpSession session = request.getSession(true);
         u = (Usuario)session.getAttribute("user");
