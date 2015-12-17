@@ -14,7 +14,7 @@
         </div>
 
 
-        <form  class="form-horizontal" action=""  method="post" >
+        <form  class="form-horizontal" action="AddUserServlet"  method="post" >
             <div class="form-group">
                 <label for="DNI" class="col-sm-2 control-label">DNI: </label>
                 <div class="col-sm-4">

@@ -31,18 +31,30 @@ public class AddQuestionParameters {
             question = request.getParameter("pregunta");
             String categoria = request.getParameter("Categoria");
             categoryID = 0;
+            if(request.getPart("fileImage") != null){
             image = getImageBytes(request.getPart("fileImage"));
+            }
         } catch (IOException ex) {
             Logger.getLogger(AddQuestionParameters.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ServletException ex) {
             Logger.getLogger(AddQuestionParameters.class.getName()).log(Level.SEVERE, null, ex);
         }
-        //respuestaCollection = request.getAttribute("respuesta[]");
-        for (int i = 0; i < request.getParameter("respuesta").length(); i++) {
-            System.out.println(request.getParameter("respuesta[0]"));
-            System.out.println(request.getParameter("respuestaText[0]"));
-        }
-
+    
+            String[] answer = request.getParameterValues("respuestaText[]");
+            String answerIsCorrect = request.getParameter("respuesta");
+            for(int i = 0; i<answer.length; i++){
+                //AÑADIR RESPUESTAS JPA FACADE!
+                ///////////////////////////////////////
+                //////////////////////////////////////////////////////////////////////////////
+                ///////////////////////////////////////
+                ///////////////////////////////////////
+                ///////////////////////////////////////
+                ///////////////////////////////////////
+                ///////////////////////////////////////
+                
+                System.out.println(answerIsCorrect);
+                System.out.println(answer[i]);
+                }
     }
 
     public byte[] getImage() {

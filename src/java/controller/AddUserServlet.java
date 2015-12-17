@@ -40,7 +40,7 @@ public class AddUserServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         u = (Usuario) session.getAttribute("user");
 
-        if (u != null) { // Si no esta autenticado, redirigimos a la pantalla principal
+        if (u == null) { // Si no esta autenticado, redirigimos a la pantalla principal
             processErrorLogin(request, response);
             return;
         }
@@ -49,6 +49,7 @@ public class AddUserServlet extends HttpServlet {
         //Instanciamos User added
         Usuario userAdded = new Usuario(adduserparam.getDni(),adduserparam.getName(),adduserparam.getSurname(),adduserparam.getPassword(),(short)((adduserparam.isPermits())?1:0));
         //Llamamos al JPA facade usuario
+        System.out.println(adduserparam.getDni());
         usuarioFacade.create(userAdded);
         //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
         //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
