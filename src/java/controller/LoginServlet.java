@@ -51,6 +51,7 @@ public class LoginServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         Usuario u;
         HttpSession session = request.getSession(true);
         u = (Usuario)session.getAttribute("user");
@@ -79,8 +80,7 @@ public class LoginServlet extends HttpServlet {
     private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("ERROR_LOGIN", "true");
         RequestDispatcher rd = getServletContext().getNamedDispatcher("/login.jsp");
-        rd.forward(request, response);
-        
+        rd.forward(request, response);       
     }
     
     private void processLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
