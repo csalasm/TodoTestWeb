@@ -32,29 +32,30 @@
                 <button type="submit" class="btn btn-primary col-sm-2">Añadir Tematica</button>
             </div> 
 
-            <div class="form-group">
-                <label for="Respuestas" class="col-sm-2 control-label">Respuestas: </label>
-                <div class="col-sm-4">
+            <div class="form-group ">
+                <label for="Respuestas" class="col-sm-offset-3 control-label">Respuestas: </label>
+                <div class="col-sm-offset-2">
                     <div class="radio">
                         <label>
                             <input type="radio" name="respuesta" id="respuesta" value="Respuesta1" checked>
-                            Verdadero
+                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="Respuesta1" value placeholder="Respuesta1" required>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
                             <input type="radio" name="respuesta" id="respuesta" value="Respuesta2" checked>
-                            Falso
+                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="Respuesta2" value placeholder="Respuesta2" required>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
                             <input type="radio" name="respuesta" id="respuesta" value="Respuesta3" checked>
-                            Todo lo contrario
+                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="Respuesta3" value placeholder="Respuesta3" required>
                         </label>
                     </div>
                 </div>
-            </div>   
+            </div>  
+            
             <div class="form-group">
                 <div class="col-sm-offset-2">
                     <button type="submit" class="btn btn-primary" id="boton">Añadir Pregunta</button>
