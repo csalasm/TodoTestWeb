@@ -7,9 +7,9 @@ package controller;
 
 import controller.facades.CategoriaFacade;
 import controller.parameters.AddCategoryParameters;
-import controller.parameters.LoginParameters;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,7 +26,7 @@ import model.jpa.Usuario;
  * @author Jesus
  */
 @WebServlet(name = "AddTopicServlet", urlPatterns = {"/AddTopicServlet"})
-public class AddTopicServlet extends HttpServlet {
+public class AddCategoryServlet extends HttpServlet {
 
     @EJB
     private CategoriaFacade categoriaFacade;
@@ -48,13 +48,12 @@ public class AddTopicServlet extends HttpServlet {
         u = (Usuario) session.getAttribute("user");
         AddCategoryParameters atp = new AddCategoryParameters(request);
 
-        Categoria cat = categoriaFacade.findByName(atp.getCategoryName());
+        List<Categoria> list_cat = categoriaFacade.findByName(atp.getCategoryName());
 
-        if (cat == null) { //Si no existe    
-            categoriaFacade.create(cat);   //Lo crea   
-        } else { //Si existe
-
-            processErrorAddTopic(request, response);
+        if (list_cat.size() == 0) { //No existe ninguno con el nombre. buscado
+            Categoria new_cat = new Categoria();
+            new_cat.setNombre(atp.getCategoryName());
+            categoriaFacade.create(new_cat);   //Crea la nueva categoria
         }
 
         processAddTopic(request, response);
