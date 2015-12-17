@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label>Autor</label>
-                        <input type="text" class="form-control" name="username">
+                        <input type="text" class="form-control" name="username" value="${usuario.dni}">
                     </div>
                     <button type="submit" class="btn btn-warning btn-lg">Crear Test</button>
                 </form>
