@@ -39,7 +39,7 @@ public class AddUserServlet extends HttpServlet {
         Usuario u;
         HttpSession session = request.getSession(true);
         u = (Usuario) session.getAttribute("user");
-
+        
         if (u == null) { // Si no esta autenticado, redirigimos a la pantalla principal
             processErrorLogin(request, response);
             return;
@@ -63,12 +63,12 @@ public class AddUserServlet extends HttpServlet {
 
     private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("ERROR_LOGIN", "true");
-        RequestDispatcher rd = getServletContext().getNamedDispatcher("/login.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
         rd.forward(request, response);
     }
     private void processMainPageTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
         //request.setAttribute(name, this);
-        RequestDispatcher rd = getServletContext().getNamedDispatcher("/MainPageTeacher.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/MainPageTeacher.jsp");
         rd.forward(request, response);
     }
 

@@ -17,6 +17,7 @@ public class AddUserParameters {
     private String surname;
     private String password;
     private boolean permits;
+    private int identificado;
     
     public AddUserParameters(HttpServletRequest request){
         dni = request.getParameter("DNI");
@@ -24,6 +25,15 @@ public class AddUserParameters {
         surname = request.getParameter("Apellidos");
         password = request.getParameter("password");
         permits = Boolean.valueOf(request.getParameter("permisos"));
+        identificado = 0;
+    }
+
+    public int getIdentificado() {
+        return identificado;
+    }
+
+    public void setIdentificado(int identificado) {
+        this.identificado = identificado;
     }
 
     public String getDni() {
