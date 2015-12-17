@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -32,6 +33,12 @@ public class SessionDestroyServlet extends HttpServlet {
             throws ServletException, IOException {
         HttpSession session = request.getSession();
         session.invalidate();
+        redirectToLogin(request, response);
+    }
+    
+        private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

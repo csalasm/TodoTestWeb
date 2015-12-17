@@ -1,4 +1,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+        
+<c:if test="${sessionScope.user != null}">
+    <c:choose>
+    <c:when test="${sessionScope.user.esProf == 0}">
+        <c:redirect url="MainPageStudent.jsp" ></c:redirect>
+    </c:when>
+    <c:when test="${sessionScope.user.esProf == 1}">
+        <c:redirect url="MainPageTeacher.jsp"></c:redirect>
+    </c:when>
+    </c:choose>
+</c:if>
 <!doctype html>
 <html>
 <head>
@@ -21,7 +32,6 @@
 	<h1><span class="fa fa-sign-in"></span> Login</h1>
 
 	<!-- show any messages that come back with authentication -->
-	
         <c:if test="${error_login eq true}">
             <div class="alert alert-danger">Usuario / Contraseña incorrecta</div>
         </c:if>
@@ -35,7 +45,7 @@
 		</div>
 		<div class="form-group">
 			<label>Password</label>
-			<input type="password" class="form-control" name="password" value="wrong">
+			<input type="password" class="form-control" name="password" value="test">
 		</div>
 
 		<button type="submit" class="btn btn-warning btn-lg">Login</button>
