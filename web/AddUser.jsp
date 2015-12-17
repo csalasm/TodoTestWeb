@@ -14,7 +14,7 @@
                 </div>
 
 
-                <form  class="form-horizontal" action="mailto:newcomputer@nc.com"  method="post" enctype="multipart/form-data" >
+                <form  class="form-horizontal" action=""  method="post" >
                     <div class="form-group">
                         <label for="DNI" class="col-sm-2 control-label">DNI: </label>
                         <div class="col-sm-4">
