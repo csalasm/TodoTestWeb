@@ -16,7 +16,7 @@
                             <table class="table  table-striped">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
+                                        <th>ID</th>
                                         <th>Fecha</th>
                                         <th>Test</th>
                                         <th>Aciertos</th>
@@ -28,7 +28,7 @@
                                         
                                 <tbody>
                                     <tr>
-                                        <td>$</td>
+                                        <td>${examen.examenPK.idTest}</td>
                                         <td>${examen.fecha}</td>
                                         <td>${examen.test.nombre}</td>
                                         <td>${examen.aciertos}</td>
@@ -63,10 +63,10 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>x</td>
-                                        <td>x</td>
-                                        <td>x</td>
-                                        <td>x</td>
+                                        <td>${total}</td>
+                                        <td>${success}</td>
+                                        <td>${fails}</td>
+                                        <td>${average}</td>
                                    
                                     </tr>
                                 </tbody>

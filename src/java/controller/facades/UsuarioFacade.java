@@ -5,9 +5,13 @@
  */
 package controller.facades;
 
+import java.awt.List;
+import java.math.BigDecimal;
+import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import model.jpa.Examen;
 import model.jpa.Usuario;
 
 /**
@@ -38,5 +42,47 @@ public class UsuarioFacade extends AbstractFacade<Usuario> {
         
         return u;
     }
+    
+    public int totalSuccess (Usuario user){
+        int total = 0;
+        Collection<Examen> ExamenList = user.getExamenCollection();
+        for(Examen ex: ExamenList){
+            total = total + ex.getAciertos();
+        }
+        return total;
+    }
+    
+    public int totalFail (Usuario user){
+        int total = 0;
+        Collection<Examen> ExamenList = user.getExamenCollection();
+        for(Examen ex: ExamenList){
+            total = total + ex.getFallos();
+        }
+        return total;
+    }
+    
+    public double average (Usuario user){
+        
+        double total = 0.0;
+        int contador = 0;
+        Collection<Examen> ExamenList = user.getExamenCollection();
+        for(Examen ex: ExamenList){
+           contador++;
+           total = total + (ex.getNota().doubleValue());
+        }
+        return total/contador;
+    }
+    
+    public int totalTest (Usuario user){
+        
+        int total = 0;
+        Collection<Examen> ExamenList = user.getExamenCollection();
+        for(Examen ex : ExamenList){
+            total++;
+        }
+        return total;
+    }
+    
+    
     
 }

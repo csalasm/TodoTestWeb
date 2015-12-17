@@ -52,10 +52,18 @@ public class ResultStudentServlet extends HttpServlet {
             return;
         }*/
         u = usuarioFacade.find("77774444A");
-        
-        Collection<Examen> ExamList = u.getExamenCollection();
+        int success = usuarioFacade.totalSuccess(u);
+        int fails = usuarioFacade.totalFail(u);
+        double average = usuarioFacade.average(u);
+        int totalTest = usuarioFacade.totalTest(u);
         
         request.setAttribute("usuario", u);
+        request.setAttribute("success",success);
+        request.setAttribute("fails", fails);
+        request.setAttribute("average", average);
+        request.setAttribute("total",totalTest);
+        
+        
         
         processResultStudent(request,response);
         
