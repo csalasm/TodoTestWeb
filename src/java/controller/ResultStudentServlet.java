@@ -44,14 +44,14 @@ public class ResultStudentServlet extends HttpServlet {
             throws ServletException, IOException {
          //Recuperamos la sesión
         Usuario u;
-        /*HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(true);
         u = (Usuario)session.getAttribute("user");
-        
-        if (u != null) { // Si esta autenticado, redirigimos a la pantalla principal
-            processErrorLogin(request, response);
+        if (u == null) { // Si esta autenticado, redirigimos a la pantalla principal
+            redirectToLogin(request, response);
             return;
-        }*/
-        u = usuarioFacade.find("77774444A");
+        }
+        
+        
         int success = usuarioFacade.totalSuccess(u);
         int fails = usuarioFacade.totalFail(u);
         double average = usuarioFacade.average(u);
@@ -109,15 +109,13 @@ public class ResultStudentServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ERROR_LOGIN", "true");
-        RequestDispatcher rd = getServletContext().getNamedDispatcher("/login.jsp");
+    private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
-        
     }
 
     private void processResultStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("ResultsStudent.jsp");
+        RequestDispatcher rd = request.getRequestDispatcher("/ResultsStudent.jsp");
         rd.forward(request, response);
     }
 
