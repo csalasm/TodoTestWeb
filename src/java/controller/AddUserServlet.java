@@ -23,8 +23,10 @@ import model.jpa.Usuario;
  * @author andresbailen93
  */
 public class AddUserServlet extends HttpServlet {
+
     @EJB
     private UsuarioFacade usuarioFacade;
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -39,15 +41,15 @@ public class AddUserServlet extends HttpServlet {
         Usuario u;
         HttpSession session = request.getSession(true);
         u = (Usuario) session.getAttribute("user");
-        
-        if (u == null) { // Si no esta autenticado, redirigimos a la pantalla principal
-            processErrorLogin(request, response);
+
+        if (u == null) { // Si esta autenticado, redirigimos a la pantalla principal
+            redirectToLogin(request, response);
             return;
         }
         //Recuperamos los parametros de AddUserParameters
         AddUserParameters adduserparam = new AddUserParameters(request);
         //Instanciamos User added
-        Usuario userAdded = new Usuario(adduserparam.getDni(),adduserparam.getName(),adduserparam.getSurname(),adduserparam.getPassword(),(short)((adduserparam.isPermits())?1:0));
+        Usuario userAdded = new Usuario(adduserparam.getDni(), adduserparam.getName(), adduserparam.getSurname(), adduserparam.getPassword(), (short) ((adduserparam.isPermits()) ? 1 : 0));
         //Llamamos al JPA facade usuario
         System.out.println(adduserparam.getDni());
         usuarioFacade.create(userAdded);
@@ -58,15 +60,15 @@ public class AddUserServlet extends HttpServlet {
         //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
         //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
         //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
-        processMainPageTeacher(request, response);
+        redirectMainPageTeacher(request, response);
     }
 
-    private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ERROR_LOGIN", "true");
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+    private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
     }
-    private void processMainPageTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+
+    private void redirectMainPageTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //request.setAttribute(name, this);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/MainPageTeacher.jsp");
         rd.forward(request, response);
