@@ -6,7 +6,7 @@
 package controller;
 
 import controller.facades.CategoriaFacade;
-import controller.parameters.AddTopicParameters;
+import controller.parameters.AddCategoryParameters;
 import controller.parameters.LoginParameters;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -46,9 +46,9 @@ public class AddTopicServlet extends HttpServlet {
         Usuario u;
         HttpSession session = request.getSession(true);
         u = (Usuario) session.getAttribute("user");
-        AddTopicParameters atp = new AddTopicParameters(request);
+        AddCategoryParameters atp = new AddCategoryParameters(request);
 
-        Categoria cat = categoriaFacade.findByName(atp.getTopicName());
+        Categoria cat = categoriaFacade.findByName(atp.getCategoryName());
 
         if (cat == null) { //Si no existe    
             categoriaFacade.create(cat);   //Lo crea   
