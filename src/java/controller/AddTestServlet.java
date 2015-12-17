@@ -63,10 +63,11 @@ public class AddTestServlet extends HttpServlet {
         test.setResta(Short.parseShort(atp.getSubtraction()));
         test.setActivo((short)(false?1:0));
         
+        //Insertar en la base de datos
         testFacade.create(test);
         
         
-        
+        processAddQuestion(request,response);
        
         
 
@@ -119,5 +120,11 @@ private void processErrorLogin(HttpServletRequest request, HttpServletResponse r
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void processAddQuestion(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("/AddQuestio.jsp");
+        rd.forward(request, response);
+        
+    }
 
 }
