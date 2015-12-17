@@ -56,30 +56,25 @@ public class AddTestServlet extends HttpServlet {
         //Recuperamos los parámetros del Servlet
         AddTestParameters atp = new AddTestParameters(request);
         
-        if(testFacade.existTestName(atp, u)){
-            System.out.println("Existe");
-        }else{
-            System.out.println("No existe");
-        }
-        
-        
-        //Crear el objeto
-        Test test = new Test();
-        test.setNombre(atp.getName());
-        test.setDni(u);
-        test.setDuracion(Integer.parseInt(atp.getDuration()));
-        test.setResta(Short.parseShort(atp.getSubtraction()));
-        test.setActivo((short)(false?1:0));
-        
-        //Insertar en la base de datos
-        //testFacade.create(test);
-        
-        
-        redirectAddQuestion(request,response);
-       
-        
+        if (!testFacade.existTestName(atp, u)) {
+            //Crear el objeto
+            Test test = new Test();
+            test.setNombre(atp.getName());
+            test.setDni(u);
+            test.setDuracion(Integer.parseInt(atp.getDuration()));
+            test.setResta(Short.parseShort(atp.getSubtraction()));
+            test.setActivo((short) (false ? 1 : 0));
+            testFacade.create(test);
+            redirectAddQuestion(request,response);
+            
 
+        }else{
+            errorAddTest(request,response);
+            
         }
+ 
+
+    }
     
 private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
@@ -128,7 +123,15 @@ private void redirectToLogin(HttpServletRequest request, HttpServletResponse res
     }// </editor-fold>
 
     private void redirectAddQuestion(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        request.setAttribute("ADD_TEST_OK", "true");
         RequestDispatcher rd = request.getRequestDispatcher("/AddQuestion.jsp");
+        rd.forward(request, response);
+        
+    }
+    
+    private void errorAddTest(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        request.setAttribute("ADD_TEST_OK", "false");
+        RequestDispatcher rd = request.getRequestDispatcher("/AddTest.jsp");
         rd.forward(request, response);
         
     }
