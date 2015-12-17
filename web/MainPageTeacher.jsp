@@ -11,7 +11,7 @@
         <div class="panel-heading"><span class="glyphicon glyphicon-home"></span> Bienvenido ${name}</div>
         <div class="panel-body">
             
-      <a href="#" class="btn btn-info btn-lg">
+      <a href="AddTest.jsp" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-list-alt"></span> Añadir test
       </a>
             <br><br>
@@ -19,14 +19,14 @@
           <span class="glyphicon glyphicon-book"></span> Añadir pregunta
         </a>
       
-       <a href="#" class="btn btn-info btn-lg">
+       <a href="AddUser.jsp" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-list-alt"></span> Añadir usuario
       </a>
             <br><br>
    <a href="#" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-book"></span> Activar/Desactivar test
         </a>
-      <a href="#" class="btn btn-info btn-lg">
+      <a href="ResultTeacherServlet" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-book"></span> Resultados
         </a>
         </div>    

@@ -54,23 +54,11 @@ public class AddCategoryServlet extends HttpServlet {
             Categoria new_cat = new Categoria();
             new_cat.setNombre(atp.getCategoryName());
             categoriaFacade.create(new_cat);   //Crea la nueva categoria
+            processAddTopic(request, response);
+        }else{
+            processErrorAddTopic(request,response); 
         }
-
-        processAddTopic(request, response);
-
-        response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet AddTopicServlet</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet AddTopicServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -113,7 +101,7 @@ public class AddCategoryServlet extends HttpServlet {
     }// </editor-fold>
 
     private void processErrorAddTopic(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ERROR_ADD_TOPIC", "true");
+        request.setAttribute("ADD_TOPIC_OK", "false");
         RequestDispatcher rd = getServletContext().getNamedDispatcher("/AddTest.jsp");
         rd.forward(request, response);
     }

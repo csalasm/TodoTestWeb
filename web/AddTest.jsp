@@ -4,6 +4,7 @@
     Author     : andresbailen93
 --%>
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="TeacherHeader.html"%>
         <div class="container">
             <div class="jumbotron">
@@ -14,6 +15,9 @@
 
                 <h1><span class="fa fa-sign-in"></span> Crear Test</h1>
 
+                <c:if test="${ADD_TEST_OK eq 'false'}">
+                    <div class="alert alert-danger">Ya existe un test con ese nombre</div>
+                </c:if>
 
                 <!-- AddTest FORM -->
                 <form action="AddTestServlet" method="post">
@@ -64,7 +68,7 @@
                     <button type="submit" class="btn btn-warning btn-lg">Crear Test</button>
                 </form>
 
-
+               
 
             </div>
 

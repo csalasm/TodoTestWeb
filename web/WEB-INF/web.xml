@@ -12,9 +12,17 @@
         <servlet-name>AddQuestionServlet</servlet-name>
         <servlet-class>controller.AddQuestionServlet</servlet-class>
     </servlet>
-        <servlet>
+    <servlet>
         <servlet-name>SessionDestroyServlet</servlet-name>
         <servlet-class>controller.SessionDestroyServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AvailableTestListServlet</servlet-name>
+        <servlet-class>controller.AvailableTestListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DoTestServlet</servlet-name>
+        <servlet-class>controller.DoTestServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
@@ -31,6 +39,14 @@
     <servlet-mapping>
         <servlet-name>AddQuestionServlet</servlet-name>
         <url-pattern>/AddQuestionServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AvailableTestListServlet</servlet-name>
+        <url-pattern>/AvailableTestListServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DoTestServlet</servlet-name>
+        <url-pattern>/DoTestServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

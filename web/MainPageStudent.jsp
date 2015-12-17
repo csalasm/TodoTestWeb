@@ -15,7 +15,7 @@
           <span class="glyphicon glyphicon-list-alt"></span> Realizar Test
       </a><br>
       <br>
-   <a href="#" class="btn btn-info btn-lg">
+   <a href="ResultStudentServlet" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-book"></span> Consultar calificaciones
         </a>
         </div>    

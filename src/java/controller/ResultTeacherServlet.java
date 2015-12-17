@@ -49,11 +49,11 @@ public class ResultTeacherServlet extends HttpServlet {
             return;
         }
         
-       //Usuario user = usuarioFacade.find("77774444P");
+      
         
         request.setAttribute("usuario", u);
         
-        processResultTeacher(request,response);
+        redirectResultTeacher(request,response);
         
         
     }
@@ -102,7 +102,7 @@ public class ResultTeacherServlet extends HttpServlet {
         rd.forward(request, response);
     }
     
-    private void processResultTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void redirectResultTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("ResultsTeacher.jsp");
         rd.forward(request, response);
     }
