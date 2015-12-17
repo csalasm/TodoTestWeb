@@ -8,7 +8,7 @@
         </div>
 
 
-        <form  class="form-horizontal" action=""  method="post" enctype="multipart/form-data" >
+        <form  class="form-horizontal" action="AddQuestionServlet"  method="post" enctype="multipart/form-data" >
             <div class="form-group">
                 <label for="Pregunta" class="col-sm-2 control-label">Pregunta: </label>
                 <div class="col-sm-6 ">
@@ -42,13 +42,13 @@
                 <div class="col-sm-offset-2">
                     <div class="radio">
                         <label>
-                            <input type="radio" name="respuesta" id="respuesta" value="Respuesta1" checked>
+                            <input type="radio" name="respuesta" id="respuesta" value="0" checked>
                             <input type="text" class="form-control col-sm-8" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta1" required>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
-                            <input type="radio" name="respuesta" id="respuesta" value="Respuesta2" checked>
+                            <input type="radio" name="respuesta" id="respuesta" value="1" checked>
                             <input type="text" class="form-control col-sm-8" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta2" required>
                         </label>
                     </div>

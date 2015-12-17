@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import model.jpa.Usuario;
  *
  * @author andresbailen93
  */
+@MultipartConfig(fileSizeThreshold = 1024*1024, maxFileSize = 1024*1024*2, maxRequestSize = 1024*1024*2)
 public class AddQuestionServlet extends HttpServlet {
 
     /**
@@ -37,11 +39,10 @@ public class AddQuestionServlet extends HttpServlet {
         HttpSession session = request.getSession(true);
         u = (Usuario) session.getAttribute("user");
 
-        if (u != null) { // Si no esta autenticado, redirigimos a la pantalla principal
+        /*if (u != null) { // Si no esta autenticado, redirigimos a la pantalla principal
             processErrorLogin(request, response);
             return;
-        }
-        
+        }*/
         AddQuestionParameters addQuestionParam = new AddQuestionParameters(request);
         
     }
