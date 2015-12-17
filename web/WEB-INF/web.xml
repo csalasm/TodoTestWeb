@@ -9,12 +9,12 @@
         <servlet-class>controller.LoginServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SessionDestroyServlet</servlet-name>
-        <servlet-class>controller.SessionDestroyServlet</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>AddUserServlet</servlet-name>
         <servlet-class>controller.AddUserServlet</servlet-class>
+    </servlet>
+        <servlet>
+        <servlet-name>SessionDestroyServlet</servlet-name>
+        <servlet-class>controller.SessionDestroyServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>QuestionServlet</servlet-name>
