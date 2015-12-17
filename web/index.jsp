@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!doctype html>
 <html>
 <head>
@@ -21,18 +22,20 @@
 
 	<!-- show any messages that come back with authentication -->
 	
-		<div class="alert alert-danger"></div>
+        <c:if test="${error_login eq true}">
+            <div class="alert alert-danger">Usuario / Contraseña incorrecta</div>
+        </c:if>
 	
 
 	<!-- LOGIN FORM -->
-	<form action="/login" method="post">
+	<form action="LoginServlet" method="post">
 		<div class="form-group">
 			<label>DNI</label>
-			<input type="text" class="form-control" name="dni">
+			<input type="text" class="form-control" name="user" value="77774444P">
 		</div>
 		<div class="form-group">
 			<label>Password</label>
-			<input type="password" class="form-control" name="password">
+			<input type="password" class="form-control" name="password" value="wrong">
 		</div>
 
 		<button type="submit" class="btn btn-warning btn-lg">Login</button>
