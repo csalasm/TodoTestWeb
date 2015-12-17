@@ -8,11 +8,16 @@
         </div>
 
 
-        <form  class="form-horizontal" action="mailto:newcomputer@nc.com"  method="post" enctype="multipart/form-data" >
+        <form  class="form-horizontal" action=""  method="post" enctype="multipart/form-data" >
             <div class="form-group">
                 <label for="Pregunta" class="col-sm-2 control-label">Pregunta: </label>
                 <div class="col-sm-6 ">
-                    <textarea class="form-control" rows="3"  placeholder="Pregunta" required></textarea>
+                    <textarea name="pregunta" class="form-control" rows="3"  placeholder="Pregunta" required></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="Imagen" class="col-sm-2 control-label">Selecciona un fichero:</label><div class="col-sm-6">
+                    <input type="file" name="fileName" class="btn"><br>
                 </div>
             </div>
             <div class="form-group">
@@ -27,9 +32,9 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-4">
-                    <input type="text" class="form-control" id="Tematica" name="Tematica" value placeholder="Temática" required>
+                    <input type="text" class="form-control" id="addcateogira" name="adcategoria" value placeholder="Categoría">
                 </div>
-                <button type="submit" class="btn btn-primary col-sm-2">Añadir Tematica</button>
+                <button type="submit" class="btn btn-primary col-sm-2">Añadir Categoría</button>
             </div> 
 
             <div class="form-group ">
@@ -38,19 +43,13 @@
                     <div class="radio">
                         <label>
                             <input type="radio" name="respuesta" id="respuesta" value="Respuesta1" checked>
-                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="Respuesta1" value placeholder="Respuesta1" required>
+                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta1" required>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
                             <input type="radio" name="respuesta" id="respuesta" value="Respuesta2" checked>
-                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="Respuesta2" value placeholder="Respuesta2" required>
-                        </label>
-                    </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="respuesta" id="respuesta" value="Respuesta3" checked>
-                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="Respuesta3" value placeholder="Respuesta3" required>
+                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta2" required>
                         </label>
                     </div>
                 </div>

@@ -5,52 +5,31 @@
  */
 package controller;
 
-import controller.parameters.QuestionParameters;
-import java.io.ByteArrayInputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import controller.facades.UsuarioFacade;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.PrintWriter;
-import java.util.Base64;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.annotation.Resource;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import java.util.Collection;
+import java.util.List;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-import model.actions.QuestionActions;
-import model.jpa.Categoria;
-import model.jpa.Pregunta;
+import javax.servlet.http.HttpSession;
+import model.jpa.Examen;
+import model.jpa.Usuario;
 
 /**
  *
- * @author csalas
+ * @author alejandroruiz
  */
-@WebServlet(name = "QuestionServlet", urlPatterns = {"/QuestionServlet"})
-@MultipartConfig(fileSizeThreshold = 1024*1024, maxFileSize = 1024*1024*2, maxRequestSize = 1024*1024*2)
-public class QuestionServlet extends HttpServlet {
-    @PersistenceContext(unitName = "TodoTestWebPU")
-    private EntityManager em;
-    @Resource
-    private javax.transaction.UserTransaction utx;
-    QuestionActions qa = null;
+@WebServlet(name = "ResultStudentServlet", urlPatterns = {"/ResultStudentServlet"})
+public class ResultStudentServlet extends HttpServlet {
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        qa = new QuestionActions(em);
-    }
-    
+    @EJB
+    UsuarioFacade usuarioFacade;
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -63,34 +42,32 @@ public class QuestionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Recogemos los parámetros del Servlet
-        QuestionParameters questionParameters = new QuestionParameters(request);
-        // Construimos una entidad pregunta
-        Pregunta p = new Pregunta();
-        p.setIdCategoria(em.find(Categoria.class, questionParameters.getCategoryID()));
-        p.setTexto(questionParameters.getQuestionText());
-        p.setImagen(questionParameters.getImage());
-        persist(p);
-
-        //request.setAttribute("pregunta", preg);
-        //String image = Base64.getEncoder().encodeToString(preg.getImagen());
-        //request.setAttribute("image", image);
-        RequestDispatcher rd;
-        rd = getServletContext().getRequestDispatcher("/image.jsp");
-        rd.forward(request, response);
-    }
-    
-   
-    
-    public void persist(Object object) {
-        try {
-            utx.begin();
-            em.persist(object);
-            utx.commit();
-        } catch (Exception e) {
-            Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", e);
-            throw new RuntimeException(e);
-        }
+         //Recuperamos la sesión
+        Usuario u;
+        /*HttpSession session = request.getSession(true);
+        u = (Usuario)session.getAttribute("user");
+        
+        if (u != null) { // Si esta autenticado, redirigimos a la pantalla principal
+            processErrorLogin(request, response);
+            return;
+        }*/
+        u = usuarioFacade.find("77774444A");
+        int success = usuarioFacade.totalSuccess(u);
+        int fails = usuarioFacade.totalFail(u);
+        double average = usuarioFacade.average(u);
+        int totalTest = usuarioFacade.totalTest(u);
+        
+        request.setAttribute("usuario", u);
+        request.setAttribute("success",success);
+        request.setAttribute("fails", fails);
+        request.setAttribute("average", average);
+        request.setAttribute("total",totalTest);
+        
+        
+        
+        processResultStudent(request,response);
+        
+        
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -131,5 +108,17 @@ public class QuestionServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("ERROR_LOGIN", "true");
+        RequestDispatcher rd = getServletContext().getNamedDispatcher("/login.jsp");
+        rd.forward(request, response);
+        
+    }
+
+    private void processResultStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("ResultsStudent.jsp");
+        rd.forward(request, response);
+    }
 
 }

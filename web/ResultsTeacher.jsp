@@ -3,6 +3,7 @@
     Created on : 16-dic-2015, 16:38:41
     Author     : Jesus
 --%>
+  <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   <%@include file="TeacherHeader.html" %>
      
     
@@ -23,17 +24,21 @@
                                         <th>Puntuacion</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>x</td>
-                                         <td>x</td>
-                                        <td>x</td>
-                                        <td>x</td>
-                                        <td>x</td>
-                                        <td>x</td>
-                                        <td>x</td>
-                                    </tr>
-                                </tbody>
+                                <c:forEach var="test" items="${usuario.testCollection}">
+                                    <c:forEach var="exam" items="${test.examenCollection}">
+                                        <tbody>
+                                            <tr>
+                                                <td>${test.idTest}</td>
+                                                <td>${exam.usuario.dni}</td>
+                                                <td>${exam.fecha}</td>
+                                                <td>${exam.test.nombre}</td>
+                                                <td>${exam.aciertos}</td>
+                                                <td>${exam.fallos}</td>
+                                                <td>${exam.nota}</td>
+                                            </tr>
+                                        </tbody>
+                                    </c:forEach>
+                                </c:forEach>
                             </table>
                         </div>
                  
