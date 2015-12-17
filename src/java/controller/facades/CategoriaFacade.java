@@ -5,6 +5,7 @@
  */
 package controller.facades;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -28,8 +29,10 @@ public class CategoriaFacade extends AbstractFacade<Categoria> {
         super(Categoria.class);
     }
     
-    public Categoria findByName(String topicName) { //Devuelve una categoria apartir de su nombre.
-        return find(topicName);
+    public List<Categoria> findByName(String topicName) { //Devuelve una categoria apartir de su nombre.
+        
+        List<Categoria> list_cat = em.createNamedQuery("Categoria.findByNombre").setParameter("nombre", topicName).getResultList();
+        return list_cat;
     }
     
 }
