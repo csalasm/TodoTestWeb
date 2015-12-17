@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.jpa.Examen;
 import model.jpa.Usuario;
+import viewBean.ResultadosViewBean;
 
 /**
  *
@@ -57,15 +58,12 @@ public class ResultStudentServlet extends HttpServlet {
         double average = usuarioFacade.average(u);
         int totalTest = usuarioFacade.totalTest(u);
         
-        request.setAttribute("usuario", u);
-        request.setAttribute("success",success);
-        request.setAttribute("fails", fails);
-        request.setAttribute("average", average);
-        request.setAttribute("total",totalTest);
+        ResultadosViewBean rvb = new ResultadosViewBean(u,success,fails,average,totalTest);
+        
+        request.setAttribute("usuario", rvb);
         
         
-        
-        processResultStudent(request,response);
+        redirectResultStudent(request,response);
         
         
     }
@@ -114,7 +112,7 @@ public class ResultStudentServlet extends HttpServlet {
         rd.forward(request, response);
     }
 
-    private void processResultStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    private void redirectResultStudent(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher rd = request.getRequestDispatcher("/ResultsStudent.jsp");
         rd.forward(request, response);
     }

@@ -10,7 +10,7 @@
      <div class="col-md-offset-2 text-primary col-md-8"> 
          <h1>Resultados </h1> 
             <div class="panel panel-primary">
-                <div class="panel-heading">DNI ${usuario.dni}</div>
+                <div class="panel-heading">DNI ${usuario.user.dni}</div>
                 <div class="panel-body">
                         <div class="table-responsive">          
                             <table class="table  table-striped">
@@ -24,7 +24,7 @@
                                         <th>Puntuacion</th>
                                     </tr>
                                 </thead>
-                                <c:forEach var="examen" items="${usuario.examenCollection}">
+                                <c:forEach var="examen" items="${usuario.user.examenCollection}">
                                         
                                 <tbody>
                                     <tr>
@@ -63,10 +63,10 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>${total}</td>
-                                        <td>${success}</td>
-                                        <td>${fails}</td>
-                                        <td>${average}</td>
+                                        <td>${usuario.totalTest}</td>
+                                        <td>${usuario.success}</td>
+                                        <td>${usuario.fails}</td>
+                                        <td>${usuario.average}</td>
                                    
                                     </tr>
                                 </tbody>

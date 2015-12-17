@@ -9,6 +9,7 @@ import controller.facades.TestFacade;
 import controller.parameters.AddTestParameters;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -43,17 +44,24 @@ public class AddTestServlet extends HttpServlet {
             throws ServletException, IOException {
         
         //Recuperamos la sesión
+         //Recuperamos la sesión
         Usuario u;
-        HttpSession session = request.getSession(true);
+       HttpSession session = request.getSession();
         u = (Usuario)session.getAttribute("user");
-        
-        if (u != null) { // Si esta autenticado, redirigimos a la pantalla principal
-            processErrorLogin(request, response);
+        if (u == null) { // Si esta autenticado, redirigimos a la pantalla principal
+            redirectToLogin(request, response);
             return;
         }
         
         //Recuperamos los parámetros del Servlet
         AddTestParameters atp = new AddTestParameters(request);
+        
+        if(testFacade.existTestName(atp, u)){
+            System.out.println("Existe");
+        }else{
+            System.out.println("No existe");
+        }
+        
         
         //Crear el objeto
         Test test = new Test();
@@ -64,20 +72,18 @@ public class AddTestServlet extends HttpServlet {
         test.setActivo((short)(false?1:0));
         
         //Insertar en la base de datos
-        testFacade.create(test);
+        //testFacade.create(test);
         
         
-        processAddQuestion(request,response);
+        redirectAddQuestion(request,response);
        
         
 
         }
     
-private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ERROR_LOGIN", "true");
-        RequestDispatcher rd = getServletContext().getNamedDispatcher("/login.jsp");
+private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
-        
     }
     
     
@@ -121,8 +127,8 @@ private void processErrorLogin(HttpServletRequest request, HttpServletResponse r
         return "Short description";
     }// </editor-fold>
 
-    private void processAddQuestion(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-        RequestDispatcher rd = request.getRequestDispatcher("/AddQuestio.jsp");
+    private void redirectAddQuestion(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+        RequestDispatcher rd = request.getRequestDispatcher("/AddQuestion.jsp");
         rd.forward(request, response);
         
     }
