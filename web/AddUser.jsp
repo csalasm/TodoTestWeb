@@ -57,7 +57,7 @@
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-3">
-                    <input type="submit" class="btn btn-primary" id="boton">
+                    <button type="submit" class="btn btn-primary" id="boton">Agregar</button>
                 </div>
             </div>
 

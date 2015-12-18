@@ -66,6 +66,7 @@ public class LoginServlet extends HttpServlet {
         }
         
         session.setAttribute("user", u);
+        request.setAttribute("user", u);
         redirectToMain(u, request, response);
             
     }
