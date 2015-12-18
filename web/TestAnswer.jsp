@@ -8,10 +8,7 @@
 <%@include file="StudentHeader.html" %>
 <div class="container" style="margin-top: 30px">
             <div class="col-md-offset-2 col-md-8">
-
-
                 <div class="form-vertical form-required">
-
                     <div class="panel panel-primary">
                         <div class="panel-heading">
                             <h2>${question.testName}</h2></div>
@@ -19,6 +16,9 @@
                             <c:if test="${question.answerList != null}">
                                 <form method="post" action="DoTestServlet?id=${param.id}">
                                     <p id="pregunta">(${question.currentQuestion} / ${question.totalQuestions}) ${question.question.texto}</p>
+                                    <c:if test="${question.question.imagen != null}">
+                                        <p style="text-align: center"><img src="ImageServlet?image=${question.question.idPregunta}" /></p>
+                                    </c:if>
                                     <c:forEach var="answer" items="${question.answerList}">
                                         <label for="radio-one">
                                             <input type="radio" name="answer" id="radio-one" value="${answer.idRespuesta}"/>
@@ -46,6 +46,6 @@
                 </div>
             </div>
         </div>
-                            <script type="text/javascript" src="js/back.js"></script>           
+        <script type="text/javascript" src="js/back.js"></script>           
 <%@include file="Footer.html" %>
 

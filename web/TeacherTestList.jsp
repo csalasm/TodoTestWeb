@@ -10,9 +10,11 @@
         <a href="#" class="list-group-item active">
             Seleccionar test
         </a>
+        <form method="post" action="CreateTestSession">
         <c:forEach var="test" items="${user.testCollection}">
-            <a href="AddQuestionServlet?id=${test.idTest}" class="list-group-item">${test.nombre}</a>
+            <button name="idtest" value="${test.idTest}" class="list-group-item col-md-12">${test.nombre}</button>
         </c:forEach>
+        </form>
     </div>
 </div>
 <%@include file="Footer.html"%>

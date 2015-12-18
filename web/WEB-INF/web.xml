@@ -32,6 +32,18 @@
         <servlet-name>AddCategoryServlet</servlet-name>
         <servlet-class>controller.AddCategoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ListCategoryServlet</servlet-name>
+        <servlet-class>controller.ListCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CreateTestSession</servlet-name>
+        <servlet-class>controller.CreateTestSession</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ImageServlet</servlet-name>
+        <servlet-class>controller.ImageServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCategoryServlet</servlet-name>
         <url-pattern>/AddCategoryServlet</url-pattern>
@@ -63,6 +75,18 @@
     <servlet-mapping>
         <servlet-name>AddAnswerParameters</servlet-name>
         <url-pattern>/AddAnswerParameters</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ListCategoryServlet</servlet-name>
+        <url-pattern>/ListCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreateTestSession</servlet-name>
+        <url-pattern>/CreateTestSession</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImageServlet</servlet-name>
+        <url-pattern>/ImageServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

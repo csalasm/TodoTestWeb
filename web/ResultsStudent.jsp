@@ -6,6 +6,7 @@
 
     <%@include file="StudentHeader.html" %>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
  
      <div class="col-md-offset-2 text-primary col-md-8"> 
          <h1>Resultados </h1> 
@@ -29,7 +30,7 @@
                                 <tbody>
                                     <tr>
                                         <td>${examen.examenPK.idTest}</td>
-                                        <td>${examen.fecha}</td>
+                                        <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${examen.fecha}" /></td>
                                         <td>${examen.test.nombre}</td>
                                         <td>${examen.aciertos}</td>
                                         <td>${examen.fallos}</td>

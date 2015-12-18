@@ -8,7 +8,7 @@
 <div class="container">
 <div class="col-sm-6 col-sm-offset-3" style="margin-top: 30px">
     <div class="panel panel-primary">
-        <div class="panel-heading"><h3><span class="glyphicon glyphicon-home"></span> Bienvenido ${name}</h3></div>
+        <div class="panel-heading"><h3><span class="glyphicon glyphicon-home"></span> Bienvenid@ ${user.nombre}</h3></div>
         <div class="panel-body">
             
       <a href="ShowAddTestServlet" class="btn btn-info btn-lg">
