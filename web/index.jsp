@@ -19,22 +19,26 @@
         <link href="css/personalizado.css" rel="stylesheet" type="text/css"/>
 	<style>
 		body 		{ padding-top:80px; }
+                body {
+   background: whitesmoke;
+}
 	</style>
 </head>
 <body>
 <div class="container">
-   
+ 
 <p style="text-align: center">
     <img src="images/banner.png" />
 </p>
+  
     
 <div class="col-sm-6 col-sm-offset-3">
 
-	
-
-	<!-- show any messages that come back with authentication -->
-	<!-- LOGIN FORM -->
-	<form action="LoginServlet" method="post">
+	<div class="panel panel-primary">
+     
+      <div class="panel-body">
+      
+      <form action="LoginServlet" method="post">
 		<div class="form-group">
 			<label>DNI</label>
 			<input type="text" class="form-control" name="user" value="77774444P">
@@ -48,8 +52,15 @@
                 <div class="alert alert-danger small-margin">Usuario / Contraseña incorrecta</div>
             </c:if>
 
-		<button type="submit" class="btn btn-warning btn-lg">Acceder</button>
+		<button type="submit" class="btn btn-primary btn-md">Acceder</button>
 	</form>
+      
+      </div>
+    </div>
+
+	<!-- show any messages that come back with authentication -->
+	<!-- LOGIN FORM -->
+	
         
 
 	
