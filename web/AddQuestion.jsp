@@ -45,13 +45,13 @@
                     <div class="radio">
                         <label>
                             <input type="radio" name="respuesta" id="respuesta" value="0" checked>
-                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta1" required>
+                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
                         </label>
                     </div>
                     <div class="radio">
                         <label>
                             <input type="radio" name="respuesta" id="respuesta" value="1" checked>
-                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta2" required>
+                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
                         </label>
                     </div>
                 </div>
@@ -61,12 +61,18 @@
                     </div>  
                 </div>
 
-                <div class="form-group">
+                <div class="form-group ">
                     <div class="col-sm-offset-2">
-                        <button type="submit" class="btn btn-primary" id="boton">Añadir Pregunta</button>
+                        <button type="submit" class="btn btn-primary" id="boton" name="ActionButton" value="0">Añadir Pregunta</button>
+                    </div>
+                    <div class="col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary" id="boton" name="ActionButton" value="1">Añadir Pregunta y Volver</button>
+                    </div>
+                    <div class="col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary" id="boton" name="ActionButton" value="2">Volver</button>
                     </div>
                 </div>
-
+            </div>
         </form>
     </div>
 </div>
