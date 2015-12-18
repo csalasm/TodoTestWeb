@@ -8,10 +8,12 @@ package controller;
 import controller.facades.CategoriaFacade;
 import controller.facades.PreguntaFacade;
 import controller.facades.RespuestaFacade;
+import controller.facades.TestFacade;
 import controller.parameters.AddAnswerParameters;
 import controller.parameters.AddQuestionParameters;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -24,6 +26,7 @@ import javax.servlet.http.HttpSession;
 import model.jpa.Categoria;
 import model.jpa.Pregunta;
 import model.jpa.Respuesta;
+import model.jpa.Test;
 import model.jpa.Usuario;
 
 /**
@@ -32,13 +35,16 @@ import model.jpa.Usuario;
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 2, maxRequestSize = 1024 * 1024 * 2)
 public class AddQuestionServlet extends HttpServlet {
-
+    Test test;
+    HttpSession session;
     @EJB
     private CategoriaFacade categoriaFacade;
     @EJB
     private PreguntaFacade preguntaFacade;
     @EJB
     private RespuestaFacade respuestaFacade;
+    @EJB
+    private TestFacade testFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -52,28 +58,38 @@ public class AddQuestionServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         Usuario u;
-        HttpSession session = request.getSession(true);
+        session = request.getSession(true);
         u = (Usuario) session.getAttribute("user");
 
         /*if (u != null) { // Si no esta autenticado, redirigimos a la pantalla principal
             processErrorLogin(request, response);
             return;
         }*/
-        int action = Integer.parseInt(request.getParameter("ActionButton"));
-        if(0 == action){
-            createQuestion(request, response);
-            redirectToCreateQuestion(request, response);
+      //  if (request.getParameter("test") != null) {
+            test = (Test) session.getAttribute("test");
+            int action = Integer.parseInt(request.getParameter("ActionButton"));
+            if (0 == action) {
+                createQuestion(request);
+                redirectToCreateQuestion(request, response);
+            }
+            if (1 == action) {
+                createQuestion(request);
+                redirectMainPageTeacher(request, response);
+            }
+            if (2 == action) {
+                redirectMainPageTeacher(request, response);
+            }
+            if (3 == action) {
 
-        }
-        if(1 == action){
-            createQuestion(request,response);
-            redirectMainPageTeacher(request, response);
-        }
-        if(2 == action){
-            redirectMainPageTeacher(request, response);
-        }
-        
+            }
+            
+            if (request.getParameter("id") == null) {
+                redirectMainPageTeacher(request, response);
+            }
 
+      //  } else {
+      //      redirectMainPageTeacher(request, response);
+      //  }
     }
 
     private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -90,13 +106,14 @@ public class AddQuestionServlet extends HttpServlet {
     }
 
     private void redirectMainPageTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //request.setAttribute(name, this);
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/MainPageTeacher.jsp");
         rd.forward(request, response);
     }
-    
-    private void createQuestion(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
-        List<Categoria> lista_categoria = categoriaFacade.findByName(request.getParameter("Categoria"));
+
+    private void createQuestion(HttpServletRequest request) throws ServletException, IOException {
+
+        List<Categoria> lista_categoria;
+        lista_categoria = categoriaFacade.findByName(request.getParameter("Categoria"));
         AddQuestionParameters addQuestionParam = new AddQuestionParameters(request);
         addQuestionParam.setCategoria(lista_categoria.get(0));
 
@@ -105,6 +122,9 @@ public class AddQuestionServlet extends HttpServlet {
         pregunta.setIdCategoria(addQuestionParam.getCategory());
         pregunta.setImagen(addQuestionParam.getImage());
         pregunta.setTexto(addQuestionParam.getQuestion());
+        List<Test> listaTest = new ArrayList<>();
+        listaTest.add(test);
+        pregunta.setTestCollection(listaTest);
         //Insertamos la pregunta en la bse de datos.
         preguntaFacade.create(pregunta);
 
@@ -118,6 +138,7 @@ public class AddQuestionServlet extends HttpServlet {
             respuesta.setCorrecta(addAnswerParam.getAnswer_resp().get(i).getCorrecta());
             respuestaFacade.create(respuesta);
         }
+        session.setAttribute("categoria",lista_categoria.get(0).getNombre());
 
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
