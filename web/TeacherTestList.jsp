@@ -3,7 +3,7 @@
     Author     : Alejandro
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@include file="StudentHeader.html" %>
+<%@include file="TeacherHeader.html" %>
 
 <div class="col-md-offset-2 text-primary col-md-8" style="margin-top: 30px">  
     <div class="list-group">
