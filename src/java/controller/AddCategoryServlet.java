@@ -25,7 +25,7 @@ import model.jpa.Usuario;
  *
  * @author Jesus
  */
-@WebServlet(name = "AddTopicServlet", urlPatterns = {"/AddTopicServlet"})
+@WebServlet(name = "AddCategoryServlet", urlPatterns = {"/AddCategoryServlet"})
 public class AddCategoryServlet extends HttpServlet {
 
     @EJB
@@ -49,14 +49,16 @@ public class AddCategoryServlet extends HttpServlet {
         AddCategoryParameters atp = new AddCategoryParameters(request);
 
         List<Categoria> list_cat = categoriaFacade.findByName(atp.getCategoryName());
-
+        Categoria categoria;
+        
         if (list_cat.size() == 0) { //No existe ninguno con el nombre. buscado
-            Categoria new_cat = new Categoria();
-            new_cat.setNombre(atp.getCategoryName());
-            categoriaFacade.create(new_cat);   //Crea la nueva categoria
-            processAddTopic(request, response);
+            categoria = new Categoria();
+            categoria.setNombre(atp.getCategoryName());
+            System.out.println(atp.getCategoryName());
+            categoriaFacade.create(categoria);   //Crea la nueva categoria
+            processAddCategory(request, response);
         }else{
-            processErrorAddTopic(request,response); 
+            processErrorAddCategory(request,response); 
         }
         
     }
@@ -100,15 +102,18 @@ public class AddCategoryServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void processErrorAddTopic(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ADD_TOPIC_OK", "false");
-        RequestDispatcher rd = getServletContext().getNamedDispatcher("/AddTest.jsp");
+    private void processErrorAddCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("ADD_CATEGORY_OK", "false");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddTest.jsp");
         rd.forward(request, response);
     }
 
-    private void processAddTopic(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ADD_TOPIC_OK", "true");
-        RequestDispatcher rd = getServletContext().getNamedDispatcher("/AddTest.jsp");
+    private void processAddCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("ADD_CATEGORY_OK", "true");        
+        List<Categoria> categoria_list = categoriaFacade.findAll();
+        request.setAttribute("categories", categoria_list);
+        
+        RequestDispatcher rd = request.getRequestDispatcher("/AddQuestion.jsp");
         rd.forward(request, response);
     }
 }

@@ -5,11 +5,13 @@
  */
 package controller;
 
+import controller.facades.CategoriaFacade;
 import controller.facades.TestFacade;
 import controller.parameters.AddTestParameters;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.jpa.Categoria;
 import model.jpa.Test;
 import model.jpa.Usuario;
 
@@ -30,6 +33,8 @@ public class AddTestServlet extends HttpServlet {
     
     @EJB
     private TestFacade testFacade;
+    @EJB
+    private CategoriaFacade categoriaFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -63,7 +68,7 @@ public class AddTestServlet extends HttpServlet {
             test.setDni(u);
             test.setDuracion(Integer.parseInt(atp.getDuration()));
             test.setResta(Short.parseShort(atp.getSubtraction()));
-            test.setActivo((short) (false ? 1 : 0));
+            test.setActivo((short) 0);
             testFacade.create(test);
             redirectAddQuestion(request,response);
             
@@ -124,6 +129,8 @@ private void redirectToLogin(HttpServletRequest request, HttpServletResponse res
 
     private void redirectAddQuestion(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
         request.setAttribute("ADD_TEST_OK", "true");
+        List<Categoria> categoria_list = categoriaFacade.findAll();
+        request.setAttribute("categories", categoria_list);
         RequestDispatcher rd = request.getRequestDispatcher("/AddQuestion.jsp");
         rd.forward(request, response);
         

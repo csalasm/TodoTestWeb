@@ -24,6 +24,18 @@
         <servlet-name>DoTestServlet</servlet-name>
         <servlet-class>controller.DoTestServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddAnswerParameters</servlet-name>
+        <servlet-class>controller.parameters.AddAnswerParameters</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddCategoryServlet</servlet-name>
+        <servlet-class>controller.AddCategoryServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddCategoryServlet</servlet-name>
+        <url-pattern>/AddCategoryServlet</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet</url-pattern>
@@ -47,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>DoTestServlet</servlet-name>
         <url-pattern>/DoTestServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddAnswerParameters</servlet-name>
+        <url-pattern>/AddAnswerParameters</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

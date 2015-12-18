@@ -30,7 +30,6 @@ public class CategoriaFacade extends AbstractFacade<Categoria> {
     }
     
     public List<Categoria> findByName(String topicName) { //Devuelve una categoria apartir de su nombre.
-        
         List<Categoria> list_cat = em.createNamedQuery("Categoria.findByNombre").setParameter("nombre", topicName).getResultList();
         return list_cat;
     }
