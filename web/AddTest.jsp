@@ -7,13 +7,13 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="TeacherHeader.html"%>
         <div class="container">
-            <div class="jumbotron">
-                <h1>TODOTEST WEB</h1>
-            </div>
+            
 
             <div class="col-sm-6 col-sm-offset-3">
 
-                <h1><span class="fa fa-sign-in"></span> Crear Test</h1>
+                <div class="text-primary col-sm-offset-4">
+                    <h1>Crear Test</h1>
+                </div>
 
                 <c:if test="${ADD_TEST_OK eq 'false'}">
                     <div class="alert alert-danger">Ya existe un test con ese nombre</div>
@@ -23,7 +23,7 @@
                 <form action="AddTestServlet" method="post">
                     <div class="form-group ">
                         <label>Nombre Test</label>
-                        <input type="text" class="form-control" name="testname">
+                        <input type="text" class="form-control" name="testname" required>
                     </div>
                     <div class="col-sm-6">
                         <div class="form-group">
@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <label>Autor</label>
-                        <input type="text" class="form-control" name="username">
+                        <input type="text" class="form-control" name="username" value="${usuario.dni}">
                     </div>
                     <button type="submit" class="btn btn-warning btn-lg">Crear Test</button>
                 </form>
