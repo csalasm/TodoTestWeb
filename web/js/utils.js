@@ -5,15 +5,20 @@
  */
 $(document).ready(function(){
 $("#addRespuesta").on('click',function() {
-    var r="<div class=\"radio\"> <label> <input type=\"radio\" name=\"respuesta\"id=\"respuesta\" value=\"1\"> <input type=\"text\" class=\"form-control col-sm-8\" id=\"Respuesta\" name=\"respuestaText[]\" value placeholder=\"Respuesta\" > </label> </div>";
-   $("#answers").append(r);
+    var r="<div class=\"radio\"> <label> <input type=\"radio\" name=\"respuesta\"id=\"respuesta\" value=\"1\"> <input type=\"text\" class=\"form-control col-sm-8\" id=\"Respuesta\" name=\"respuestaText[]\" value placeholder=\"Respuesta\" required> </label> </div>";
+   $("#answersadded").append(r);
 });
+
+
+
+$("#removeRespuesta").on('click',function() {
+   $("#answersadded div:last-child").remove();
 });
 
 
 
 
-$(document).ready(function(){
+
 $("#boton").on('click',function(){
     var dni = $("#DNI").val();
     var exp = /^\d{8}[a-zA-Z]$/;
