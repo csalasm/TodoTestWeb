@@ -5,6 +5,7 @@
  */
 package viewBean;
 
+import com.sun.org.apache.xml.internal.security.utils.Base64;
 import java.util.Collection;
 import model.jpa.Pregunta;
 import model.jpa.Respuesta;

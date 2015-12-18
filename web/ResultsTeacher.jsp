@@ -4,6 +4,7 @@
     Author     : Jesus
 --%>
   <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   <%@include file="TeacherHeader.html" %>
      
     
@@ -30,7 +31,7 @@
                                             <tr>
                                                 <td>${test.idTest}</td>
                                                 <td>${exam.usuario.dni}</td>
-                                                <td>${exam.fecha}</td>
+                                                <td><fmt:formatDate type="both" dateStyle="short" timeStyle="short" value="${exam.fecha}" /></td>
                                                 <td>${exam.test.nombre}</td>
                                                 <td>${exam.aciertos}</td>
                                                 <td>${exam.fallos}</td>

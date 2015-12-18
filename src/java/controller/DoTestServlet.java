@@ -110,6 +110,7 @@ public class DoTestServlet extends HttpServlet {
                 redirectToQuestion(request, response);
             }
             else { // Es la ultima pregunta, corregimos
+                tsb.addUserAnswer(Long.valueOf(request.getParameter("answer")));
                 correctTest(tsb);
                 PreguntaViewBean pvb = new PreguntaViewBean(tsb.getTest().getNombre(), null, null, 0, 0);
                 pvb.setMark(tsb.getMark().toString());
@@ -132,15 +133,18 @@ public class DoTestServlet extends HttpServlet {
                 questionsAnswer = new ArrayList(p.getRespuestaCollection());
                 Respuesta correctAnswer = null;
                 for(Respuesta r: questionsAnswer) {
-                    if (r.getCorrecta() == 1)
+                    if (r.getCorrecta() == 1) {
                         correctAnswer = r;
+                        break;
+                    }
                 }
                 // Si la respuesta es correcta
-                if (tsb.getUserAnswers().size() > i)
-                    if (correctAnswer.getIdPregunta().getIdPregunta() == tsb.getUserAnswers().get(i))
+                if (tsb.getUserAnswers().size() > i) {
+                    if (correctAnswer.getIdRespuesta().equals(tsb.getUserAnswers().get(i)))
                         correct++;
                     else
                         fail++;
+                }
             }
         }
         calcMark(tsb, correct, fail, testQuestions.size());
