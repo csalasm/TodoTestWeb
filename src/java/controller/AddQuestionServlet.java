@@ -59,7 +59,43 @@ public class AddQuestionServlet extends HttpServlet {
             processErrorLogin(request, response);
             return;
         }*/
-        //Obtenemos la categoria de la base de datos.
+        int action = Integer.parseInt(request.getParameter("ActionButton"));
+        if(0 == action){
+            createQuestion(request, response);
+            redirectToCreateQuestion(request, response);
+
+        }
+        if(1 == action){
+            createQuestion(request,response);
+            redirectMainPageTeacher(request, response);
+        }
+        if(2 == action){
+            redirectMainPageTeacher(request, response);
+        }
+        
+
+    }
+
+    private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("ERROR_LOGIN", "true");
+        RequestDispatcher rd = getServletContext().getNamedDispatcher("/login.jsp");
+        rd.forward(request, response);
+    }
+
+    private void redirectToCreateQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Categoria> categoria_list = categoriaFacade.findAll();
+        request.setAttribute("categories", categoria_list);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestion.jsp");
+        rd.forward(request, response);
+    }
+
+    private void redirectMainPageTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        //request.setAttribute(name, this);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/MainPageTeacher.jsp");
+        rd.forward(request, response);
+    }
+    
+    private void createQuestion(HttpServletRequest request,HttpServletResponse response) throws ServletException, IOException{
         List<Categoria> lista_categoria = categoriaFacade.findByName(request.getParameter("Categoria"));
         AddQuestionParameters addQuestionParam = new AddQuestionParameters(request);
         addQuestionParam.setCategoria(lista_categoria.get(0));
@@ -82,27 +118,7 @@ public class AddQuestionServlet extends HttpServlet {
             respuesta.setCorrecta(addAnswerParam.getAnswer_resp().get(i).getCorrecta());
             respuestaFacade.create(respuesta);
         }
-        redirectToCreateQuestion(request, response);
 
-    }
-
-    private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ERROR_LOGIN", "true");
-        RequestDispatcher rd = getServletContext().getNamedDispatcher("/login.jsp");
-        rd.forward(request, response);
-    }
-
-    private void redirectToCreateQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Categoria> categoria_list = categoriaFacade.findAll();
-        request.setAttribute("categories", categoria_list);
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestion.jsp");
-        rd.forward(request, response);
-    }
-
-    private void redirectMainPageTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //request.setAttribute(name, this);
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/MainPageTeacher.jsp");
-        rd.forward(request, response);
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
 
