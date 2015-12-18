@@ -11,7 +11,7 @@
             Seleccionar test
         </a>
         <c:forEach var="test" items="${testList}">
-            <a href="DoTest?id=${test.idTest}" class="list-group-item">${test.nombre}</a>
+            <a href="DoTestServlet?id=${test.idTest}" class="list-group-item">${test.nombre}</a>
         </c:forEach>
     </div>
 </div>
