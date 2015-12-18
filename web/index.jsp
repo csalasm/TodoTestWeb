@@ -23,20 +23,16 @@
 </head>
 <body>
 <div class="container">
-    <div class="jumbotron">
-        <h1>TODOTEST WEB</h1>
-    </div>
+   
+<p style="text-align: center">
+    <img src="images/banner.png" />
+</p>
     
 <div class="col-sm-6 col-sm-offset-3">
 
-	<h1><span class="fa fa-sign-in"></span> Login</h1>
-
-	<!-- show any messages that come back with authentication -->
-        <c:if test="${error_login eq true}">
-            <div class="alert alert-danger">Usuario / Contraseña incorrecta</div>
-        </c:if>
 	
 
+	<!-- show any messages that come back with authentication -->
 	<!-- LOGIN FORM -->
 	<form action="LoginServlet" method="post">
 		<div class="form-group">
@@ -47,9 +43,14 @@
 			<label>Password</label>
 			<input type="password" class="form-control" name="password" value="test">
 		</div>
+            
+            <c:if test="${error_login eq true}">
+                <div class="alert alert-danger small-margin">Usuario / Contraseña incorrecta</div>
+            </c:if>
 
-		<button type="submit" class="btn btn-warning btn-lg">Login</button>
+		<button type="submit" class="btn btn-warning btn-lg">Acceder</button>
 	</form>
+        
 
 	
 

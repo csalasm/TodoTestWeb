@@ -80,6 +80,10 @@
         <servlet-name>CreateTestSession</servlet-name>
         <url-pattern>/CreateTestSession</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImageServlet</servlet-name>
+        <url-pattern>/ImageServlet</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

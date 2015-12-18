@@ -8,7 +8,7 @@
 
 <div class="col-sm-6 col-sm-offset-3"style="margin-top: 30px" >
     <div class="panel panel-primary">
-        <div class="panel-heading"><span class="glyphicon glyphicon-home"></span> Bienvenido ${name}</div>
+        <div class="panel-heading"><h3><span class="glyphicon glyphicon-home"></span> Bienvenid@ ${user.nombre}</h3></div>
         <div class="panel-body">
             
       <a href="AvailableTestListServlet" class="btn btn-info btn-lg">
@@ -16,7 +16,7 @@
       </a><br>
       <br>
    <a href="ResultStudentServlet" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-book"></span> Consultar calificaciones
+          <span class="glyphicon glyphicon-book"></span> Resultados
         </a>
         </div>    
 

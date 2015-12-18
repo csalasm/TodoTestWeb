@@ -48,4 +48,10 @@ public class TestFacade extends AbstractFacade<Test> {
         return listTest;
     }
     
+        public List returnTestfromUser(Usuario user) {
+        Query query = em.createQuery("SELECT t FROM Test t WHERE t.dni = :nombre").setParameter("nombre", user);
+        List<Test> test_list = query.getResultList();
+        return test_list;
+    }
+    
 }
