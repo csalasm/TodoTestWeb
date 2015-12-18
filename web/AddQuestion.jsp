@@ -26,6 +26,7 @@
                             <c:choose>
                                 <c:when test="${categoria == categorias.nombre}">
                                     <option value="${categorias.nombre}" selected="">${categorias.nombre}</option>
+                                    
                                 </c:when>
                                 <c:otherwise>
                                     <option value="${categorias.nombre}">${categorias.nombre}</option>
