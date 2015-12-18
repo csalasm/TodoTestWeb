@@ -43,6 +43,9 @@ public class AvailableTestListServlet extends HttpServlet {
             redirectToLogin(request, response);
             return;
         }
+        // Borramos cualquier ejecución de test anterior
+        session.removeAttribute("test");
+        session.removeAttribute("question");
         
         // Recuperamos los tests activos
         request.setAttribute("testList", testFacade.getActiveTest());
