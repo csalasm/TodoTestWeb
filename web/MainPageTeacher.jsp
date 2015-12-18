@@ -15,7 +15,7 @@
           <span class="glyphicon glyphicon-list-alt"></span> Añadir test
       </a>
             <br><br>
-   <a href="#" class="btn btn-info btn-lg">
+   <a href="TeacherListServlet" class="btn btn-info btn-lg">
           <span class="glyphicon glyphicon-book"></span> Añadir pregunta
         </a>
       
