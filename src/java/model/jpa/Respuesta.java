@@ -67,6 +67,12 @@ public class Respuesta implements Serializable {
         this.texto = texto;
         this.correcta = correcta;
     }
+    /*
+    public Respuesta(String texto, short correcta, Pregunta idPregunta) {
+        this.texto = texto;
+        this.correcta = correcta;
+        this.idPregunta = idPregunta;
+    }*/
 
     public Long getIdRespuesta() {
         return idRespuesta;

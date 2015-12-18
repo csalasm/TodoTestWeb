@@ -6,13 +6,21 @@
 package controller.parameters;
 
 import controller.AddQuestionServlet;
+import controller.facades.CategoriaFacade;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.ejb.EJB;
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
+import model.jpa.Categoria;
 import model.jpa.Respuesta;
 
 /**
@@ -21,40 +29,24 @@ import model.jpa.Respuesta;
  */
 public class AddQuestionParameters {
 
+
+
     private String question;
     private Collection<Respuesta> respuestaCollection;
     private byte[] image;
-    private int categoryID;
+    private Categoria category;
 
     public AddQuestionParameters(HttpServletRequest request) {
         try {
             question = request.getParameter("pregunta");
-            String categoria = request.getParameter("Categoria");
-            categoryID = 0;
-            if(request.getPart("fileImage") != null){
-            image = getImageBytes(request.getPart("fileImage"));
+            if(request.getPart("fileName") != null){
+            image = getImageBytes(request.getPart("fileName"));
             }
         } catch (IOException ex) {
             Logger.getLogger(AddQuestionParameters.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ServletException ex) {
             Logger.getLogger(AddQuestionParameters.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-            String[] answer = request.getParameterValues("respuestaText[]");
-            String answerIsCorrect = request.getParameter("respuesta");
-            for(int i = 0; i<answer.length; i++){
-                //AÑADIR RESPUESTAS JPA FACADE!
-                ///////////////////////////////////////
-                //////////////////////////////////////////////////////////////////////////////
-                ///////////////////////////////////////
-                ///////////////////////////////////////
-                ///////////////////////////////////////
-                ///////////////////////////////////////
-                ///////////////////////////////////////
-                
-                System.out.println(answerIsCorrect);
-                System.out.println(answer[i]);
-                }
     }
 
     public byte[] getImage() {
@@ -73,12 +65,12 @@ public class AddQuestionParameters {
         this.question = question;
     }
 
-    public int getCategoryID() {
-        return categoryID;
+    public Categoria getCategory() {
+        return category;
     }
 
-    public void setCategoria(int categoria) {
-        this.categoryID = categoria;
+    public void setCategoria(Categoria categoria) {
+        this.category = categoria;
     }
 
     public Collection<Respuesta> getRespuestaCollection() {

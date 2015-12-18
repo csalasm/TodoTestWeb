@@ -74,11 +74,6 @@ public class Pregunta implements Serializable {
         this.idPregunta = idPregunta;
     }
 
-    public Pregunta(Long idPregunta, String texto) {
-        this.idPregunta = idPregunta;
-        this.texto = texto;
-    }
-
     public Long getIdPregunta() {
         return idPregunta;
     }

@@ -5,12 +5,8 @@
  */
 package controller;
 
-import controller.facades.CategoriaFacade;
-import controller.parameters.AddCategoryParameters;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.List;
-import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,18 +14,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.jpa.Categoria;
 import model.jpa.Usuario;
 
 /**
  *
- * @author Jesus
+ * @author Asus
  */
-@WebServlet(name = "AddCategoryServlet", urlPatterns = {"/AddCategoryServlet"})
-public class AddCategoryServlet extends HttpServlet {
-
-    @EJB
-    private CategoriaFacade categoriaFacade;
+@WebServlet(name = "ShowActiveTestServlet", urlPatterns = {"/ShowActiveTestServlet"})
+public class ShowActiveTestServlet extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -42,24 +34,21 @@ public class AddCategoryServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+       
         Usuario u;
         HttpSession session = request.getSession(true);
-        u = (Usuario) session.getAttribute("user");
-        AddCategoryParameters atp = new AddCategoryParameters(request);
-
-        List<Categoria> list_cat = categoriaFacade.findByName(atp.getCategoryName());
-        Categoria categoria;
-        
-        if (list_cat.size() == 0) { //No existe ninguno con el nombre. buscado
-            categoria = new Categoria();
-            categoria.setNombre(atp.getCategoryName());
-            System.out.println(atp.getCategoryName());
-            categoriaFacade.create(categoria);   //Crea la nueva categoria
-            processAddCategory(request, response);
-        }else{
-            processErrorAddCategory(request,response); 
+       
+        u = (Usuario)session.getAttribute("user");
+        if ( u == null){
+            redirectToLogin(request, response);
+            return;
         }
+        
+        request.setAttribute("usuario",u);
+       
+        
+        redirectToManageTest(request, response);
+        
         
     }
 
@@ -102,18 +91,13 @@ public class AddCategoryServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void processErrorAddCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ADD_CATEGORY_OK", "false");
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddTest.jsp");
+     private void redirectToManageTest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+           
+        RequestDispatcher rd = request.getRequestDispatcher("/ManageTest.jsp");
         rd.forward(request, response);
     }
-
-    private void processAddCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ADD_CATEGORY_OK", "true");        
-        List<Categoria> categoria_list = categoriaFacade.findAll();
-        request.setAttribute("categories", categoria_list);
-        
-        RequestDispatcher rd = request.getRequestDispatcher("/AddQuestion.jsp");
+    private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
     }
 }

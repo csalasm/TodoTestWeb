@@ -1,12 +1,30 @@
 <%@include file="TeacherHeader.html"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <div class="container">
     <div class=" col-sm-offset-2">
 
         <div class="col-sm-offset-3 text-primary">
             <h1>Añadir Pregunta</h1> 
         </div>
+        <form name="Category" class="form-horizontal" action="AddCategoryServlet" method="post">
+            <div class="form-group">
+                <label for="Categoría" class="col-sm-2 control-label">Categoría: </label>
+                <div class="col-sm-6">
+                    <select class="form-control" id="categoria" name="Categoria" required>
+                        <c:forEach var="categorias" items="${categories}">
+                            <option value="${categorias.nombre}">${categorias.nombre}</option>
+                        </c:forEach>
+                    </select>
+                </div>
+            </div>
 
+            <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-4">
+                    <input type="text" class="form-control" id="addcategoria" name="addcategory" value placeholder="Categoría">
+                </div>
+                <button type="submit" class="btn btn-primary col-sm-2">Añadir Categoría</button>
+            </div> 
+        </form>
 
         <form  class="form-horizontal" action="AddQuestionServlet"  method="post" enctype="multipart/form-data" >
             <div class="form-group">
@@ -20,26 +38,10 @@
                     <input type="file" name="fileName" class="btn"><br>
                 </div>
             </div>
-            <div class="form-group">
-                <label for="Categoría" class="col-sm-2 control-label">Categoría: </label>
-                <div class="col-sm-6">
-                    <select class="form-control" id="categoria" name="Categoria" required>
-                        <option>Categoria1</option>
-                        <option>Categoria2</option>
-                    </select>
-
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="col-sm-offset-2 col-sm-4">
-                    <input type="text" class="form-control" id="addcateogira" name="adcategoria" value placeholder="Categoría">
-                </div>
-                <button type="submit" class="btn btn-primary col-sm-2">Añadir Categoría</button>
-            </div> 
 
             <div class="form-group ">
                 <label for="Respuestas" class="col-sm-offset-3 control-label">Respuestas: </label>
-                <div class="col-sm-offset-2">
+                <div class="col-sm-offset-2" id="answers">
                     <div class="radio">
                         <label>
                             <input type="radio" name="respuesta" id="respuesta" value="0" checked>
@@ -53,13 +55,17 @@
                         </label>
                     </div>
                 </div>
-            </div>  
-            
-            <div class="form-group">
-                <div class="col-sm-offset-2">
-                    <button type="submit" class="btn btn-primary" id="boton">Añadir Pregunta</button>
+                <div class="form-group">
+                    <div class="col-sm-offset-2">
+                        <button type="button" class="btn btn-primary" id="addRespuesta">Añadir Respuesta</button>
+                    </div>  
                 </div>
-            </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-2">
+                        <button type="submit" class="btn btn-primary" id="boton">Añadir Pregunta</button>
+                    </div>
+                </div>
 
         </form>
     </div>

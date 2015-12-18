@@ -16,7 +16,7 @@ public class AddCategoryParameters {
     private String CategoryName;
 
     public AddCategoryParameters(HttpServletRequest request) {
-        CategoryName = request.getParameter("TopicName");
+        CategoryName = request.getParameter("addcategory");
     }
 
     public String getCategoryName() {

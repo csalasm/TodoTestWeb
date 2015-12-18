@@ -11,6 +11,7 @@ import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import model.jpa.Test;
 import model.jpa.Usuario;
 
@@ -37,17 +38,14 @@ public class TestFacade extends AbstractFacade<Test> {
         return (List<Test>) em.createNamedQuery("Test.findByActivo").setParameter("activo", 1).getResultList();
     }
     
-    public boolean existTestName(AddTestParameters atp, Usuario u){
-        boolean exist = false;
-        //Coleccion de test creados por ese profesor
-        Collection<Test> TestList = u.getTestCollection();
-        for(Test t : TestList){
-            if(t.getNombre().equals(atp.getName())){
-                exist = true;
-            }
-            
-        }
-        return exist;
+    public List<Test> findByNameAndDni(String testName, Usuario u){
+        
+        Query query = em.createQuery("SELECT t FROM Test t WHERE t.nombre = :nombre AND t.dni = :usuario")
+                .setParameter("nombre", testName)
+                .setParameter("usuario",u);
+                
+        List<Test> listTest = query.getResultList();
+        return listTest;
     }
     
 }
