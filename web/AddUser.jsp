@@ -7,6 +7,8 @@
 <%@include file="TeacherHeader.html" %>
 <div class="container">
 
+    
+    
     <div class=" col-sm-offset-3">
 
         <div class="col-sm-offset-2 text-primary">
@@ -16,9 +18,10 @@
 
         <form  class="form-horizontal" action="AddUserServlet"  method="post" >
             <div class="form-group">
+                
                 <label for="DNI" class="col-sm-2 control-label">DNI: </label>
                 <div class="col-sm-4">
-                    <input type="text" class="form-control"  id="dni" name="DNI" value placeholder="DNI" required>
+                    <input type="text" class="form-control"  id="DNI" name="DNI" value placeholder="DNI" required>
                 </div>
             </div>
             <div class="form-group">
@@ -63,6 +66,8 @@
 
 
         </form>
+        
+        <div id="errorDNI" class="col-sm-4 col-sm-offset-2"></div>
     </div>
 </div>
 <%@include file="Footer.html" %>
