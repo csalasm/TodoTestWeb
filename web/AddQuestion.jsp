@@ -23,7 +23,14 @@
                 <div class="col-sm-6">
                     <select class="form-control" id="categoria" name="Categoria" required>
                         <c:forEach var="categorias" items="${categories}">
-                            <option value="${categorias.nombre}">${categorias.nombre}</option>
+                            <c:choose>
+                                <c:when test="${categoria == categorias.nombre}">
+                                    <option value="${categorias.nombre}" selected="">${categorias.nombre}</option>
+                                </c:when>
+                                <c:otherwise>
+                                    <option value="${categorias.nombre}">${categorias.nombre}</option>
+                                </c:otherwise>
+                            </c:choose>
                         </c:forEach>
                     </select>
                 </div>
