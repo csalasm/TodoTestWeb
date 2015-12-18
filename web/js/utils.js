@@ -9,3 +9,21 @@ $("#addRespuesta").on('click',function() {
    $("#answers").append(r);
 });
 });
+
+
+
+
+$(document).ready(function(){
+$("#boton").on('click',function(){
+    var dni = $("#DNI").val();
+    var exp = /^\d{8}[a-zA-Z]$/;
+    
+    var error = "<div class=\"alert alert-danger\">Introduce un DNI correcto</div>";
+    if(exp.test(dni)==false){
+        $("#errorDNI").append(error);
+    }else{
+        $("#errorDNI").hide();
+    }
+        
+});   
+});

@@ -4,10 +4,10 @@
 <div class="container">
     <div class="col-sm-10 col-sm-offset-1">
         <div class="panel panel-primary">
-            <div class="panel-heading">GestionTest</div>
+         
             <div class="panel-body">
 
-                <h1>Test activos:</h1>
+                <h3>Test activos:</h3>
 
                 <form method="post" action="ActivateTestServlet">
                     <div class="checkbox" action="ActivateTestServlet">
@@ -16,28 +16,26 @@
                             <c:choose>
                                 <c:when test="${test.activo == '1'}">
                                     <div class="checkbox-primary">
-                                        <label><input type="checkbox" name="activeTests" value="${test.idTest}" checked>${test.nombre} (activo)<br></label>
+                                        <label><input type="checkbox" name="activeTests" value="${test.idTest}" checked>${test.nombre} (Activo)<br></label>
                                     </div>
 
                                 </c:when>
                                 <c:when test="${test.activo == '0'}">
                                     <div class="checkbox-primary">
-                                        <label><input type="checkbox" name="activeTests" value="${test.idTest}">${test.nombre} (desactivado)<br></label>
+                                        <label><input type="checkbox" name="activeTests" value="${test.idTest}">${test.nombre} (Desactivado)<br></label>
                                     </div>
                                 </c:when>   
                             </c:choose>
 
                         </c:forEach>
-                        <button type="submit" value="guardar" class="btn btn-primary ">Guardar</button>
+                        <br>
+                        
+                        <button type="submit" value="guardar" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-save"></span> Guardar</button>
 
                     </div>
                 </form>
-
-            <a href="ActivateTestServlet" class="btn btn-primary pull-right">
-                <span class="glyphicon glyphicon-book"></span> Añadir nuevo test
-            </a>      
-
-
+             <a href="ShowAddTestServlet" class="btn btn-primary btn-md">
+          <span class="glyphicon glyphicon-list-alt"></span> Añadir test</a>
 
 
         </div>
