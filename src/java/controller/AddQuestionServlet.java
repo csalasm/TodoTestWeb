@@ -78,18 +78,12 @@ public class AddQuestionServlet extends HttpServlet {
                 createQuestion(request);
                 redirectToCreateQuestion(request, response);
             }
-            //Añadir pregunta y volver
-            if (1 == action) {
-                request.setAttribute("AddQuestion_OK", "true");
-                createQuestion(request);
-                redirectMainPageTeacher(request, response);
-            }
             //VOLVER
-            if (2 == action) {
+            if (1 == action) {
                 redirectMainPageTeacher(request, response);
             }
             //Añadir pregunta por categoria
-            if (3 == action) {
+            if (2 == action) {
                 redirectAddQuestionByCategory(request,response);
             }
         } else {
