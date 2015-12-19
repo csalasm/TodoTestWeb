@@ -63,8 +63,9 @@ public class AddQuestionByCategory extends HttpServlet {
         test = (Test) session.getAttribute("test");
         int numPreguntas = Integer.parseInt(request.getParameter("numeroPreg"));
         List<Categoria> lista_categoria = categoriaFacade.findByName(request.getParameter("Categoria"));
-        Collection<Pregunta> lista_preguntas = lista_categoria.get(0).getPreguntaCollection();
-
+        //Collection<Pregunta> lista_preguntas = lista_categoria.get(0).getPreguntaCollection();
+        List<Pregunta> lista_preguntas = preguntaFacade.findPreguntasByNum(lista_categoria.get(0), numPreguntas);
+        System.out.println(lista_preguntas.toString());
         Collection<Test> listaTest;
         for (Pregunta p : lista_preguntas) {
             listaTest = p.getTestCollection();

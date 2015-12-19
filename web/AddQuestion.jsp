@@ -54,7 +54,7 @@
                     <div id="answers">
                         <div class="radio">
                             <label>
-                                <input type="radio" name="respuesta" id="respuesta" value="1" checked>
+                                <input type="radio" name="respuesta" id="respuesta" value="0" checked>
                                 <input type="text" class="form-control col-sm-8" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
                             </label>
                         </div>
