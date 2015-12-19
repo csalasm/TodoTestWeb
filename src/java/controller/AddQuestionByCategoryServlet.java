@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 import javax.ejb.EJB;
@@ -59,23 +60,36 @@ public class AddQuestionByCategoryServlet extends HttpServlet {
             processErrorLogin(request, response);
             return;
         }
-        //  if (request.getParameter("test") != null) {
+        addQuestionByCategory(request);
+        redirectAddQuestionByCategory(request, response);
+    }
+
+    private void addQuestionByCategory(HttpServletRequest request) throws ServletException, IOException {
         test = (Test) session.getAttribute("test");
+
         int numPreguntas = Integer.parseInt(request.getParameter("numeroPreg"));
         List<Categoria> lista_categoria = categoriaFacade.findByName(request.getParameter("Categoria"));
         //Collection<Pregunta> lista_preguntas = lista_categoria.get(0).getPreguntaCollection();
-        List<Pregunta> lista_preguntas = preguntaFacade.findPreguntasByNum(lista_categoria.get(0), numPreguntas);
-        System.out.println(lista_preguntas.toString());
+        List<Pregunta> lista_preguntas = preguntaFacade.findPreguntasByNum(lista_categoria.get(0));
+
+        long seed = System.nanoTime();
+        Collections.shuffle(lista_preguntas, new Random(seed));
+
+        List<Pregunta> lista_preguntas_add = new ArrayList<>();
+        //Si marcamos un numero superior de preguntas de las que hay no las inserta.
+        for (int i = 0; i < lista_preguntas.size(); i++) {
+            if (i < numPreguntas) {
+                lista_preguntas_add.add(lista_preguntas.get(i));
+            }
+        }
+
         Collection<Test> listaTest;
-        for (Pregunta p : lista_preguntas) {
+        for (Pregunta p : lista_preguntas_add) {
             listaTest = p.getTestCollection();
             listaTest.add(test);
             p.setTestCollection(listaTest);
             preguntaFacade.edit(p);
         }
-
-        //test.setPreguntaCollection(lista_preguntas);
-        redirectAddQuestionByCategory(request, response);
     }
 
     private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -85,6 +99,10 @@ public class AddQuestionByCategoryServlet extends HttpServlet {
     }
 
     private void redirectAddQuestionByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Categoria> categoria_list = categoriaFacade.findAll();
+        request.setAttribute("categories", categoria_list);
+        request.setAttribute("usuario", u);
+
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestionByCategory.jsp");
         rd.forward(request, response);
     }

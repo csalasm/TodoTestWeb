@@ -31,11 +31,10 @@ public class PreguntaFacade extends AbstractFacade<Pregunta> {
         super(Pregunta.class);
     }
 
-    public List<Pregunta> findPreguntasByNum(Categoria categoriaId, int numPreguntas) {
+    public List<Pregunta> findPreguntasByNum(Categoria categoriaId) {
         List<Pregunta> lista_pregunta;
-        lista_pregunta = em.createQuery("SELECT p FROM Pregunta p WHERE p.idCategoria = :categoriaId ORDER BY rand()")
+        lista_pregunta = em.createQuery("SELECT p FROM Pregunta p WHERE p.idCategoria = :categoriaId")
                 .setParameter("categoriaId", categoriaId)
-                .setMaxResults(numPreguntas)
                 .getResultList();
         return lista_pregunta;
     }

@@ -50,9 +50,9 @@
                         <label>Numero de preguntas</label>
                         <select id="numeroPreg" name="numeroPreg" class="form-control">    
 
-                                <c:forEach var="i" begin="1" end="15">
-                                    <option value="${i}">${i}</option>
-                                </c:forEach>
+                            <c:forEach var="i" begin="1" end="15">
+                                <option value="${i}">${i}</option>
+                            </c:forEach>
                         </select>
                     </div>
                 </div>
@@ -63,6 +63,11 @@
                 <button type="submit" class="btn btn-primary btn-lg">Añadir Preguntas</button>
             </div>
         </form>
+        <div>
+            <form action="AddQuestion.jsp"  method="post">
+                <button type="submit" class="btn btn-warning btn-lg">Volver</button>
+            </form>
+        </div>
 
     </div>
 

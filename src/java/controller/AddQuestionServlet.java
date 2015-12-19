@@ -70,6 +70,7 @@ public class AddQuestionServlet extends HttpServlet {
         //  if (request.getParameter("test") != null) {
         test = (Test) session.getAttribute("test");
         if (test != null) {
+            
             int action = Integer.parseInt(request.getParameter("ActionButton"));
             if (0 == action) {
                 createQuestion(request);
