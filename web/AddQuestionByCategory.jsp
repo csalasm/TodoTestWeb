@@ -18,8 +18,8 @@
             <h1>Añadir preguntas por Categoría</h1>
         </div>
 
-        <c:if test="${ADD_TEST_OK eq 'false'}">
-            <div class="alert alert-danger">Ya existe un test con ese nombre</div>
+        <c:if test="${AddQuestion_category eq 'true'}">
+            <div class="alert alert-info">Preguntas añadidas al test correctamente</div>
         </c:if>
 
         <!-- AddTest FORM -->

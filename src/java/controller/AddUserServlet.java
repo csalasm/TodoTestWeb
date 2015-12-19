@@ -51,25 +51,18 @@ public class AddUserServlet extends HttpServlet {
         //Instanciamos User added
         Usuario userAdded = new Usuario(adduserparam.getDni(), adduserparam.getName(), adduserparam.getSurname(), adduserparam.getPassword(), (short) ((adduserparam.isPermits()) ? 1 : 0));
         //Llamamos al JPA facade usuario
-        System.out.println(adduserparam.getDni());
         usuarioFacade.create(userAdded);
-        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
-        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
-        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
-        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
-        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
-        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
-        //COMPROBAR LOS PARAMETROS CON JAVASCRPIT*********************************************************************************
         redirectMainPageTeacher(request, response);
     }
 
     private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("Session_Loggin","false");
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
     }
 
     private void redirectMainPageTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        //request.setAttribute(name, this);
+        request.setAttribute("ADD_USER", "true");
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/MainPageTeacher.jsp");
         rd.forward(request, response);
     }

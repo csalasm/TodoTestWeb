@@ -6,7 +6,12 @@
 
 <%@include file="TeacherHeader.html" %>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
+<c:if test="${AddQuestion_OK eq 'true'}">
+    <div class="alert alert-info">Pregunta añadida correctamente</div>
+</c:if>
+<c:if test="${ADD_USER eq 'true'}">
+    <div class="alert alert-info">Usuario añadido correctamente</div>
+</c:if>
 <div class="container">
     <div class="col-sm-6 col-sm-offset-3" style="margin-top: 30px">
         <div class="panel panel-primary">
