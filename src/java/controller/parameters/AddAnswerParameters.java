@@ -24,7 +24,7 @@ public class AddAnswerParameters {
         Respuesta resp;
         text = request.getParameterValues("respuestaText[]");
         correcta = Integer.parseInt(request.getParameter("respuesta"));
-        
+        System.out.println(correcta);
         for(int i = 0; i < text.length; i++){
             resp = new Respuesta();
             if(correcta==i){

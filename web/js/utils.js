@@ -4,15 +4,18 @@
  * and open the template in the editor.
  */
 $(document).ready(function(){
+    var value=2;
 $("#addRespuesta").on('click',function() {
-    var r="<div class=\"radio\"> <label> <input type=\"radio\" name=\"respuesta\"id=\"respuesta\" value=\"1\"> <input type=\"text\" class=\"form-control col-sm-8\" id=\"Respuesta\" name=\"respuestaText[]\" value placeholder=\"Respuesta\" required> </label> </div>";
-   $("#answersadded").append(r);
+    var r="<div class=\"radio\"> <label> <input type=\"radio\" name=\"respuesta\"id=\"respuesta\" value=\""+(value)+"\"> <input type=\"text\" class=\"form-control col-sm-8\" id=\"Respuesta\" name=\"respuestaText[]\" value placeholder=\"Respuesta\" required> </label> </div>";
+    $("#answersadded").append(r);
+    value++;
 });
 
 
 
 $("#removeRespuesta").on('click',function() {
    $("#answersadded div:last-child").remove();
+   value--;
 });
 
 
