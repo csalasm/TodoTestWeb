@@ -85,10 +85,6 @@ public class AddQuestionServlet extends HttpServlet {
             if (3 == action) {
                 redirectAddQuestionByCategory(request,response);
             }
-
-            if (request.getParameter("id") == null) {
-                redirectMainPageTeacher(request, response);
-            }
         } else {
             redirectMainPageTeacher(request, response);
         }
@@ -100,7 +96,7 @@ public class AddQuestionServlet extends HttpServlet {
 
     private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("ERROR_LOGIN", "true");
-        RequestDispatcher rd = getServletContext().getNamedDispatcher("/login.jsp");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
         rd.forward(request, response);
     }
 
@@ -120,6 +116,8 @@ public class AddQuestionServlet extends HttpServlet {
         request.setAttribute("usuario", u);
         List<Categoria> categoria_list = categoriaFacade.findAll();
         request.setAttribute("categories", categoria_list);
+
+
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestionByCategory.jsp");
         rd.forward(request, response);
     }

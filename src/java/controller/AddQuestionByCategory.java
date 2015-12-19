@@ -6,10 +6,14 @@
 package controller;
 
 import controller.facades.CategoriaFacade;
+import controller.facades.PreguntaFacade;
 import controller.facades.TestFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Random;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,16 +22,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.jpa.Categoria;
+import model.jpa.Pregunta;
 import model.jpa.Test;
+import model.jpa.Usuario;
 
 /**
  *
  * @author andresbailen93
  */
-public class CreateTestSession extends HttpServlet {
+public class AddQuestionByCategory extends HttpServlet {
 
+    HttpSession session;
+    Usuario u;
+    Test test;
     @EJB
-    TestFacade testFacade;
+    PreguntaFacade preguntaFacade;
     @EJB
     CategoriaFacade categoriaFacade;
 
@@ -42,21 +51,40 @@ public class CreateTestSession extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        long idTest = Long.valueOf(request.getParameter("idtest"));
-        Test test = new Test();
-        test.setIdTest(idTest);
+        response.setContentType("text/html;charset=UTF-8");
+        session = request.getSession();
+        u = (Usuario) session.getAttribute("user");
 
-        test = testFacade.find(idTest);
+        if (u == null) { // Si no esta autenticado, redirigimos a la pantalla principal
+            processErrorLogin(request, response);
+            return;
+        }
+        //  if (request.getParameter("test") != null) {
+        test = (Test) session.getAttribute("test");
+        int numPreguntas = Integer.parseInt(request.getParameter("numeroPreg"));
+        List<Categoria> lista_categoria = categoriaFacade.findByName(request.getParameter("Categoria"));
+        Collection<Pregunta> lista_preguntas = lista_categoria.get(0).getPreguntaCollection();
 
-        HttpSession session = request.getSession(true);
-        session.setAttribute("test", test);
-        redirectAddQuestion(request, response);
+        Collection<Test> listaTest;
+        for (Pregunta p : lista_preguntas) {
+            listaTest = p.getTestCollection();
+            listaTest.add(test);
+            p.setTestCollection(listaTest);
+            preguntaFacade.edit(p);
+        }
+
+        //test.setPreguntaCollection(lista_preguntas);
+        redirectAddQuestionByCategory(request, response);
     }
 
-    private void redirectAddQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Categoria> categoria_list = categoriaFacade.findAll();
-        request.setAttribute("categories", categoria_list);
-        RequestDispatcher rd = request.getRequestDispatcher("/AddQuestion.jsp");
+    private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("ERROR_LOGIN", "true");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
+        rd.forward(request, response);
+    }
+
+    private void redirectAddQuestionByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestionByCategory.jsp");
         rd.forward(request, response);
     }
 

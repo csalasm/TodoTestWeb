@@ -52,6 +52,10 @@
         <servlet-name>AddTestByCategory</servlet-name>
         <servlet-class>controller.AddTestByCategoryServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddQuestionByCategory</servlet-name>
+        <servlet-class>controller.AddQuestionByCategory</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCategoryServlet</servlet-name>
         <url-pattern>/AddCategoryServlet</url-pattern>
@@ -103,6 +107,10 @@
     <servlet-mapping>
         <servlet-name>AddTestByCategory</servlet-name>
         <url-pattern>/AddTestByCategory</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddQuestionByCategory</servlet-name>
+        <url-pattern>/AddQuestionByCategory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

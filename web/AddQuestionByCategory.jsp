@@ -7,6 +7,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="TeacherHeader.html"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 <div class="container">
 
@@ -22,7 +23,7 @@
         </c:if>
 
         <!-- AddTest FORM -->
-        <form action="AddTestByCategory" method="post">
+        <form action="AddQuestionByCategory" method="post">
             <div class="form-group">
                 <div class="form-group ">
                     <label>Nombre Test</label>
@@ -47,10 +48,11 @@
                 <div class="col-sm-6">
                     <div>
                         <label>Numero de preguntas</label>
-                        <select id="numeroPreg" name="numeroPreg" class="form-control">
-                            <c:forEach var="i" begin="1" end="15">
-                                <option value="${i}">${i}</option>
-                            </c:forEach>
+                        <select id="numeroPreg" name="numeroPreg" class="form-control">    
+
+                                <c:forEach var="i" begin="1" end="15">
+                                    <option value="${i}">${i}</option>
+                                </c:forEach>
                         </select>
                     </div>
                 </div>
