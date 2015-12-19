@@ -29,32 +29,9 @@
             <p style="text-align: center">
                 <img src="images/banner.png" />
             </p>
-	<div class="panel panel-primary">
+	<div class="panel panel-primary col-md-6 col-md-offset-3">
      
       <div class="panel-body">
-      
-      <form action="LoginServlet" method="post">
-		<div class="form-group">
-			<label>DNI</label>
-			<input type="text" class="form-control" name="user" value="77774444P">
-		</div>
-		<div class="form-group">
-			<label>Password</label>
-			<input type="password" class="form-control" name="password" value="test">
-		</div>
-            
-            <c:if test="${error_login eq true}">
-                <div class="alert alert-danger small-margin">Usuario / Contraseña incorrecta</div>
-            </c:if>
-                <c:if test="${already_identified eq true}">
-                    <div class="alert alert-danger small-margin">Este usuario ya está conectado</div>
-                </c:if>
-
-            <div class="col-sm-6 col-sm-offset-3">
-
-                <div class="panel panel-primary">
-
-                    <div class="panel-body">
 
                         <form action="LoginServlet" method="post">
                             <div class="form-group">
@@ -85,12 +62,7 @@
                 <!-- show any messages that come back with authentication -->
                 <!-- LOGIN FORM -->
 
-
-
-
-
             </div>
 
-        </div>
     </body>
 </html>
