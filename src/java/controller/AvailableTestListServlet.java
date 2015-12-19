@@ -7,7 +7,6 @@ package controller;
 
 import controller.facades.TestFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;

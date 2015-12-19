@@ -5,7 +5,6 @@
  */
 package viewBean;
 
-import com.sun.org.apache.xml.internal.security.utils.Base64;
 import java.util.Collection;
 import model.jpa.Pregunta;
 import model.jpa.Respuesta;
@@ -22,13 +21,18 @@ public class PreguntaViewBean {
     private String mark;
     private int currentQuestion;
     private int totalQuestions;
+    private int currentTestTime;
+    private String currentTestTimeWithFormat;
+    private boolean pdf = false;
+   
 
-    public PreguntaViewBean(String testName, Pregunta question, Collection<Respuesta> answerList, int currenQuestion, int totalQuestions) {
+    public PreguntaViewBean(String testName, Pregunta question, Collection<Respuesta> answerList, int currenQuestion, int totalQuestions, int currentTestTime) {
         this.testName = testName;
         this.question = question;
         this.answerList = answerList;
         this.currentQuestion = currenQuestion;
         this.totalQuestions = totalQuestions;
+        this.currentTestTime = currentTestTime;
     }
 
     public Pregunta getQuestion() {
@@ -86,5 +90,46 @@ public class PreguntaViewBean {
     public void setTotalQuestions(int totalQuestions) {
         this.totalQuestions = totalQuestions;
     }
+    
+    public void setCurrentTestTime(int time) {
+        this.currentTestTime = time;
+    }
+    
+    public int getCurrentTestTime() {
+        return currentTestTime;
+    }
+    
+    public void setCurrentTestTimeWithFormat(String time) {
+        this.currentTestTimeWithFormat = time;
+    }
+        
+     public String getCurrentTestTimeWithFormat() {
+        int m, s;
+        String mCad, sCad;
+        m = currentTestTime / 60;
+        s = currentTestTime%60;
+        
+        if (m < 10)
+            mCad = "0"+m;
+        else
+            mCad = Integer.toString(m);
+        
+        if (s < 10)
+            sCad = "0"+s;
+        else
+            sCad = Integer.toString(s);
+        
+        setCurrentTestTimeWithFormat(mCad+":"+sCad);
+        
+        return currentTestTimeWithFormat;
+    }
+     
+     public void setPdf(boolean pdf) {
+         this.pdf = pdf;
+     }
+     
+     public boolean getPdf() {
+         return pdf;
+     }
     
 }
