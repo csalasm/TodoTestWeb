@@ -65,9 +65,17 @@ public class LoginServlet extends HttpServlet {
             return;
         }
         
-        session.setAttribute("user", u);
-        request.setAttribute("user", u);
-        redirectToMain(u, request, response);
+        if(u.getIdentificador()==1){
+            request.setAttribute("already_identified",true);
+            redirectToLogin(request,response);
+        }else{
+        
+            flagAsIdentified(u);
+        
+            session.setAttribute("user", u);
+            request.setAttribute("user", u);
+            redirectToMain(u, request, response);
+        }
             
     }
     
@@ -84,6 +92,8 @@ public class LoginServlet extends HttpServlet {
             rd = getServletContext().getRequestDispatcher("/MainPageTeacher.jsp");
         rd.forward(request, response);
     }
+    
+    
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -123,5 +133,13 @@ public class LoginServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void flagAsIdentified(Usuario u) {
+        
+        short iden = 1;
+        u.setIdentificador(iden);
+        usuarioFacade.edit(u);
+        
+    }
 
 }
