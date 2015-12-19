@@ -30,7 +30,7 @@ import model.jpa.Usuario;
  *
  * @author andresbailen93
  */
-public class AddQuestionByCategory extends HttpServlet {
+public class AddQuestionByCategoryServlet extends HttpServlet {
 
     HttpSession session;
     Usuario u;

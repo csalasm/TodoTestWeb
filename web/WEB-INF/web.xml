@@ -54,7 +54,7 @@
     </servlet>
     <servlet>
         <servlet-name>AddQuestionByCategory</servlet-name>
-        <servlet-class>controller.AddQuestionByCategory</servlet-class>
+        <servlet-class>controller.AddQuestionByCategoryServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>AddCategoryServlet</servlet-name>

@@ -23,7 +23,7 @@
         </c:if>
 
         <!-- AddTest FORM -->
-        <form action="AddQuestionByCategory" method="post">
+        <form action="AddQuestionByCategoryServlet" method="post">
             <div class="form-group">
                 <div class="form-group ">
                     <label>Nombre Test</label>
