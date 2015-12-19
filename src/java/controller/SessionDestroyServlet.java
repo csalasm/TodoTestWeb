@@ -40,7 +40,7 @@ public class SessionDestroyServlet extends HttpServlet {
         HttpSession session = request.getSession();
         Usuario u = (Usuario)session.getAttribute("user");
         
-        flagAdUnidentified(u);
+        
         
         session.invalidate();
         redirectToLogin(request, response);
@@ -90,12 +90,6 @@ public class SessionDestroyServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private void flagAdUnidentified(Usuario u) {
-        
-        short iden = 0;
-        u.setIdentificador(iden);
-        usuarioFacade.edit(u);
-        
-    }
+    
 
 }
