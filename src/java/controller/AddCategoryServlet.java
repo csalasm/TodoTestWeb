@@ -44,23 +44,28 @@ public class AddCategoryServlet extends HttpServlet {
             throws ServletException, IOException {
 
         Usuario u;
-        HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession();
         u = (Usuario) session.getAttribute("user");
+        if (u == null) { // Si esta autenticado, redirigimos a la pantalla principal
+            redirectToLogin(request, response);
+            return;
+        }
+        
         AddCategoryParameters atp = new AddCategoryParameters(request);
 
         List<Categoria> list_cat = categoriaFacade.findByName(atp.getCategoryName());
         Categoria categoria;
-        
+
         if (list_cat.size() == 0) { //No existe ninguno con el nombre. buscado
             categoria = new Categoria();
             categoria.setNombre(atp.getCategoryName());
             System.out.println(atp.getCategoryName());
             categoriaFacade.create(categoria);   //Crea la nueva categoria
             processAddCategory(request, response);
-        }else{
-            processErrorAddCategory(request,response); 
+        } else {
+            processErrorAddCategory(request, response);
         }
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -102,6 +107,11 @@ public class AddCategoryServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
+    private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
+        rd.forward(request, response);
+    }
+
     private void processErrorAddCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("ADD_CATEGORY_OK", "false");
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddTest.jsp");
@@ -109,10 +119,10 @@ public class AddCategoryServlet extends HttpServlet {
     }
 
     private void processAddCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ADD_CATEGORY_OK", "true");        
+        request.setAttribute("ADD_CATEGORY_OK", "true");
         List<Categoria> categoria_list = categoriaFacade.findAll();
         request.setAttribute("categories", categoria_list);
-        
+
         RequestDispatcher rd = request.getRequestDispatcher("/AddQuestion.jsp");
         rd.forward(request, response);
     }

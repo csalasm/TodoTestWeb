@@ -35,8 +35,10 @@ import model.jpa.Usuario;
  */
 @MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 2, maxRequestSize = 1024 * 1024 * 2)
 public class AddQuestionServlet extends HttpServlet {
+
     Test test;
     HttpSession session;
+    Usuario u;
     @EJB
     private CategoriaFacade categoriaFacade;
     @EJB
@@ -57,16 +59,17 @@ public class AddQuestionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Usuario u;
-        session = request.getSession(true);
+
+        session = request.getSession();
         u = (Usuario) session.getAttribute("user");
 
-        /*if (u != null) { // Si no esta autenticado, redirigimos a la pantalla principal
+        if (u == null) { // Si no esta autenticado, redirigimos a la pantalla principal
             processErrorLogin(request, response);
             return;
-        }*/
-      //  if (request.getParameter("test") != null) {
-            test = (Test) session.getAttribute("test");
+        }
+        //  if (request.getParameter("test") != null) {
+        test = (Test) session.getAttribute("test");
+        if (test != null) {
             int action = Integer.parseInt(request.getParameter("ActionButton"));
             if (0 == action) {
                 createQuestion(request);
@@ -80,16 +83,19 @@ public class AddQuestionServlet extends HttpServlet {
                 redirectMainPageTeacher(request, response);
             }
             if (3 == action) {
-
+                redirectAddQuestionByCategory(request,response);
             }
-            
+
             if (request.getParameter("id") == null) {
                 redirectMainPageTeacher(request, response);
             }
+        } else {
+            redirectMainPageTeacher(request, response);
+        }
 
-      //  } else {
-      //      redirectMainPageTeacher(request, response);
-      //  }
+        //  } else {
+        //      redirectMainPageTeacher(request, response);
+        //  }
     }
 
     private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -109,6 +115,15 @@ public class AddQuestionServlet extends HttpServlet {
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/MainPageTeacher.jsp");
         rd.forward(request, response);
     }
+    private void redirectAddQuestionByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("test", test);
+        request.setAttribute("usuario", u);
+        List<Categoria> categoria_list = categoriaFacade.findAll();
+        request.setAttribute("categories", categoria_list);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestionByCategory.jsp");
+        rd.forward(request, response);
+    }
+
 
     private void createQuestion(HttpServletRequest request) throws ServletException, IOException {
 
@@ -138,7 +153,7 @@ public class AddQuestionServlet extends HttpServlet {
             respuesta.setCorrecta(addAnswerParam.getAnswer_resp().get(i).getCorrecta());
             respuestaFacade.create(respuesta);
         }
-        session.setAttribute("categoria",lista_categoria.get(0).getNombre());
+        session.setAttribute("categoria", lista_categoria.get(0).getNombre());
 
     }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

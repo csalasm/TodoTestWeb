@@ -44,6 +44,14 @@
         <servlet-name>ImageServlet</servlet-name>
         <servlet-class>controller.ImageServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ShowAddTestByCategoryServlet</servlet-name>
+        <servlet-class>controller.ShowAddTestByCategoryServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddTestByCategory</servlet-name>
+        <servlet-class>controller.AddTestByCategoryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCategoryServlet</servlet-name>
         <url-pattern>/AddCategoryServlet</url-pattern>
@@ -87,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>ImageServlet</servlet-name>
         <url-pattern>/ImageServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowAddTestByCategoryServlet</servlet-name>
+        <url-pattern>/ShowAddTestByCategoryServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddTestByCategory</servlet-name>
+        <url-pattern>/AddTestByCategory</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
