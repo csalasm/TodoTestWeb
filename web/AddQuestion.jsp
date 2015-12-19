@@ -7,6 +7,12 @@
         <div class="col-sm-offset-3 text-primary">
             <h1>Añadir Pregunta</h1> 
         </div>
+        <c:if test="${AddQuestion_OK eq 'true'}">
+            <div class="alert alert-success">Pregunta añadida correctamente</div>
+        </c:if>
+        <c:if test="${ADD_TEST_OK eq 'true'}">
+            <div class="alert alert-success">Test añadido correctamente</div>
+        </c:if>
         <form name="Category" class="form-horizontal" action="AddCategoryServlet" method="post">
 
             <div class="form-group">

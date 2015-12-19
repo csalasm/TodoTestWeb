@@ -93,7 +93,7 @@ public class AddQuestionByCategoryServlet extends HttpServlet {
     }
 
     private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("ERROR_LOGIN", "true");
+        request.setAttribute("Session_Loggin","false");
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/login.jsp");
         rd.forward(request, response);
     }
@@ -102,6 +102,7 @@ public class AddQuestionByCategoryServlet extends HttpServlet {
         List<Categoria> categoria_list = categoriaFacade.findAll();
         request.setAttribute("categories", categoria_list);
         request.setAttribute("usuario", u);
+        request.setAttribute("AddQuestion_category","true");
 
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestionByCategory.jsp");
         rd.forward(request, response);

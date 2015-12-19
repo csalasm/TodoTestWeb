@@ -72,17 +72,23 @@ public class AddQuestionServlet extends HttpServlet {
         if (test != null) {
             
             int action = Integer.parseInt(request.getParameter("ActionButton"));
+            //Añadir pregunta
             if (0 == action) {
+                request.setAttribute("AddQuestion_OK", "true");
                 createQuestion(request);
                 redirectToCreateQuestion(request, response);
             }
+            //Añadir pregunta y volver
             if (1 == action) {
+                request.setAttribute("AddQuestion_OK", "true");
                 createQuestion(request);
                 redirectMainPageTeacher(request, response);
             }
+            //VOLVER
             if (2 == action) {
                 redirectMainPageTeacher(request, response);
             }
+            //Añadir pregunta por categoria
             if (3 == action) {
                 redirectAddQuestionByCategory(request,response);
             }
@@ -109,6 +115,7 @@ public class AddQuestionServlet extends HttpServlet {
     }
 
     private void redirectMainPageTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("Session_Loggin","false");
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/MainPageTeacher.jsp");
         rd.forward(request, response);
     }
