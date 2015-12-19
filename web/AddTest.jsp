@@ -65,7 +65,7 @@
                         <label>Autor</label>
                         <input type="text" class="form-control" name="username" value="${usuario.dni}" readonly>
                     </div>
-                    <button type="submit" class="btn btn-warning btn-lg">Crear Test</button>
+                    <button type="submit" class="btn btn-primary btn-lg">Crear Test</button>
                 </form>
 
                

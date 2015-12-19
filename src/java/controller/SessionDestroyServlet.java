@@ -5,14 +5,17 @@
  */
 package controller;
 
+import controller.facades.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.jpa.Usuario;
 
 /**
  *
@@ -20,6 +23,9 @@ import javax.servlet.http.HttpSession;
  */
 public class SessionDestroyServlet extends HttpServlet {
 
+    @EJB
+    private UsuarioFacade usuarioFacade;
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -32,6 +38,10 @@ public class SessionDestroyServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         HttpSession session = request.getSession();
+        Usuario u = (Usuario)session.getAttribute("user");
+        
+        flagAdUnidentified(u);
+        
         session.invalidate();
         redirectToLogin(request, response);
     }
@@ -79,5 +89,13 @@ public class SessionDestroyServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private void flagAdUnidentified(Usuario u) {
+        
+        short iden = 0;
+        u.setIdentificador(iden);
+        usuarioFacade.edit(u);
+        
+    }
 
 }

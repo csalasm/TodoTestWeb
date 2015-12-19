@@ -16,12 +16,22 @@ public class AddTestParameters {
     private String duration;
     private String subtraction;
     private String author;
+    private String category;
     
     public AddTestParameters(HttpServletRequest request){
         this.name = request.getParameter("testname");
         this.duration = request.getParameter("duration");
         this.subtraction = request.getParameter("puntuation");
         this.author = request.getParameter("username");
+        this.category = request.getParameter("Categoria");
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     public String getName() {

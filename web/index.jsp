@@ -51,6 +51,9 @@
             <c:if test="${error_login eq true}">
                 <div class="alert alert-danger small-margin">Usuario / Contraseña incorrecta</div>
             </c:if>
+                <c:if test="${already_identified eq true}">
+                    <div class="alert alert-danger small-margin">Este usuario ya está conectado</div>
+                </c:if>
 
 		<button type="submit" class="btn btn-primary btn-md">Acceder</button>
 	</form>

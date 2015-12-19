@@ -7,25 +7,23 @@ package controller;
 
 import controller.facades.CategoriaFacade;
 import controller.facades.PreguntaFacade;
-import controller.facades.RespuestaFacade;
 import controller.facades.TestFacade;
-import controller.parameters.AddAnswerParameters;
-import controller.parameters.AddQuestionParameters;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.jpa.Categoria;
 import model.jpa.Pregunta;
-import model.jpa.Respuesta;
 import model.jpa.Test;
 import model.jpa.Usuario;
 
@@ -33,20 +31,15 @@ import model.jpa.Usuario;
  *
  * @author andresbailen93
  */
-@MultipartConfig(fileSizeThreshold = 1024 * 1024, maxFileSize = 1024 * 1024 * 2, maxRequestSize = 1024 * 1024 * 2)
-public class AddQuestionServlet extends HttpServlet {
+public class AddQuestionByCategoryServlet extends HttpServlet {
 
-    Test test;
     HttpSession session;
     Usuario u;
+    Test test;
     @EJB
-    private CategoriaFacade categoriaFacade;
+    PreguntaFacade preguntaFacade;
     @EJB
-    private PreguntaFacade preguntaFacade;
-    @EJB
-    private RespuestaFacade respuestaFacade;
-    @EJB
-    private TestFacade testFacade;
+    CategoriaFacade categoriaFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -59,7 +52,7 @@ public class AddQuestionServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        response.setContentType("text/html;charset=UTF-8");
         session = request.getSession();
         u = (Usuario) session.getAttribute("user");
 
@@ -67,32 +60,36 @@ public class AddQuestionServlet extends HttpServlet {
             processErrorLogin(request, response);
             return;
         }
-        //  if (request.getParameter("test") != null) {
+        addQuestionByCategory(request);
+        redirectAddQuestionByCategory(request, response);
+    }
+
+    private void addQuestionByCategory(HttpServletRequest request) throws ServletException, IOException {
         test = (Test) session.getAttribute("test");
-        if (test != null) {
-            
-            int action = Integer.parseInt(request.getParameter("ActionButton"));
-            if (0 == action) {
-                createQuestion(request);
-                redirectToCreateQuestion(request, response);
+
+        int numPreguntas = Integer.parseInt(request.getParameter("numeroPreg"));
+        List<Categoria> lista_categoria = categoriaFacade.findByName(request.getParameter("Categoria"));
+        //Collection<Pregunta> lista_preguntas = lista_categoria.get(0).getPreguntaCollection();
+        List<Pregunta> lista_preguntas = preguntaFacade.findPreguntasByNum(lista_categoria.get(0));
+
+        long seed = System.nanoTime();
+        Collections.shuffle(lista_preguntas, new Random(seed));
+
+        List<Pregunta> lista_preguntas_add = new ArrayList<>();
+        //Si marcamos un numero superior de preguntas de las que hay no las inserta.
+        for (int i = 0; i < lista_preguntas.size(); i++) {
+            if (i < numPreguntas) {
+                lista_preguntas_add.add(lista_preguntas.get(i));
             }
-            if (1 == action) {
-                createQuestion(request);
-                redirectMainPageTeacher(request, response);
-            }
-            if (2 == action) {
-                redirectMainPageTeacher(request, response);
-            }
-            if (3 == action) {
-                redirectAddQuestionByCategory(request,response);
-            }
-        } else {
-            redirectMainPageTeacher(request, response);
         }
 
-        //  } else {
-        //      redirectMainPageTeacher(request, response);
-        //  }
+        Collection<Test> listaTest;
+        for (Pregunta p : lista_preguntas_add) {
+            listaTest = p.getTestCollection();
+            listaTest.add(test);
+            p.setTestCollection(listaTest);
+            preguntaFacade.edit(p);
+        }
     }
 
     private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -101,62 +98,16 @@ public class AddQuestionServlet extends HttpServlet {
         rd.forward(request, response);
     }
 
-    private void redirectToCreateQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Categoria> categoria_list = categoriaFacade.findAll();
-        request.setAttribute("categories", categoria_list);
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestion.jsp");
-        rd.forward(request, response);
-    }
-
-    private void redirectMainPageTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher rd = getServletContext().getRequestDispatcher("/MainPageTeacher.jsp");
-        rd.forward(request, response);
-    }
     private void redirectAddQuestionByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("test", test);
-        request.setAttribute("usuario", u);
         List<Categoria> categoria_list = categoriaFacade.findAll();
         request.setAttribute("categories", categoria_list);
-
+        request.setAttribute("usuario", u);
 
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestionByCategory.jsp");
         rd.forward(request, response);
     }
 
-
-    private void createQuestion(HttpServletRequest request) throws ServletException, IOException {
-
-        List<Categoria> lista_categoria;
-        lista_categoria = categoriaFacade.findByName(request.getParameter("Categoria"));
-        AddQuestionParameters addQuestionParam = new AddQuestionParameters(request);
-        addQuestionParam.setCategoria(lista_categoria.get(0));
-
-        //Creamos la pregunta
-        Pregunta pregunta = new Pregunta();
-        pregunta.setIdCategoria(addQuestionParam.getCategory());
-        pregunta.setImagen(addQuestionParam.getImage());
-        pregunta.setTexto(addQuestionParam.getQuestion());
-        List<Test> listaTest = new ArrayList<>();
-        listaTest.add(test);
-        pregunta.setTestCollection(listaTest);
-        //Insertamos la pregunta en la bse de datos.
-        preguntaFacade.create(pregunta);
-
-        AddAnswerParameters addAnswerParam = new AddAnswerParameters(request);
-        Respuesta respuesta;
-
-        for (int i = 0; i < addAnswerParam.getAnswer_resp().size(); i++) {
-            respuesta = new Respuesta();
-            respuesta.setIdPregunta(pregunta);
-            respuesta.setTexto(addAnswerParam.getAnswer_resp().get(i).getTexto());
-            respuesta.setCorrecta(addAnswerParam.getAnswer_resp().get(i).getCorrecta());
-            respuestaFacade.create(respuesta);
-        }
-        session.setAttribute("categoria", lista_categoria.get(0).getNombre());
-
-    }
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-
     /**
      * Handles the HTTP <code>GET</code> method.
      *

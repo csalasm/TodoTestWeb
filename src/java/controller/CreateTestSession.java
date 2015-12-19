@@ -42,8 +42,6 @@ public class CreateTestSession extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        System.out.println(request.getParameter("idtest"));
-
         long idTest = Long.valueOf(request.getParameter("idtest"));
         Test test = new Test();
         test.setIdTest(idTest);

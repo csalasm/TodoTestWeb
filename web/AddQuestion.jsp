@@ -18,7 +18,7 @@
         </form>
 
         <form  class="form-horizontal" action="AddQuestionServlet"  method="post" enctype="multipart/form-data" >
-             <div class="form-group">
+            <div class="form-group">
                 <label for="Categoría" class="col-sm-2 control-label">Categoría: </label>
                 <div class="col-sm-6">
                     <select class="form-control" id="categoria" name="Categoria" required>
@@ -26,7 +26,7 @@
                             <c:choose>
                                 <c:when test="${categoria == categorias.nombre}">
                                     <option value="${categorias.nombre}" selected="">${categorias.nombre}</option>
-                                    
+
                                 </c:when>
                                 <c:otherwise>
                                     <option value="${categorias.nombre}">${categorias.nombre}</option>
@@ -50,39 +50,54 @@
 
             <div class="form-group ">
                 <label for="Respuestas" class="col-sm-offset-3 control-label">Respuestas: </label>
-                <div class="col-sm-offset-2" id="answers">
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="respuesta" id="respuesta" value="1" checked>
-                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
-                        </label>
+                <div class="col-sm-offset-2">
+                    <div id="answers">
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="respuesta" id="respuesta" value="0" checked>
+                                <input type="text" class="form-control col-sm-8" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="respuesta" id="respuesta" value="1" >
+                                <input type="text" class="form-control col-sm-8" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
+                            </label>
+                        </div>
                     </div>
-                    <div class="radio">
-                        <label>
-                            <input type="radio" name="respuesta" id="respuesta" value="1" >
-                            <input type="text" class="form-control col-sm-8" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
-                        </label>
+                    <div  id="answersadded">
                     </div>
                 </div>
+
                 <div class="form-group">
                     <div class="col-sm-offset-2">
-                        <button type="button" class="btn btn-primary" id="addRespuesta">Añadir Respuesta</button>
+                        <button type="button" class="btn btn-primary" id="addRespuesta"><i class="glyphicon glyphicon-plus"></i></button>
+                        <button type="button" class="btn btn-primary" id="removeRespuesta"><i class="glyphicon glyphicon-minus"></i></button>
+
                     </div>  
                 </div>
 
-                <div class="form-group ">
+                <div class="form-group">
                     <div class="col-sm-offset-2">
-                        <button type="submit" class="btn btn-primary" id="boton" name="ActionButton" value="0" >Añadir Pregunta</button>
+                        <button type="submit" class="btn btn-primary col-sm-7" id="boton" name="ActionButton" value="0" >Añadir Pregunta</button>
                     </div>
                     <div class="col-sm-offset-2">
-                        <button type="submit" class="btn btn-primary" id="boton" name="ActionButton" value="1">Añadir Pregunta y Volver</button>
+                        <button type="submit" class="btn btn-primary col-sm-7" id="boton" name="ActionButton" value="1">Añadir Pregunta y Volver</button>
                     </div>
+
                 </div>
             </div>
         </form>
         <form  class="form-horizontal" action="AddQuestionServlet"  method="post" enctype="multipart/form-data" >
+                <div class="col-sm-offset-2">
+                    <button type="submit" class="btn btn-warning col-sm-7" id="boton" name="ActionButton" value="3">Añadir Pregunta por Categoria</button>
+                </div>
+        </form>
+
+
+        <form  class="form-horizontal" action="AddQuestionServlet"  method="post" enctype="multipart/form-data" >
             <div class="col-sm-offset-2">
-                <button type="submit" class="btn btn-primary" id="boton" name="ActionButton" value="2">Volver</button>
+                <button type="submit" class="btn btn-warning col-sm-7" id="boton" name="ActionButton" value="2">Volver</button>
             </div>
         </form>
     </div>
