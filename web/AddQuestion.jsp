@@ -81,23 +81,19 @@
                     <div class="col-sm-offset-2">
                         <button type="submit" class="btn btn-primary col-sm-7" id="boton" name="ActionButton" value="0" >Añadir Pregunta</button>
                     </div>
-                    <div class="col-sm-offset-2">
-                        <button type="submit" class="btn btn-primary col-sm-7" id="boton" name="ActionButton" value="1">Añadir Pregunta y Volver</button>
-                    </div>
-
                 </div>
             </div>
         </form>
         <form  class="form-horizontal" action="AddQuestionServlet"  method="post" enctype="multipart/form-data" >
                 <div class="col-sm-offset-2">
-                    <button type="submit" class="btn btn-primary col-sm-7" id="boton" name="ActionButton" value="2">Añadir Pregunta por Categoria</button>
+                    <button type="submit" class="btn btn-primary col-sm-7" id="boton" name="ActionButton" value="1">Añadir Pregunta por Categoria</button>
                 </div>
         </form>
 
 
         <form  class="form-horizontal" action="AddQuestionServlet"  method="post" enctype="multipart/form-data" >
             <div class="col-sm-offset-2">
-                <button type="submit" class="btn btn-primary col-sm-7" id="boton" name="ActionButton" value="3">Volver</button>
+                <button type="submit" class="btn btn-primary col-sm-7" id="boton" name="ActionButton" value="2">Volver</button>
             </div>
         </form>
     </div>
