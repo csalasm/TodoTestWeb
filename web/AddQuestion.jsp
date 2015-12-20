@@ -54,7 +54,7 @@
                     </div>
 
                     <div class="form-group ">
-                        <label for="Respuestas" class="col-sm-offset-3 control-label">Respuestas: </label>
+                        <label for="Respuestas" class="control-label">Respuestas: </label>
 
                         <div id="answers">
                             <div class="radio">
@@ -62,49 +62,50 @@
                                     <input type="radio" name="respuesta" id="respuesta" value="0" checked>
                                     <input type="text" class="form-control" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
                                 </label>
+                            </div>
+                            <div class="radio">
+                                <label>
 
-                                <div class="radio">
-                                    <label>
-
-                                        <input type="radio" name="respuesta" id="respuesta" value="1" >
-                                        <input type="text" class="form-control" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
-                                    </label>
-                                </div>
-
-                                <div  id="answersadded">
-                                </div>
+                                    <input type="radio" name="respuesta" id="respuesta" value="1" >
+                                    <input type="text" class="form-control" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
+                                </label>
                             </div>
                         </div>
 
-
-                        <div class="form-group">
-                            <div class="col-sm-offset-2">
-                                <button type="button" class="btn btn-primary" id="addRespuesta"><i class="glyphicon glyphicon-plus"></i></button>
-                                <button type="button" class="btn btn-primary" id="removeRespuesta"><i class="glyphicon glyphicon-minus"></i></button>
-
-                            </div>  
+                        <div  id="answersadded">
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-sm-offset-2">
-                                <button type="submit" class="btn btn-primary btn-xs" id="boton" name="ActionButton" value="0" >Añadir Pregunta</button>
-                            </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-1">
+                            <button type="button" class="btn btn-primary" id="addRespuesta"><i class="glyphicon glyphicon-plus"></i></button>
+                            <button type="button" class="btn btn-primary" id="removeRespuesta"><i class="glyphicon glyphicon-minus"></i></button>
+
+                        </div>  
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-1">
+                            <button type="submit" class="btn btn-primary btn-xs" id="boton" name="ActionButton" value="0" >Añadir Pregunta</button>
                         </div>
                     </div>
-                </form>
 
-                <form  class="form-vertical" action="AddQuestionServlet"  method="post" enctype="multipart/form-data" >
-                    <div class="btn-group-vertical pull-right">
-                        <button type="submit" class="btn btn-primary btn-xs pull-right" id="boton" name="ActionButton" value="1">Añadir Pregunta por Categoria</button>
+            </form>
 
-                        <button type="submit" class="btn btn-primary btn-xs pull-right" id="boton" name="ActionButton" value="2">Volver</button>
-                    </div>
-                </form>
+            <form  class="form-vertical" action="AddQuestionServlet"  method="post" enctype="multipart/form-data" >
+                <div class="btn-group-vertical pull-right">
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" id="boton" name="ActionButton" value="1">Añadir Pregunta por Categoria</button>
 
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" id="boton" name="ActionButton" value="2">Volver</button>
+                </div>
+            </form>
             </div>
-
         </div>
+
     </div>
+</div>
 </div>
 
 <%@include file="Footer.html"%>
