@@ -23,9 +23,9 @@ import model.jpa.Usuario;
  * @author andresbailen93
  */
 public class AddUserServlet extends HttpServlet {
-
     @EJB
     private UsuarioFacade usuarioFacade;
+
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
