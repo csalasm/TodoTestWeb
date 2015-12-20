@@ -20,7 +20,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.ejb.EJB;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -190,9 +189,10 @@ public class TestActions {
         e.setFallos((short) fail);
         e.setFecha(new Date(Calendar.getInstance().getTime().getTime()));
         e.setNota(new BigDecimal(mark).setScale(2, RoundingMode.CEILING));
+        e.setTest(tsb.getTest());
         tsb.setMark(new BigDecimal(mark).setScale(2, RoundingMode.CEILING));
         
-        //examenFacade.create(e);
+        examenFacade.create(e);
         
     }
     
