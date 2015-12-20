@@ -7,9 +7,8 @@ package controller;
 
 import controller.facades.UsuarioFacade;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.Collection;
-import java.util.List;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,7 +17,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.jpa.Examen;
 import model.jpa.Usuario;
 import viewBean.ResultadosViewBean;
 
@@ -52,13 +50,12 @@ public class ResultStudentServlet extends HttpServlet {
             return;
         }
         
-        
-        int success = usuarioFacade.totalSuccess(u);
-        int fails = usuarioFacade.totalFail(u);
-        double average = usuarioFacade.average(u);
-        int totalTest = usuarioFacade.totalTest(u);
-        
-        ResultadosViewBean rvb = new ResultadosViewBean(u,success,fails,average,totalTest);
+        Usuario user = usuarioFacade.find(u.getDni());
+        int success = usuarioFacade.totalSuccess(user);
+        int fails = usuarioFacade.totalFail(user);
+        BigDecimal average = new BigDecimal(usuarioFacade.average(user)).setScale(2, RoundingMode.CEILING);
+        int totalTest = usuarioFacade.totalTest(user);        
+        ResultadosViewBean rvb = new ResultadosViewBean(user,success,fails,average,totalTest);
         
         request.setAttribute("usuario", rvb);
         

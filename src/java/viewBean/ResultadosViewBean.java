@@ -5,6 +5,7 @@
  */
 package viewBean;
 
+import java.math.BigDecimal;
 import model.jpa.Usuario;
 
 /**
@@ -16,10 +17,10 @@ public class ResultadosViewBean {
     private Usuario user;
     private int success;
     private int fails;
-    private double average;
+    private BigDecimal average;
     private int totalTest;
 
-    public ResultadosViewBean(Usuario usuario, int success, int fails, double average, int totalTest) {
+    public ResultadosViewBean(Usuario usuario, int success, int fails, BigDecimal average, int totalTest) {
         this.user = usuario;
         this.success = success;
         this.fails = fails;
@@ -51,11 +52,11 @@ public class ResultadosViewBean {
         this.fails = fails;
     }
 
-    public double getAverage() {
+    public BigDecimal getAverage() {
         return average;
     }
 
-    public void setAverage(double average) {
+    public void setAverage(BigDecimal average) {
         this.average = average;
     }
 
