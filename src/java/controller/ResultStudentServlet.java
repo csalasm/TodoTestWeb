@@ -53,7 +53,12 @@ public class ResultStudentServlet extends HttpServlet {
         Usuario user = usuarioFacade.find(u.getDni());
         int success = usuarioFacade.totalSuccess(user);
         int fails = usuarioFacade.totalFail(user);
-        BigDecimal average = new BigDecimal(usuarioFacade.average(user)).setScale(2, RoundingMode.CEILING);
+        BigDecimal average;
+        try {
+            average = new BigDecimal(usuarioFacade.average(user)).setScale(2, RoundingMode.CEILING);
+        } catch (NumberFormatException e) {
+            average = new BigDecimal(0);
+        }
         int totalTest = usuarioFacade.totalTest(user);        
         ResultadosViewBean rvb = new ResultadosViewBean(user,success,fails,average,totalTest);
         
