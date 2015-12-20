@@ -35,9 +35,7 @@ public class PreguntaFacade extends AbstractFacade<Pregunta> {
     public List<Pregunta> findPreguntasByNum(Categoria categoriaId, Test test) {
         List<Pregunta> lista_pregunta;
         lista_pregunta = em.createQuery("SELECT p FROM Pregunta p WHERE p.idCategoria = :categoriaId")
-                //em.createQuery("SELECT p FROM Pregunta p WHERE p.idCategoria = :categoriaId AND NOT EXISTS (SELECT PREGUNTA.PREGUNTA_TEST.ID_PREGUNTA FROM PREGUNTA.PREGUNTA_TEST WHERE PREGUNTA.PREGUNTA_TEST.ID_TEST = :testId )")
                 .setParameter("categoriaId", categoriaId)
-                //.setParameter("testId", test)
                 .getResultList();
         return lista_pregunta;
     }

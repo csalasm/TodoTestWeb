@@ -40,6 +40,8 @@ public class AddQuestionByCategoryServlet extends HttpServlet {
     PreguntaFacade preguntaFacade;
     @EJB
     CategoriaFacade categoriaFacade;
+    @EJB
+    TestFacade testFacade;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -70,25 +72,41 @@ public class AddQuestionByCategoryServlet extends HttpServlet {
         int numPreguntas = Integer.parseInt(request.getParameter("numeroPreg"));
         List<Categoria> lista_categoria = categoriaFacade.findByName(request.getParameter("Categoria"));
         //Collection<Pregunta> lista_preguntas = lista_categoria.get(0).getPreguntaCollection();
-        List<Pregunta> lista_preguntas = preguntaFacade.findPreguntasByNum(lista_categoria.get(0),test);
+        List<Pregunta> lista_preguntas = preguntaFacade.findPreguntasByNum(lista_categoria.get(0), test);
 
-        long seed = System.nanoTime();
-        Collections.shuffle(lista_preguntas, new Random(seed));
+        test = testFacade.find(test.getIdTest());
 
         List<Pregunta> lista_preguntas_add = new ArrayList<>();
         //Si marcamos un numero superior de preguntas de las que hay no las inserta.
-        for (int i = 0; i < lista_preguntas.size(); i++) {
-            if (i < numPreguntas) {
-                lista_preguntas_add.add(lista_preguntas.get(i));
+
+        for (int i = (lista_preguntas.size() - 1); i >= 0; i--) {
+            if (lista_preguntas.get(i).getTestCollection().contains((test))) {
+                lista_preguntas.remove(i);
+            }
+        }
+
+        long seed = System.nanoTime();
+        Collections.shuffle(lista_preguntas, new Random(seed));
+        for (int j = 0; j < lista_preguntas.size(); j++) {
+            if (j < numPreguntas) {
+                if (lista_preguntas.get(j) != null) {
+                    lista_preguntas_add.add(lista_preguntas.get(j));
+                }
             }
         }
 
         Collection<Test> listaTest;
         for (Pregunta p : lista_preguntas_add) {
             listaTest = p.getTestCollection();
+
+            //if (!listaTest.contains(test)) {
             listaTest.add(test);
             p.setTestCollection(listaTest);
             preguntaFacade.edit(p);
+            //}
+            // listaTest.add(test);
+            // p.setTestCollection(listaTest);
+            // preguntaFacade.edit(p);
         }
     }
 
@@ -101,7 +119,7 @@ public class AddQuestionByCategoryServlet extends HttpServlet {
         List<Categoria> categoria_list = categoriaFacade.findAll();
         request.setAttribute("categories", categoria_list);
         request.setAttribute("usuario", u);
-        request.setAttribute("AddQuestion_category","true");
+        request.setAttribute("AddQuestion_category", "true");
 
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestionByCategory.jsp");
         rd.forward(request, response);
