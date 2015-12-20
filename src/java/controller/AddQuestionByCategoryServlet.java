@@ -70,7 +70,7 @@ public class AddQuestionByCategoryServlet extends HttpServlet {
         int numPreguntas = Integer.parseInt(request.getParameter("numeroPreg"));
         List<Categoria> lista_categoria = categoriaFacade.findByName(request.getParameter("Categoria"));
         //Collection<Pregunta> lista_preguntas = lista_categoria.get(0).getPreguntaCollection();
-        List<Pregunta> lista_preguntas = preguntaFacade.findPreguntasByNum(lista_categoria.get(0));
+        List<Pregunta> lista_preguntas = preguntaFacade.findPreguntasByNum(lista_categoria.get(0),test);
 
         long seed = System.nanoTime();
         Collections.shuffle(lista_preguntas, new Random(seed));
