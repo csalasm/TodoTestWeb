@@ -20,6 +20,7 @@
                     <c:if test="${question.answerList != null}">
                         <form method="post" action="DoTestServlet?id=${param.id}">
                             <p id="pregunta">(${question.currentQuestion} / ${question.totalQuestions}) ${question.question.texto}</p>
+                            <p id="chronometer" style="text-align: right; font-size: 18px"></p>
                             <c:if test="${question.question.imagen != null}">
                                 <p style="text-align: center"><img src="ImageServlet?image=${question.question.idPregunta}" /></p>
                                 </c:if>
@@ -64,4 +65,3 @@
 </c:if> 
 
 <%@include file="Footer.html" %>
-
