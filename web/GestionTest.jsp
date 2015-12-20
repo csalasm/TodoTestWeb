@@ -1,13 +1,16 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="TeacherHeader.html"%>
-<div class="container">
+<div class="container"  style="margin-top:80px; margin-bottom: 10px">
     <div class="col-sm-10 col-sm-offset-1">
         <div class="panel panel-primary">
-         
+          
+             <a href="#" class="list-group-item active">
+            Test activos:
+        </a>
             <div class="panel-body">
 
-                <h3>Test activos:</h3>
+              
                 <c:if test="${ADD_TEST_OK eq 'true'}">
                     <div class="alert alert-danger">Se ha modificado la configuracion de los test seleccionados</div>
                 </c:if>
@@ -31,13 +34,14 @@
 
                         </c:forEach>
                         <br>
-                        
+                        <div class="btn-group-vertical pull-right">
                         <button type="submit" value="guardar" class="btn btn-primary btn-md"><span class="glyphicon glyphicon-save"></span> Guardar</button>
-
+                        <a href="ShowAddTestServlet" class="btn btn-primary btn-md">
+          <span class="glyphicon glyphicon-list-alt"></span> Añadir test</a>
+                        </div>
                     </div>
                 </form>
-             <a href="ShowAddTestServlet" class="btn btn-primary btn-md">
-          <span class="glyphicon glyphicon-list-alt"></span> Añadir test</a>
+             
 
 
         </div>

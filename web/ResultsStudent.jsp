@@ -7,7 +7,7 @@
     <%@include file="StudentHeader.html" %>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
- 
+ <div class="container" style="margin-top:80px; margin-bottom: 10px">
      <div class="col-md-offset-2 text-primary col-md-8"> 
          <h1>Resultados </h1> 
             <div class="panel panel-primary">
@@ -78,4 +78,5 @@
 
             </div>
         </div> 
+ </div>
     <%@include file="Footer.html" %>
