@@ -85,14 +85,15 @@ public class AddQuestionServlet extends HttpServlet {
             //Añadir pregunta por categoria
             if (2 == action) {
                 redirectAddQuestionByCategory(request,response);
-            }
-        } else {
+            
+        }if(3 == action) {
             redirectMainPageTeacher(request, response);
         }
 
         //  } else {
         //      redirectMainPageTeacher(request, response);
         //  }
+    }
     }
 
     private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
