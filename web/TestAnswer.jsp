@@ -22,11 +22,11 @@
                                         <p style="text-align: center"><img src="ImageServlet?image=${question.question.idPregunta}" /></p>
                                     </c:if>
                                     <c:forEach var="answer" items="${question.answerList}">
-                                        <label for="radio-one">
+                                    <div><label for="radio-one">
                                             <input type="radio" name="answer" id="radio-one" value="${answer.idRespuesta}"/>
-                                            <i></i>
-                                            <span>${answer.texto}</span>
-                                        </label><br>    
+                                            <span class="">${answer.texto}</span>
+                                        </label></br>   
+                                    </div>
                                     </c:forEach>
                                     <c:if test="${question.lastQuestion == true}">
                                         <button id="nextQuestion" type="submit" class="btn btn-primary btn-xs" style="float: right">Finalizar</button>
