@@ -17,14 +17,9 @@
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
         <link href="css/personalizado.css" rel="stylesheet" type="text/css"/>
-        <style>
-            body 		{ padding-top:80px; }
-            body {
-                background: whitesmoke;
-            }
-        </style>
+        <link href="css/styles.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
+    <body class="body">
         <div class="container">
             <p style="text-align: center">
                 <img src="images/banner.png" />
