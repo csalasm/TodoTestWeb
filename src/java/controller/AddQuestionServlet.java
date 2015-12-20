@@ -109,7 +109,6 @@ public class AddQuestionServlet extends HttpServlet {
     }
 
     private void redirectMainPageTeacher(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("Session_Loggin","false");
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/MainPageTeacher.jsp");
         rd.forward(request, response);
     }

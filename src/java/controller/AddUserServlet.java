@@ -56,7 +56,6 @@ public class AddUserServlet extends HttpServlet {
     }
 
     private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        request.setAttribute("Session_Loggin","false");
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/index.jsp");
         rd.forward(request, response);
     }

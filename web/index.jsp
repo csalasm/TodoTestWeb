@@ -42,10 +42,6 @@
                                 <label>Password</label>
                                 <input type="password" class="form-control" name="password" value="test">
                             </div>
-                            <c:if test="${Session_Loggin eq false}">
-                                <div class="alert alert-danger small-margin">La sesion a expirado</div>
-                            </c:if>
-
                             <c:if test="${error_login eq true}">
                                 <div class="alert alert-danger small-margin">Usuario / Contraseña incorrecta</div>
                             </c:if>
