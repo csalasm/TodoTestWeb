@@ -77,11 +77,11 @@ public class AddQuestionServlet extends HttpServlet {
                 createQuestion(request);
                 redirectToCreateQuestion(request, response);
             }
-            //VOLVER
+            //Añadir pregunta por categoria
             if (1 == action) {
                 redirectAddQuestionByCategory(request, response);
             }
-            //Añadir pregunta por categoria
+            //Volver
             if (2 == action) {
                 redirectMainPageTeacher(request, response);
             }

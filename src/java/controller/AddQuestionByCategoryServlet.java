@@ -62,8 +62,24 @@ public class AddQuestionByCategoryServlet extends HttpServlet {
             processErrorLogin(request, response);
             return;
         }
-        addQuestionByCategory(request);
-        redirectAddQuestionByCategory(request, response);
+        int action = Integer.parseInt(request.getParameter("AddQuestionByCategory_ACTION"));
+        //Añade pregunta
+        if (action == 0) {
+            addQuestionByCategory(request);
+            redirectAddQuestionByCategory(request, response);
+        }
+        //Vuelve a crear pregunta
+        if (action == 1) {
+            redirectToCreateQuestion(request, response);
+        }
+
+    }
+
+    private void redirectToCreateQuestion(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<Categoria> categoria_list = categoriaFacade.findAll();
+        request.setAttribute("categories", categoria_list);
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestion.jsp");
+        rd.forward(request, response);
     }
 
     private void addQuestionByCategory(HttpServletRequest request) throws ServletException, IOException {
