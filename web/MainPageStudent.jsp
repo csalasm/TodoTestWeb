@@ -6,18 +6,29 @@
 
 <%@include file="StudentHeader.html" %>
 
-<div class="col-sm-6 col-sm-offset-3"style="margin-top: 30px" >
+<div class="col-sm-6 col-sm-offset-3"style="margin-top: 80px" >
     <div class="panel panel-primary">
-        <div class="panel-heading"><h3><span class="glyphicon glyphicon-home"></span> Bienvenid@ ${user.nombre}</h3></div>
+        
+        <a href="#" class="list-group-item active">
+            Bienvenid@ ${user.nombre}
+        </a> 
+        
         <div class="panel-body">
-            
-      <a href="AvailableTestListServlet" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-list-alt"></span> Realizar Test
-      </a><br>
-      <br>
-   <a href="ResultStudentServlet" class="btn btn-info btn-lg">
-          <span class="glyphicon glyphicon-book"></span> Resultados
-        </a>
+
+            <div class="list-group" style="text-align: center">
+
+
+                <a href="AvailableTestListServlet" class="list-group-item"">
+                    <span class="glyphicon glyphicon-list-alt"></span> Realizar Test
+                </a>
+
+                <a href="ResultStudentServlet" class="list-group-item">
+                    <span class="glyphicon glyphicon-book"></span> Resultados
+                </a>
+                </a>
+            </div>
+
+
         </div>    
 
     </div>

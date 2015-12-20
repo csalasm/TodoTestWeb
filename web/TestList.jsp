@@ -12,13 +12,9 @@
 
             <div class="col-sm-6 col-sm-offset-3">
 
-                <div class="panel responsive panel-primary" style="border-color: #31b0d5;">
-
-                    <div class="panel-heading">
-                     
-                    <h1>Añadir usuario</h1>
                
-                    </div>
+
+                    
                     
                     <div class="panel-body">
 
@@ -42,5 +38,5 @@
 
             </div>
 
-        </div>
+       
 <%@include file="Footer.html"%>
