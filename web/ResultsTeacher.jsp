@@ -7,10 +7,15 @@
   <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
   <%@include file="TeacherHeader.html" %>
      
-    
+    <div class="container" style="margin-top:80px; margin-bottom: 10px">
   <div class="col-md-offset-2 text-primary col-md-8">  
-         <h1>Resultados:</h1> 
+    
+      
             <div class="panel panel-primary">
+                 <a href="#" class="list-group-item active">
+            Resultados:
+        </a>
+                     
                     <div class="panel-body">
                         <div class="table-responsive">          
                             <table class="table  table-striped">
@@ -47,4 +52,5 @@
 
             </div>
         </div> 
+    </div>
   <%@include file="Footer.html" %>

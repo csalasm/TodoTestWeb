@@ -6,16 +6,23 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="TeacherHeader.html"%>
-        <div class="container">
+        <div class="container" style="margin-top:80px; margin-bottom: 10px">
+            
+            
             
 
             <div class="col-sm-6 col-sm-offset-3">
 
-                <div class="text-primary col-sm-offset-4">
-                    <h1>Crear Test</h1>
-                </div>
+                <div class="panel responsive panel-primary" style="border-color: #31b0d5;">
 
-                <c:if test="${ADD_TEST_OK eq 'false'}">
+                     <a href="#" class="list-group-item active">
+            A&ntildeadir test
+        </a>
+                    
+                    <div class="panel-body">
+
+
+                        <c:if test="${ADD_TEST_OK eq 'false'}">
                     <div class="alert alert-danger">Ya existe un test con ese nombre</div>
                 </c:if>
 
@@ -25,7 +32,7 @@
                         <label>Nombre Test</label>
                         <input type="text" class="form-control" name="testname" required>
                     </div>
-                    <div class="col-sm-6">
+                    
                         <div class="form-group">
                             <label>Duracion</label>
                             <select id="duration" name="duration" class="form-control">
@@ -46,8 +53,8 @@
                                 <option value="14">14</option>
                             </select> 
                         </div>
-                    </div>
-                    <div class="col-sm-6">
+                  
+                   
                         <div class="form-group">
                             <label>Puntuacion negativa</label>
                             <select id="puntuation" name="puntuation" class="form-control">
@@ -60,14 +67,20 @@
                                 <option value="6">6</option>
                             </select>
                         </div>
-                    </div>
+                  
                     <div class="form-group">
                         <label>Autor</label>
                         <input type="text" class="form-control" name="username" value="${usuario.dni}" readonly>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg">Crear Test</button>
+                    <button type="submit" class="btn btn-primary btn-md">Crear Test</button>
                 </form>
 
+
+                    </div>
+                </div>
+                
+
+                
                
 
             </div>

@@ -67,10 +67,9 @@ public class AddQuestionServlet extends HttpServlet {
             processErrorLogin(request, response);
             return;
         }
-        //  if (request.getParameter("test") != null) {
         test = (Test) session.getAttribute("test");
         if (test != null) {
-            
+
             int action = Integer.parseInt(request.getParameter("ActionButton"));
             //Añadir pregunta
             if (0 == action) {
@@ -80,19 +79,13 @@ public class AddQuestionServlet extends HttpServlet {
             }
             //VOLVER
             if (1 == action) {
-                redirectMainPageTeacher(request, response);
+                redirectAddQuestionByCategory(request, response);
             }
             //Añadir pregunta por categoria
             if (2 == action) {
-                redirectAddQuestionByCategory(request,response);
+                redirectMainPageTeacher(request, response);
             }
-        } else {
-            redirectMainPageTeacher(request, response);
         }
-
-        //  } else {
-        //      redirectMainPageTeacher(request, response);
-        //  }
     }
 
     private void processErrorLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -112,17 +105,16 @@ public class AddQuestionServlet extends HttpServlet {
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/MainPageTeacher.jsp");
         rd.forward(request, response);
     }
+
     private void redirectAddQuestionByCategory(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setAttribute("test", test);
         request.setAttribute("usuario", u);
         List<Categoria> categoria_list = categoriaFacade.findAll();
         request.setAttribute("categories", categoria_list);
 
-
         RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddQuestionByCategory.jsp");
         rd.forward(request, response);
     }
-
 
     private void createQuestion(HttpServletRequest request) throws ServletException, IOException {
 

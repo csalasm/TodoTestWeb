@@ -5,6 +5,7 @@
 --%>
 
 <%@include file="TeacherHeader.html" %>
+
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:if test="${AddQuestion_OK eq 'true'}">
     <div class="alert alert-info">Pregunta añadida correctamente</div>
@@ -12,34 +13,40 @@
 <c:if test="${ADD_USER eq 'true'}">
     <div class="alert alert-info">Usuario añadido correctamente</div>
 </c:if>
-<div class="container">
-    <div class="col-sm-6 col-sm-offset-3" style="margin-top: 30px">
+    
+    
+    <div class="container" style="margin-top:80px; margin-bottom: 10px">
+    <div class="col-sm-6 col-sm-offset-3" >
         <div class="panel panel-primary">
-            <div class="panel-heading"><h3><span class="glyphicon glyphicon-home"></span> Bienvenid@ ${user.nombre}</h3></div>
+            <a href="#" class="list-group-item active">
+            Bienvenid@ ${user.nombre}
+        </a> 
             <div class="panel-body">
-
-                <a href="ShowAddTestServlet" class="btn btn-info btn-lg">
+                <br>
+<div class="list-group" style="text-align: center">
+        
+    
+                <a href="ShowAddTestServlet" class="list-group-item"">
                     <span class="glyphicon glyphicon-list-alt"></span> Añadir test
                 </a>
-                <br>
-                <br>
-                <a href="TeacherListServlet" class="btn btn-info btn-lg">
+               
+                <a href="TeacherListServlet" class="list-group-item">
                     <span class="glyphicon glyphicon-book"></span> Añadir pregunta
                 </a>
-                <br>
-                <a href="AddUser.jsp" class="btn btn-info btn-lg">
+              
+                <a href="AddUser.jsp" class="list-group-item">
                     <span class="glyphicon glyphicon-list-alt"></span> Añadir usuario
                 </a>
-                <br><br>
-                <a href="ShowActiveTestServlet" class="btn btn-info btn-lg">
+               
+                <a href="ShowActiveTestServlet" class="list-group-item">
                     <span class="glyphicon glyphicon-book"></span> Activar/Desactivar test
                 </a>
-                <br>
-                <a href="ResultTeacherServlet" class="btn btn-info btn-lg">
+               
+                <a href="ResultTeacherServlet" class="list-group-item">
                     <span class="glyphicon glyphicon-book"></span> Resultados
                 </a>
             </div>    
-
+            </div>
         </div>
     </div> 
 </div>

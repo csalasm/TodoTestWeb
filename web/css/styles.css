@@ -3,8 +3,13 @@
 
 html,
 body {
+    background:url(9small.png) top left no-repeat #001e28;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+body {
     height: 100%;
-    padding-top:80px;
+    padding-top:0px;
     background: whitesmoke;
     /* The html and body elements cannot have any padding or margin. */
 }

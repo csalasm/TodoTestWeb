@@ -1,18 +1,12 @@
 <%@include file="TeacherHeader.html"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div class="container">
+<div class="container" style="margin-top: 80px; margin-bottom: 80px">
     <div class=" col-sm-offset-2">
 
         <div class="col-sm-offset-3 text-primary">
             <h1>Añadir Pregunta</h1> 
         </div>
-        <c:if test="${AddQuestion_OK eq 'true'}">
-            <div class="alert alert-success">Pregunta añadida correctamente</div>
-        </c:if>
-        <c:if test="${ADD_TEST_OK eq 'true'}">
-            <div class="alert alert-success">Test añadido correctamente</div>
-        </c:if>
         <form name="Category" class="form-horizontal" action="AddCategoryServlet" method="post">
 
             <div class="form-group">
@@ -92,14 +86,14 @@
         </form>
         <form  class="form-horizontal" action="AddQuestionServlet"  method="post" enctype="multipart/form-data" >
                 <div class="col-sm-offset-2">
-                    <button type="submit" class="btn btn-warning col-sm-7" id="boton" name="ActionButton" value="2">Añadir Pregunta por Categoria</button>
+                    <button type="submit" class="btn btn-primary col-sm-7" id="boton" name="ActionButton" value="1">Añadir Pregunta por Categoria</button>
                 </div>
         </form>
 
 
         <form  class="form-horizontal" action="AddQuestionServlet"  method="post" enctype="multipart/form-data" >
             <div class="col-sm-offset-2">
-                <button type="submit" class="btn btn-warning col-sm-7" id="boton" name="ActionButton" value="1">Volver</button>
+                <button type="submit" class="btn btn-primary col-sm-7" id="boton" name="ActionButton" value="2">Volver</button>
             </div>
         </form>
     </div>
