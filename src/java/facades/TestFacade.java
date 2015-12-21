@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.facades;
+package facades;
 
 import java.util.List;
-import controller.parameters.AddTestParameters;
-import java.util.Collection;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -34,9 +32,11 @@ public class TestFacade extends AbstractFacade<Test> {
     }
     
 
-    public List<Test> getActiveTest() {
+    public List<Test> getActiveTest(Usuario u) {
         //return (List<Test>) em.createNamedQuery("Test.findByActivo").setParameter("activo", 1).getResultList();
-        return (List<Test>) em.createQuery("SELECT t FROM Test t WHERE t.activo = 1 AND t.idTest NOT IN(SELECT e.test.idTest FROM Examen e)").getResultList();
+        return (List<Test>) em.createQuery("SELECT t FROM Test t WHERE t.activo = 1 AND t.idTest NOT IN(SELECT e.test.idTest FROM Examen e WHERE e.examenPK.dni = :dni)")
+                .setParameter("dni", u.getDni())
+                .getResultList();
     }
     
     public List<Test> findByNameAndDni(String testName, Usuario u){

@@ -5,7 +5,7 @@
  */
 package controller;
 
-import controller.facades.UsuarioFacade;
+import facades.UsuarioFacade;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;

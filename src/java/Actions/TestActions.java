@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.actions;
+package actions;
 
 import com.itextpdf.text.DocumentException;
 import controller.DoTestServlet;
-import controller.facades.ExamenFacade;
-import controller.facades.TestFacade;
-import controller.sessionBeans.TestSessionBean;
+import facades.ExamenFacade;
+import facades.TestFacade;
+import sessionBeans.TestSessionBean;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.math.BigDecimal;

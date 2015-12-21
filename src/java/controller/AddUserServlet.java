@@ -5,8 +5,8 @@
  */
 package controller;
 
-import controller.facades.UsuarioFacade;
-import controller.parameters.AddUserParameters;
+import facades.UsuarioFacade;
+import parameters.AddUserParameters;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
