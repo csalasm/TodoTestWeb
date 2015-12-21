@@ -23,9 +23,9 @@ import model.jpa.Usuario;
  * @author andresbailen93
  */
 public class AddUserServlet extends HttpServlet {
+
     @EJB
     private UsuarioFacade usuarioFacade;
-
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -51,8 +51,22 @@ public class AddUserServlet extends HttpServlet {
         //Instanciamos User added
         Usuario userAdded = new Usuario(adduserparam.getDni(), adduserparam.getName(), adduserparam.getSurname(), adduserparam.getPassword(), (short) ((adduserparam.isPermits()) ? 1 : 0));
         //Llamamos al JPA facade usuario
-        usuarioFacade.create(userAdded);
-        redirectMainPageTeacher(request, response);
+        Usuario CompruebaUsuario = usuarioFacade.find(userAdded.getDni());
+        if (CompruebaUsuario == null) {
+            usuarioFacade.create(userAdded);
+            redirectMainPageTeacher(request, response);
+        }
+        //usuarioFacade.create(userAdded);
+        //redirectMainPageTeacher(request, response);
+        if (CompruebaUsuario != null) {
+            redirectAddUser(request, response);
+        }
+    }
+
+    private void redirectAddUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("ADD_USER_ERROR", "true");
+        RequestDispatcher rd = getServletContext().getRequestDispatcher("/AddUser.jsp");
+        rd.forward(request, response);
     }
 
     private void redirectToLogin(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
