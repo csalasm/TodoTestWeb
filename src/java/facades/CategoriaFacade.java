@@ -34,4 +34,6 @@ public class CategoriaFacade extends AbstractFacade<Categoria> {
         return list_cat;
     }
     
+
+    
 }
