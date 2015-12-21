@@ -5,6 +5,7 @@
 --%>
 
 <%@include file="TeacherHeader.html" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <div class="container" style="margin-top:80px; margin-bottom: 10px">
@@ -21,7 +22,9 @@
             </a>
 
             <div class="panel-body">
-
+                <c:if test="${ADD_USER_ERROR eq 'true'}">
+                    <div class="alert alert-warning">Ya existe ese usuario</div>
+                </c:if>
 
                 <form  id="addUser"class="form-vertical" action="AddUserServlet"  method="post" >
                     <div class="form-group">
@@ -68,7 +71,10 @@
                     </div>
 
                     <div id="errorDNI" class="col-sm-4 col-sm-offset-2"></div>
+
                 </form>
+
+
 
 
 

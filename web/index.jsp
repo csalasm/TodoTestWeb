@@ -50,11 +50,11 @@
                         <form action="LoginServlet" method="post">
                             <div class="form-group">
                                 <label>DNI</label>
-                                <input type="text" class="form-control" name="user" value="77774444P">
+                                <input type="text" class="form-control" name="user" value="33333333P">
                             </div>
                             <div class="form-group">
                                 <label>Password</label>
-                                <input type="password" class="form-control" name="password" value="test">
+                                <input type="password" class="form-control" name="password" value="1234">
                             </div>
 
                             <c:if test="${error_login eq true}">
