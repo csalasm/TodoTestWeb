@@ -142,6 +142,7 @@ public class ActivateTestServlet extends HttpServlet {
     private void redirectToActivateTest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext context = getServletContext();
         request.setAttribute("Activate_Test", "true");
+        request.setAttribute("ADD_TEST_OK", "true");
         RequestDispatcher rd = context.getRequestDispatcher("/ShowActiveTestServlet");
         rd.forward(request, response);
     }

@@ -12,7 +12,7 @@
 
               
                 <c:if test="${ADD_TEST_OK eq 'true'}">
-                    <div class="alert alert-danger">Se ha modificado la configuracion de los test seleccionados</div>
+                    <div class="alert alert-warning">Se ha modificado la configuracion de los test seleccionados</div>
                 </c:if>
                 <form method="post" action="ActivateTestServlet">
                     <div class="checkbox" action="ActivateTestServlet">

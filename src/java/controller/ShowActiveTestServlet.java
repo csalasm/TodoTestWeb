@@ -56,7 +56,6 @@ public class ShowActiveTestServlet extends HttpServlet {
        List <Test> active_test_list = testFacade.returnTestfromUser(u);
         
        request.setAttribute("ActiveTest",active_test_list);
-        
        redirectToManageTest(request, response);
         
         
