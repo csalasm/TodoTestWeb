@@ -57,7 +57,7 @@
                     </div>
                     <div class="form-group">
 
-                        <label for="Imagen" class="control-label">Selecciona un fichero:</label>
+                        <label for="Imagen" class="control-label">Selecciona una imagen:</label>
                         <div>
 
                             <input type="file" name="fileName" class="btn">
