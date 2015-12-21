@@ -3,38 +3,46 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-$(document).ready(function(){
-    var value=2;
-$("#addRespuesta").on('click',function() {
-    var r="<div class=\"radio\"> <label> <input type=\"radio\" name=\"respuesta\"id=\"respuesta\" value=\""+(value)+"\"> <input type=\"text\" class=\"form-control\" id=\"Respuesta\" name=\"respuestaText[]\" value placeholder=\"Respuesta\" required> </label> </div>";
-    $("#answersadded").append(r);
-    value++;
-});
+$(document).ready(function () {
+    var value = 2;
+    $("#addRespuesta").on('click', function () {
+        var r = "<div class=\"radio\"> <label> <input type=\"radio\" name=\"respuesta\"id=\"respuesta\" value=\"" + (value) + "\"> <input type=\"text\" class=\"form-control\" id=\"Respuesta\" name=\"respuestaText[]\" value placeholder=\"Respuesta\" required> </label> </div>";
+        $("#answersadded").append(r);
+        value++;
+    });
 
 
 
-$("#removeRespuesta").on('click',function() {
-   $("#answersadded div:last-child").remove();
-   value--;
-});
+    $("#removeRespuesta").on('click', function () {
+        $("#answersadded div:last-child").remove();
+        value--;
+    });
 
 
 
 
 
-$("#boton").on('click',function(){
-    
-    $("#DNIerror").remove();
-    
-    var dni = $("#DNI").val();
-    var exp = /^\d{8}[a-zA-Z]$/;
-    
-    var error = "<div id=\"DNIerror\" class=\"alert alert-danger\">Introduce un DNI correcto</div>";
-    if(exp.test(dni)==false){
+    $("#boton").on('click', function () {
+
+        $("#DNIerror").remove();
+        var dni = $("#DNI").val();
+        var exp = /^\d{8}[a-zA-Z]$/;
+
+        var error = "<div id=\"DNIerror\" class=\"alert alert-danger\">DNI incorrecto</div>";
         $("#errorDNI").append(error);
-    }else{
-        $("#errorDNI").hide();
-    }
-        
-});   
+
+        $("#addUser").submit(function () {
+            
+            if (exp.test(dni) == false) {
+                $("#errorDNI").show();
+                return false;
+            }
+            if (exp.test(dni) == true) {
+                $("#errorDNI").hide();
+                this.submit();
+            }
+            $("#errorDNI").remove();
+        });
+
+    });
 });
