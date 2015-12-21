@@ -21,13 +21,13 @@
                             <c:choose>
                                 <c:when test="${test.activo == '1'}">
                                     <div class="checkbox-primary">
-                                        <label><input type="checkbox" name="activeTests" value="${test.idTest}" checked>${test.nombre} (Activo)<br></label>
+                                        <label><input type="checkbox" name="activeTests" value="${test.idTest}" checked>${test.nombre}<br></label>
                                     </div>
 
                                 </c:when>
                                 <c:when test="${test.activo == '0'}">
                                     <div class="checkbox-primary">
-                                        <label><input type="checkbox" name="activeTests" value="${test.idTest}">${test.nombre} (Desactivado)<br></label>
+                                        <label><input type="checkbox" name="activeTests" value="${test.idTest}">${test.nombre}<br></label>
                                     </div>
                                 </c:when>   
                             </c:choose>
