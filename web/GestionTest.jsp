@@ -1,7 +1,7 @@
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="TeacherHeader.html"%>
-<div class="container"  style="margin-top:80px; margin-bottom: 10px">
+<div class="container"  style="margin-top:80px; margin-bottom: 80px">
     <div class="col-sm-10 col-sm-offset-1">
         <div class="panel panel-primary">
           
@@ -12,7 +12,7 @@
 
               
                 <c:if test="${ADD_TEST_OK eq 'true'}">
-                    <div class="alert alert-danger">Se ha modificado la configuracion de los test seleccionados</div>
+                    <div class="alert alert-warning">Se ha modificado la configuracion de los test seleccionados</div>
                 </c:if>
                 <form method="post" action="ActivateTestServlet">
                     <div class="checkbox" action="ActivateTestServlet">
@@ -21,13 +21,13 @@
                             <c:choose>
                                 <c:when test="${test.activo == '1'}">
                                     <div class="checkbox-primary">
-                                        <label><input type="checkbox" name="activeTests" value="${test.idTest}" checked>${test.nombre} (Activo)<br></label>
+                                        <label><input type="checkbox" name="activeTests" value="${test.idTest}" checked>${test.nombre}<br></label>
                                     </div>
 
                                 </c:when>
                                 <c:when test="${test.activo == '0'}">
                                     <div class="checkbox-primary">
-                                        <label><input type="checkbox" name="activeTests" value="${test.idTest}">${test.nombre} (Desactivado)<br></label>
+                                        <label><input type="checkbox" name="activeTests" value="${test.idTest}">${test.nombre}<br></label>
                                     </div>
                                 </c:when>   
                             </c:choose>

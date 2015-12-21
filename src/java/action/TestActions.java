@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Actions;
+package action;
 
 import com.itextpdf.text.DocumentException;
 import controller.DoTestServlet;
@@ -45,7 +45,7 @@ public class TestActions {
     ExamenFacade examenFacade = lookupExamenFacadeBean();
     TestFacade testFacade = lookupTestFacadeBean();
 
-    private TestSessionBean tsb;
+    private final TestSessionBean tsb;
     private final HttpServletRequest request;
     private final HttpServletResponse response;
     private final HttpSession session;
@@ -66,23 +66,17 @@ public class TestActions {
     }
     
     public void manageTest() throws ServletException, IOException {
+ 
         if (tsb == null) { // Es la primera pregunta
             Test t = testFacade.find(Long.valueOf(testID));
             Chronometer.stopChronometer();
-            tsb = new TestSessionBean(t, 0);
-            if (t.getDuracion() == 0) {
-                tsb.setTestWithoutTime(true);
-                Chronometer.setTestWithoutTime(true);
-            }
-            else
-                Chronometer.startChronometer(t.getDuracion()*60);
-            
+            Chronometer.startChronometer(t.getDuracion()*60);
             // test - preguntaActual
-            session.setAttribute("test", tsb); // Guardamos en la sesión el test que estamos haciendo
+            session.setAttribute("test", new TestSessionBean(t, 0)); // Guardamos en la sesión el test que estamos haciendo
             // Recuperamos la primera pregunta y sus respuestas
             List<Pregunta> questionList = new ArrayList(t.getPreguntaCollection()); 
             List<Respuesta> answerList = new ArrayList(questionList.get(0).getRespuestaCollection());
-            request.setAttribute("question", new PreguntaViewBean(t.getNombre(), questionList.get(0), answerList, 1, questionList.size(), tsb.getNoTime() ,Chronometer.getTime()));
+            request.setAttribute("question", new PreguntaViewBean(t.getNombre(), questionList.get(0), answerList, 1, questionList.size(), Chronometer.getTime()));
             return;
         }
         
@@ -94,7 +88,6 @@ public class TestActions {
                     answerList,
                     tsb.getCurrentQuestion() + 1,
                     questionList.size(),
-                    tsb.getNoTime(),
                     Chronometer.getTime()
             );
             if (tsb.getCurrentQuestion() == questionList.size() - 1) {
@@ -105,7 +98,7 @@ public class TestActions {
             request.setAttribute("answer", false);
             return;
         }
-        if (!tsb.isLastQuestion() && Chronometer.getTime() > 0) { // Si no es la ultima pregunta
+        if (!tsb.isLastQuestion() & Chronometer.getTime() > 0) { // Si no es la ultima pregunta
             lastAnswer = request.getParameter("answer");
             tsb.addUserAnswer(Long.valueOf(request.getParameter("answer")));
             tsb.setCurrentQuestion(tsb.getCurrentQuestion() + 1);
@@ -116,7 +109,6 @@ public class TestActions {
                     answerList,
                     tsb.getCurrentQuestion() + 1,
                     questionList.size(),
-                    tsb.getNoTime(),
                     Chronometer.getTime()
             );
             if (tsb.getCurrentQuestion() == questionList.size() - 1) { // Es la ultima pregunta
@@ -129,7 +121,7 @@ public class TestActions {
                 tsb.addUserAnswer(Long.valueOf(request.getParameter("answer")));
             }
             correctTest();
-            PreguntaViewBean pvb = new PreguntaViewBean(tsb.getTest().getNombre(), null, null, 0, 0, false, 0);
+            PreguntaViewBean pvb = new PreguntaViewBean(tsb.getTest().getNombre(), null, null, 0, 0, 0);
             pvb.setMark(tsb.getMark().toString());
             pvb.setPdf(generatePDF());
             request.setAttribute("question", pvb);
@@ -200,7 +192,7 @@ public class TestActions {
         e.setTest(tsb.getTest());
         tsb.setMark(new BigDecimal(mark).setScale(2, RoundingMode.CEILING));
         
-        //examenFacade.create(e);
+        examenFacade.create(e);
         
     }
     

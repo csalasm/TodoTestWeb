@@ -55,46 +55,44 @@ public class ActivateTestServlet extends HttpServlet {
             return;
         }
 
-         short activo = 1;
+        short activo = 1;
         short desactivado = 0;
 
         String[] active_test = null;
-        
+
         active_test = request.getParameterValues("activeTests");
-        
-        if(active_test!=null){
-        System.out.println(active_test.toString());
-       
-        if(active_test.length!=0){
 
-       
-       
-        Test test;
+        if (active_test != null) {
+            System.out.println(active_test.toString());
 
-        List<Test> all_Test = testFacade.findAll();
+            if (active_test.length != 0) {
 
-        for (Test t : all_Test) { //Marco todos como desactivados.
-            t.setActivo(desactivado);
-            testFacade.edit(t);
-        }
+                Test test;
 
-        for (String s : active_test) { //Marco como activos los que me indica la vista.
+                List<Test> all_user_test = testFacade.returnTestfromUser(u);
 
-            test = new Test();
-            test.setIdTest(Long.parseLong(s));
+                for (Test t : all_user_test) { //Marco todos como desactivados.
+                    t.setActivo(desactivado);
+                    testFacade.edit(t);
+                }
 
-            Test rec_test = testFacade.find(test.getIdTest());
-            rec_test.setActivo(activo);
-            testFacade.edit(rec_test);
-        }
+                for (String s : active_test) { //Marco como activos los que me indica la vista.
+
+                    test = new Test();
+                    test.setIdTest(Long.parseLong(s));
+
+                    Test rec_test = testFacade.find(test.getIdTest());
+                    rec_test.setActivo(activo);
+                    testFacade.edit(rec_test);
+                }
             }
-        } else{
-            List<Test> all_Test = testFacade.findAll();
+        } else {
 
-        for (Test t : all_Test) { //Marco todos como desactivados.
-            t.setActivo(desactivado);
-            testFacade.edit(t);
-        }
+            List<Test> all_user_test = testFacade.returnTestfromUser(u);
+            for (Test t : all_user_test) { //Marco todos como desactivados.
+                t.setActivo(desactivado);
+                testFacade.edit(t);
+            }
         }
 
         redirectToActivateTest(request, response);
@@ -142,6 +140,7 @@ public class ActivateTestServlet extends HttpServlet {
     private void redirectToActivateTest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ServletContext context = getServletContext();
         request.setAttribute("Activate_Test", "true");
+        request.setAttribute("ADD_TEST_OK", "true");
         RequestDispatcher rd = context.getRequestDispatcher("/ShowActiveTestServlet");
         rd.forward(request, response);
     }
