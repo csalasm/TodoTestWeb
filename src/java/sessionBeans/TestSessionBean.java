@@ -19,6 +19,7 @@ public class TestSessionBean {
     private ArrayList<Long> userAnswers;
     private boolean lastQuestion = false;
     private BigDecimal mark = new BigDecimal(0);
+    private boolean noTime = false;
 
     public TestSessionBean(Test test, int currentQuestion) {
         this.test = test;
@@ -64,6 +65,14 @@ public class TestSessionBean {
     
     public BigDecimal getMark() {
         return mark;
+    }
+    
+    public void setTestWithoutTime(boolean noTime) {
+        this.noTime = noTime;
+    }
+    
+    public boolean getNoTime() {
+        return noTime;
     }
     
     

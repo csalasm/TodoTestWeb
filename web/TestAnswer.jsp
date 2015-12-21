@@ -57,11 +57,14 @@
 </div>
 <script type="text/javascript" src="js/back.js"></script>
 <script type="text/javascript" src="js/chronometer.js"></script>
-<c:if test="${question.currentTestTime > 0}">
+<c:if test="${question.testWithoutTime == false}" >
+   <c:if test="${question.currentTestTime > 0}">
     <script type="text/javascript">
         display = jQuery('#chronometer');
         startTimer(${question.currentTestTime}, display);
     </script>
-</c:if> 
+    </c:if>  
+</c:if>
+
 
 <%@include file="Footer.html" %>

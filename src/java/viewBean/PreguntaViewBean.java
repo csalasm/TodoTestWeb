@@ -24,15 +24,16 @@ public class PreguntaViewBean {
     private int currentTestTime;
     private String currentTestTimeWithFormat;
     private boolean pdf = false;
-   
+    private boolean testWithoutTime = false;   
 
-    public PreguntaViewBean(String testName, Pregunta question, Collection<Respuesta> answerList, int currenQuestion, int totalQuestions, int currentTestTime) {
+    public PreguntaViewBean(String testName, Pregunta question, Collection<Respuesta> answerList, int currenQuestion, int totalQuestions, boolean testWithoutTime,int currentTestTime) {
         this.testName = testName;
         this.question = question;
         this.answerList = answerList;
         this.currentQuestion = currenQuestion;
         this.totalQuestions = totalQuestions;
         this.currentTestTime = currentTestTime;
+        this.testWithoutTime = testWithoutTime;
     }
 
     public Pregunta getQuestion() {
@@ -131,5 +132,13 @@ public class PreguntaViewBean {
      public boolean getPdf() {
          return pdf;
      }
+     
+    public boolean isTestWithoutTime() {
+        return testWithoutTime;
+    }
+
+    public void setTestWithoutTime(boolean testWithoutTime) {
+        this.testWithoutTime = testWithoutTime;
+    }
     
 }
