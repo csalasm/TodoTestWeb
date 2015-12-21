@@ -60,7 +60,7 @@
                             <div class="radio">
                                 <label>
                                     <input type="radio" name="respuesta" id="respuesta" value="0" checked>
-                                    <input type="text" class="form-control" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
+                                    <input type="text" class="form-control " id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
                                 </label>
                             </div>
                             <div class="radio">
