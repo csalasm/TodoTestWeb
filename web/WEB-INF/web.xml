@@ -26,7 +26,7 @@
     </servlet>
     <servlet>
         <servlet-name>AddAnswerParameters</servlet-name>
-        <servlet-class>controller.parameters.AddAnswerParameters</servlet-class>
+        <servlet-class>parameters.AddAnswerParameters</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddCategoryServlet</servlet-name>

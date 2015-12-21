@@ -5,9 +5,9 @@
  */
 package controller;
 
-import controller.facades.CategoriaFacade;
-import controller.facades.TestFacade;
-import controller.parameters.AddTestParameters;
+import facades.CategoriaFacade;
+import facades.TestFacade;
+import parameters.AddTestParameters;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;

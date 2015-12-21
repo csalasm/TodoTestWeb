@@ -5,8 +5,8 @@
  */
 package controller;
 
-import controller.facades.CategoriaFacade;
-import controller.parameters.AddCategoryParameters;
+import facades.CategoriaFacade;
+import parameters.AddCategoryParameters;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;

@@ -10,22 +10,25 @@
             <a href="#" class="list-group-item active">
                 A&ntildeadir pregunta
             </a>
-            <div class="panel-body">
+            <div class="panel-body" style="margin: 15px">
 
-                <form name="Category" class="form" action="AddCategoryServlet" method="post">
+               
+                <form name="Category" class="form-horizontal" action="AddCategoryServlet" method="post">
 
                     <div class="form-group">
-
+                        <label class="control-label">Nueva categoría: </label>
                         <input type="text" class="form-control" id="addcategoria" name="addcategory" value placeholder="Categoría">
 
                         <button type="submit" class="btn btn-primary btn-xs pull-right">Añadir Categoría</button>
                     </div> 
                 </form>
-
+              
+                
                 <form  class="form-horizontal" action="AddQuestionServlet"  method="post" enctype="multipart/form-data" >
                     <div class="form-group">
-                        <label for="Categoría" class="col-sm-2 control-label">Categoría: </label>
-                        <div class="col-sm-6">
+                     
+                        <label for="Categoría" class="control-label">Categoría: </label>
+                        <div>
                             <select class="form-control" id="categoria" name="Categoria" required>
                                 <c:forEach var="categorias" items="${categories}">
                                     <c:choose>
@@ -40,27 +43,35 @@
                                 </c:forEach>
                             </select>
                         </div>
+                      
                     </div>
                     <div class="form-group">
-                        <label for="Pregunta" class="col-sm-2 control-label">Pregunta: </label>
-                        <div class="col-sm-6 ">
+                     
+                        <label for="Pregunta" class="control-label">Pregunta: </label>
+                        <div >
                             <textarea name="pregunta" class="form-control" rows="3"  placeholder="Pregunta" required></textarea>
                         </div>
+                       
                     </div>
                     <div class="form-group">
-                        <label for="Imagen" class="col-sm-2 control-label">Selecciona un fichero:</label><div class="col-sm-6">
-                            <input type="file" name="fileName" class="btn"><br>
+                      
+                        <label for="Imagen" class="control-label">Selecciona un fichero:</label>
+                        <div>
+                         
+                            <input type="file" name="fileName" class="btn">
                         </div>
+                   
                     </div>
 
                     <div class="form-group ">
-                        <label for="Respuestas" class="control-label">Respuestas: </label>
+                       
+                        <label for="Respuestas" class="control-label" >Respuestas: </label>
 
                         <div id="answers">
                             <div class="radio">
                                 <label>
                                     <input type="radio" name="respuesta" id="respuesta" value="0" checked>
-                                    <input type="text" class="form-control" id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
+                                    <input type="text" class="form-control " id="Respuesta" name="respuestaText[]" value placeholder="Respuesta" required>
                                 </label>
                             </div>
                             <div class="radio">
@@ -74,29 +85,30 @@
 
                         <div  id="answersadded">
                         </div>
-
+                     
                     </div>
 
 
                     <div class="form-group">
-                        <div class="col-sm-offset-1">
-                            <button type="button" class="btn btn-primary" id="addRespuesta"><i class="glyphicon glyphicon-plus"></i></button>
-                            <button type="button" class="btn btn-primary" id="removeRespuesta"><i class="glyphicon glyphicon-minus"></i></button>
-
-                        </div>  
+                         <div class="btn-group-vertical pull-left">
+                           
+                         </div>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-1">
-                            <button type="submit" class="btn btn-primary btn-xs" id="boton" name="ActionButton" value="0" >Añadir Pregunta</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary btn-xs " id="boton" name="ActionButton" value="0" >Guardar</button>
+                        <button type="button" class="btn btn-primary btn-xs" id="addRespuesta"><i class="glyphicon glyphicon-plus"></i></button>
+                            <button type="button" class="btn btn-primary btn-xs" id="removeRespuesta"><i class="glyphicon glyphicon-minus"></i></button>
+                           
+                   
                     </div>
+                 
 
             </form>
 
             <form  class="form-vertical" action="AddQuestionServlet"  method="post" enctype="multipart/form-data" >
                 <div class="btn-group-vertical pull-right">
-                    <button type="submit" class="btn btn-primary btn-xs pull-right" id="boton" name="ActionButton" value="1">Añadir Pregunta por Categoria</button>
+                    <button type="submit" class="btn btn-primary btn-xs pull-right" id="boton" name="ActionButton" value="1">Añadir preguntas de una categoria</button>
 
                     <button type="submit" class="btn btn-primary btn-xs pull-right" id="boton" name="ActionButton" value="2">Volver</button>
                 </div>
@@ -106,6 +118,6 @@
 
     </div>
 </div>
-</div>
+
 
 <%@include file="Footer.html"%>

@@ -5,7 +5,7 @@
  */
 package controller;
 
-import controller.facades.TestFacade;
+import facades.TestFacade;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
@@ -47,7 +47,7 @@ public class AvailableTestListServlet extends HttpServlet {
         session.removeAttribute("question");
         
         // Recuperamos los tests activos
-        request.setAttribute("testList", testFacade.getActiveTest());
+        request.setAttribute("testList", testFacade.getActiveTest(u));
         redirectToTestList(request, response);
     }
     

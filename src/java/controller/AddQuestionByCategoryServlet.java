@@ -5,9 +5,9 @@
  */
 package controller;
 
-import controller.facades.CategoriaFacade;
-import controller.facades.PreguntaFacade;
-import controller.facades.TestFacade;
+import facades.CategoriaFacade;
+import facades.PreguntaFacade;
+import facades.TestFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;

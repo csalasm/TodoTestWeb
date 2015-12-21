@@ -5,7 +5,7 @@
  */
 package controller;
 
-import controller.facades.UsuarioFacade;
+import facades.UsuarioFacade;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.ejb.EJB;
