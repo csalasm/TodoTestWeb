@@ -7,7 +7,7 @@
  */
 package controller;
 
-import controller.facades.TestFacade;
+import facades.TestFacade;
 import java.io.IOException;
 import java.util.List;
 import javax.ejb.EJB;

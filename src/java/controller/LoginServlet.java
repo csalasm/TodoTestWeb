@@ -5,8 +5,8 @@
  */
 package controller;
 
-import controller.facades.UsuarioFacade;
-import controller.parameters.LoginParameters;
+import facades.UsuarioFacade;
+import parameters.LoginParameters;
 import java.io.IOException;
 import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;

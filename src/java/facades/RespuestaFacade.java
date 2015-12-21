@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.facades;
+package facades;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import model.jpa.Examen;
+import model.jpa.Respuesta;
 
 /**
  *
  * @author csalas
  */
 @Stateless
-public class ExamenFacade extends AbstractFacade<Examen> {
+public class RespuestaFacade extends AbstractFacade<Respuesta> {
     @PersistenceContext(unitName = "TodoTestWebPU")
     private EntityManager em;
 
@@ -24,8 +24,8 @@ public class ExamenFacade extends AbstractFacade<Examen> {
         return em;
     }
 
-    public ExamenFacade() {
-        super(Examen.class);
+    public RespuestaFacade() {
+        super(Respuesta.class);
     }
     
 }

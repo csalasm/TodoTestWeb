@@ -5,12 +5,12 @@
  */
 package controller;
 
-import controller.facades.CategoriaFacade;
-import controller.facades.PreguntaFacade;
-import controller.facades.RespuestaFacade;
-import controller.facades.TestFacade;
-import controller.parameters.AddAnswerParameters;
-import controller.parameters.AddQuestionParameters;
+import facades.CategoriaFacade;
+import facades.PreguntaFacade;
+import facades.RespuestaFacade;
+import facades.TestFacade;
+import parameters.AddAnswerParameters;
+import parameters.AddQuestionParameters;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;

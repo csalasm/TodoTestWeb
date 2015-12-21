@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.parameters;
+package parameters;
 
 import controller.AddQuestionServlet;
-import controller.facades.CategoriaFacade;
+import facades.CategoriaFacade;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.logging.Level;
