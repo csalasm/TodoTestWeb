@@ -3,7 +3,6 @@
     Created on : 16-dic-2015, 16:38:41
     Author     : Jesus
 --%>
-
     <%@include file="StudentHeader.html" %>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -44,10 +43,8 @@
                 </div>    
 
             </div>
-        </div> 
-    
+        </div>  
      <div class="col-md-offset-2 text-primary col-md-8"> 
-        
             <div class="panel panel-primary">
                 <div class="panel-heading">Resumen:</div>
                 <div class="panel-body">
@@ -59,7 +56,6 @@
                                         <th>Total aciertos</th>
                                         <th>Total fallos</th>
                                         <th>Media</th>
-
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -67,15 +63,12 @@
                                         <td>${usuario.totalTest}</td>
                                         <td>${usuario.success}</td>
                                         <td>${usuario.fails}</td>
-                                        <td>${usuario.average}</td>
-                                   
+                                        <td>${usuario.average}</td>                                  
                                     </tr>
                                 </tbody>
                             </table>
-                        </div>
-                 
+                        </div>                 
                 </div>    
-
             </div>
         </div> 
  </div>
