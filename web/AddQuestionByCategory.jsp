@@ -26,8 +26,8 @@
 
             <div class="panel-body">
 
-                <c:if test="${ADD_TEST_OK eq 'false'}">
-                    <div class="alert alert-danger">Ya existe un test con ese nombre</div>
+                <c:if test="${AddQuestionByCategory_OK eq 'true'}">
+                    <div class="alert alert-success">Las preguntas se ha añadido correctamente</div>
                 </c:if>
 
                 <!-- AddTest FORM -->

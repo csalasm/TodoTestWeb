@@ -43,7 +43,7 @@ public class PDF {
         Document document = new Document();
         File f = new File(PDF_PATH);
         if (!f.exists())
-            f.mkdirs();
+            f.mkdir();
         PdfWriter.getInstance(document, new FileOutputStream(path+filename));
         document.open();
         document.add(new Paragraph(titleExamen));

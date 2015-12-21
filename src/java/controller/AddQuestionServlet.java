@@ -73,8 +73,8 @@ public class AddQuestionServlet extends HttpServlet {
             int action = Integer.parseInt(request.getParameter("ActionButton"));
             //Añadir pregunta
             if (0 == action) {
-                request.setAttribute("AddQuestion_OK", "true");
                 createQuestion(request);
+                request.setAttribute("AddQuestion_OK", "true");
                 redirectToCreateQuestion(request, response);
             }
             //Añadir pregunta por categoria

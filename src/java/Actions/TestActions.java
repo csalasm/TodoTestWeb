@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package actions;
+package Actions;
 
 import com.itextpdf.text.DocumentException;
 import controller.DoTestServlet;
@@ -219,7 +219,7 @@ public class TestActions {
     private TestFacade lookupTestFacadeBean() {
         try {
             Context c = new InitialContext();
-            return (TestFacade) c.lookup("java:global/TodoTestWeb/TestFacade!controller.facades.TestFacade");
+            return (TestFacade) c.lookup("java:global/TodoTestWeb/TestFacade!facades.TestFacade");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
@@ -229,7 +229,7 @@ public class TestActions {
     private ExamenFacade lookupExamenFacadeBean() {
         try {
             Context c = new InitialContext();
-            return (ExamenFacade) c.lookup("java:global/TodoTestWeb/ExamenFacade!controller.facades.ExamenFacade");
+            return (ExamenFacade) c.lookup("java:global/TodoTestWeb/ExamenFacade!facades.ExamenFacade");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);

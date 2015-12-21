@@ -66,7 +66,9 @@ public class AddQuestionByCategoryServlet extends HttpServlet {
         //Añade pregunta
         if (action == 0) {
             addQuestionByCategory(request);
+            request.setAttribute("AddQuestionByCategory_OK", "true");
             redirectAddQuestionByCategory(request, response);
+
         }
         //Vuelve a crear pregunta
         if (action == 1) {
