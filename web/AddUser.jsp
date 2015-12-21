@@ -71,21 +71,9 @@
                     </div>
 
                     <div id="errorDNI" class="col-sm-4 col-sm-offset-2"></div>
-
                 </form>
-
-
-
-
-
-
             </div>
         </div>
-
-
-
-
-
     </div>
 
 </div>
