@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package actions;
+package action;
 
 import com.itextpdf.text.DocumentException;
 import controller.DoTestServlet;
