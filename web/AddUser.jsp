@@ -51,7 +51,7 @@
 
 
                         <label for="Permisos" class="col-sm-2 control-label">Permisos: </label>
-
+                        <br>
                         <label>
                             <input type="radio" name="permisos" id="permisos" value="true" checked>
                             Si
