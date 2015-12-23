@@ -20,6 +20,8 @@ public class TestSessionBean {
     private boolean lastQuestion = false;
     private BigDecimal mark = new BigDecimal(0);
     private boolean noTime = false;
+    private int timeLeft = 1;
+    private long timestamp;
 
     public TestSessionBean(Test test, int currentQuestion) {
         this.test = test;
@@ -75,5 +77,27 @@ public class TestSessionBean {
         return noTime;
     }
     
+    public void setTimeLeft(int time, long timestamp) {
+        this.timeLeft = time;
+        this.timestamp = timestamp;
+    }
+    
+    public int getTimeLeft() {
+        return timeLeft;
+    }
+    
+    public long getTimestamp() {
+        return timestamp;
+    }
+    
+    public void setTimestamp(long timestamp) {
+        // Solo editamos el tiempo si es un test con duración > 0
+        if (!noTime) {
+            // Tiempo que ha pasado entre respuestas del usuario
+            long time = (timestamp - this.timestamp) / 1000;
+            timeLeft -= (int)time;
+            this.timestamp = timestamp;
+        }
+    }
     
 }

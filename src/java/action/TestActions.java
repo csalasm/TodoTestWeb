@@ -33,7 +33,6 @@ import model.jpa.Pregunta;
 import model.jpa.Respuesta;
 import model.jpa.Test;
 import model.jpa.Usuario;
-import utils.Chronometer;
 import utils.PDF;
 import viewBean.PreguntaViewBean;
 
@@ -68,14 +67,12 @@ public class TestActions {
     public void manageTest() throws ServletException, IOException {
         if (tsb == null) { // Es la primera pregunta
             Test t = testFacade.find(Long.valueOf(testID));
-            Chronometer.stopChronometer();
             tsb = new TestSessionBean(t, 0);
             if (t.getDuracion() == 0) {
                 tsb.setTestWithoutTime(true);
-                Chronometer.setTestWithoutTime(true);
             }
             else
-                Chronometer.startChronometer(t.getDuracion()*60);
+                tsb.setTimeLeft(t.getDuracion()*60, System.currentTimeMillis());
             // test - preguntaActual
             session.setAttribute("test", tsb); // Guardamos en la sesión el test que estamos haciendo
             // Recuperamos la primera pregunta y sus respuestas
@@ -87,7 +84,7 @@ public class TestActions {
                     1,
                     questionList.size(),
                     tsb.getNoTime(),
-                    Chronometer.getTime());
+                    tsb.getTimeLeft());
             if (questionList.size() == 1) { // El rest solo tiene una pregunta
                 pvb.setLastQuestion(true);
                 tsb.setLastQuestion(true);
@@ -95,8 +92,8 @@ public class TestActions {
             request.setAttribute("question", pvb);
             return;
         }
-        
-        if ((request.getParameter("answer") == null || lastAnswer.equals(request.getParameter("answer"))) && Chronometer.getTime() > 0) { // No ha seleccionado pregunta
+        tsb.setTimestamp(System.currentTimeMillis());
+        if ((request.getParameter("answer") == null || lastAnswer.equals(request.getParameter("answer"))) && tsb.getTimeLeft()> 0) { // No ha seleccionado pregunta
             List<Pregunta> questionList = new ArrayList(tsb.getTest().getPreguntaCollection());
             List<Respuesta> answerList = new ArrayList(questionList.get(tsb.getCurrentQuestion()).getRespuestaCollection());
             PreguntaViewBean pvb = new PreguntaViewBean(tsb.getTest().getNombre(),
@@ -105,7 +102,7 @@ public class TestActions {
                     tsb.getCurrentQuestion() + 1,
                     questionList.size(),
                     tsb.getNoTime(),
-                    Chronometer.getTime()
+                    tsb.getTimeLeft()
             );
             if (tsb.getCurrentQuestion() == questionList.size() - 1) {
                 pvb.setLastQuestion(true);
@@ -115,7 +112,7 @@ public class TestActions {
             request.setAttribute("answer", false);
             return;
         }
-        if (!tsb.isLastQuestion() & Chronometer.getTime() > 0) { // Si no es la ultima pregunta
+        if (!tsb.isLastQuestion() & tsb.getTimeLeft() > 0) { // Si no es la ultima pregunta
             lastAnswer = request.getParameter("answer");
             tsb.addUserAnswer(Long.valueOf(request.getParameter("answer")));
             tsb.setCurrentQuestion(tsb.getCurrentQuestion() + 1);
@@ -127,7 +124,7 @@ public class TestActions {
                     tsb.getCurrentQuestion() + 1,
                     questionList.size(),
                     tsb.getNoTime(),
-                    Chronometer.getTime()
+                    tsb.getTimeLeft()
             );
             if (tsb.getCurrentQuestion() == questionList.size() - 1) { // Es la ultima pregunta
                 pvb.setLastQuestion(true);
@@ -210,7 +207,7 @@ public class TestActions {
         e.setTest(tsb.getTest());
         tsb.setMark(new BigDecimal(mark).setScale(2, RoundingMode.CEILING));
         
-        examenFacade.create(e);
+        //examenFacade.create(e);
         
     }
     
@@ -237,7 +234,7 @@ public class TestActions {
     private TestFacade lookupTestFacadeBean() {
         try {
             Context c = new InitialContext();
-            return (TestFacade) c.lookup("java:global/TodoTestWeb/TestFacade!facades.TestFacade");
+            return (TestFacade) c.lookup("java:global/TodoTestWebWH/TestFacade!facades.TestFacade");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
@@ -247,7 +244,7 @@ public class TestActions {
     private ExamenFacade lookupExamenFacadeBean() {
         try {
             Context c = new InitialContext();
-            return (ExamenFacade) c.lookup("java:global/TodoTestWeb/ExamenFacade!facades.ExamenFacade");
+            return (ExamenFacade) c.lookup("java:global/TodoTestWebWH/ExamenFacade!facades.ExamenFacade");
         } catch (NamingException ne) {
             Logger.getLogger(getClass().getName()).log(Level.SEVERE, "exception caught", ne);
             throw new RuntimeException(ne);
