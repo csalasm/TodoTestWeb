@@ -81,13 +81,18 @@ public class TestActions {
             // Recuperamos la primera pregunta y sus respuestas
             List<Pregunta> questionList = new ArrayList(t.getPreguntaCollection()); 
             List<Respuesta> answerList = new ArrayList(questionList.get(0).getRespuestaCollection());
-            request.setAttribute("question", new PreguntaViewBean(t.getNombre(),
+            PreguntaViewBean pvb = new PreguntaViewBean(t.getNombre(),
                     questionList.get(0),
                     answerList,
                     1,
                     questionList.size(),
                     tsb.getNoTime(),
-                    Chronometer.getTime()));
+                    Chronometer.getTime());
+            if (questionList.size() == 1) { // El rest solo tiene una pregunta
+                pvb.setLastQuestion(true);
+                tsb.setLastQuestion(true);
+            }
+            request.setAttribute("question", pvb);
             return;
         }
         
