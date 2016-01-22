@@ -40,6 +40,9 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Pregunta.findByIdPregunta", query = "SELECT p FROM Pregunta p WHERE p.idPregunta = :idPregunta"),
     @NamedQuery(name = "Pregunta.findByTexto", query = "SELECT p FROM Pregunta p WHERE p.texto = :texto")})
 public class Pregunta implements Serializable {
+    @Lob
+    @Column(name = "IMAGEN")
+    private Serializable imagen;
     private static final long serialVersionUID = 1L;
     @Id  
     @GeneratedValue(generator="QUESTION_SEQUENCE") 
@@ -53,9 +56,6 @@ public class Pregunta implements Serializable {
     @Size(min = 1, max = 1000)
     @Column(name = "TEXTO")
     private String texto;
-    @Lob
-    @Column(name = "IMAGEN")
-    private byte[] imagen;
     @JoinTable(name = "PREGUNTA_TEST", joinColumns = {
         @JoinColumn(name = "ID_PREGUNTA", referencedColumnName = "ID_PREGUNTA")}, inverseJoinColumns = {
         @JoinColumn(name = "ID_TEST", referencedColumnName = "ID_TEST")})
@@ -90,13 +90,6 @@ public class Pregunta implements Serializable {
         this.texto = texto;
     }
 
-    public byte[] getImagen() {
-        return imagen;
-    }
-
-    public void setImagen(byte[] imagen) {
-        this.imagen = imagen;
-    }
 
     @XmlTransient
     public Collection<Test> getTestCollection() {
@@ -147,6 +140,14 @@ public class Pregunta implements Serializable {
     @Override
     public String toString() {
         return "model.jpa.Pregunta[ idPregunta=" + idPregunta + " ]";
+    }
+
+    public Serializable getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(Serializable imagen) {
+        this.imagen = imagen;
     }
     
 }

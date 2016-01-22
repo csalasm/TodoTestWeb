@@ -36,10 +36,10 @@ public class ImageServlet extends HttpServlet {
             throws ServletException, IOException {
         Pregunta p = preguntaFacade.find(Long.valueOf(request.getParameter("image")));
         response.setContentType("image/png image/jpg image/jpeg");
-        if (p.getImagen() != null) {
-            response.setContentLength(p.getImagen().length);
+       /* if (p.getImagen() != null) {
+            response.setContentLength(p.getImagen().);
             response.getOutputStream().write(p.getImagen());  
-        }
+        }*/
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
