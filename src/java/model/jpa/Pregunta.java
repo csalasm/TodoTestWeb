@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlTransient;
 public class Pregunta implements Serializable {
     @Lob
     @Column(name = "IMAGEN")
-    private Serializable imagen;
+    private byte[] imagen;
     private static final long serialVersionUID = 1L;
     @Id  
     @GeneratedValue(generator="QUESTION_SEQUENCE") 
@@ -142,11 +142,11 @@ public class Pregunta implements Serializable {
         return "model.jpa.Pregunta[ idPregunta=" + idPregunta + " ]";
     }
 
-    public Serializable getImagen() {
+    public byte[] getImagen() {
         return imagen;
     }
 
-    public void setImagen(Serializable imagen) {
+    public void setImagen(byte[] imagen) {
         this.imagen = imagen;
     }
     

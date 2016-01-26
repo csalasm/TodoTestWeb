@@ -59,6 +59,15 @@ public class TestFacadeREST extends AbstractFacade<Test> {
     public Test find(@PathParam("id") Long id) {
         return super.find(id);
     }
+    
+    @GET
+    @Path("active/{dni}")
+    @Produces({"application/json"})
+    public List<Test> findActiveTest(@PathParam("dni") String dni) {
+        return (List<Test>) em.createQuery("SELECT t FROM Test t WHERE t.activo = 1 AND t.idTest NOT IN(SELECT e.test.idTest FROM Examen e WHERE e.examenPK.dni = :dni)")
+                .setParameter("dni", dni)
+                .getResultList();
+    }
 
     @GET
     @Override

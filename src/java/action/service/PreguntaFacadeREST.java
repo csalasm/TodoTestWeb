@@ -18,6 +18,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import model.jpa.Pregunta;
+import model.jpa.Test;
 
 /**
  *
@@ -58,6 +59,17 @@ public class PreguntaFacadeREST extends AbstractFacade<Pregunta> {
     @Produces({"application/xml", "application/json"})
     public Pregunta find(@PathParam("id") Long id) {
         return super.find(id);
+    }
+    
+    @GET
+    @Path("test/{idTest}")
+    @Produces({"application/json"})
+    public List<Pregunta> getPreguntasFromTest(@PathParam("idTest") Integer idTest) {
+        Test t = (Test)em.createQuery("SELECT t FROM Test t WHERE t.idTest = :idTest")
+                .setParameter("idTest", idTest)
+                .getSingleResult();
+        
+        return (List<Pregunta>) t.getPreguntaCollection();
     }
 
     @GET
