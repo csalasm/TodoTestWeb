@@ -5,6 +5,7 @@
  */
 package action.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -17,7 +18,11 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.GenericEntity;
+import javax.ws.rs.core.Response;
+import model.jpa.MyQuestion;
 import model.jpa.Pregunta;
+import model.jpa.Respuesta;
 import model.jpa.Test;
 
 /**
@@ -71,6 +76,29 @@ public class PreguntaFacadeREST extends AbstractFacade<Pregunta> {
         
         return (List<Pregunta>) t.getPreguntaCollection();
     }
+    
+    /*@GET
+    @Path("test2/{idTest}")
+    @Produces({"application/json"})
+    public Response getPreguntasFromTest2(@PathParam("idTest") Integer idTest) {
+        MyQuestion mq = null;
+        ArrayList<GenericEntity> mqList = new ArrayList<>();
+        GenericEntity<MyQuestion> ge;
+        Test t = (Test)em.createQuery("SELECT t FROM Test t WHERE t.idTest = :idTest")
+                .setParameter("idTest", idTest)
+                .getSingleResult();
+        
+        // Para cada pregunta, obtenemos las respuestas
+        for (Pregunta p: t.getPreguntaCollection()) {
+            mq = new MyQuestion(p, (List<Respuesta>) p.getRespuestaCollection());
+            ge = new GenericEntity<>(mq, MyQuestion.class);
+            mqList.add(ge);
+        }
+        //
+        GenericEntity<ArrayList<GenericEntity>> lge;
+        lge = new GenericEntity<>(mqList, ArrayList.class);
+        return Response.ok(lge).build();
+    }*/
 
     @GET
     @Override

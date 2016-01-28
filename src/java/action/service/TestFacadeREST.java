@@ -71,7 +71,7 @@ public class TestFacadeREST extends AbstractFacade<Test> {
 
     @GET
     @Override
-    @Produces({"application/xml", "application/json"})
+    @Produces({"application/json"})
     public List<Test> findAll() {
         return super.findAll();
     }
